@@ -1,0 +1,15 @@
+# ── 生成物 ───────────────────────────────────────────────
+# dashboard.html 由 build_dashboard.py 从 template.html + data/latest.json 生成。
+# 它是产物不是源码，每天都变；纳入版本库只会让 diff 变噪音、让多 Agent 合并冲突。
+# 克隆后先跑一次 python3 radar.py 采集，它会顺便生成看板。
+dashboard.html
+
+# 每次采集都会整体重写，属于运行时产物；历史价值在 data/history.json 里
+data/latest.json
+data/snapshots/
+data/run.log
+
+# ── 其他 ────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.DS_Store
