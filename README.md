@@ -33,7 +33,7 @@ GitTrend 每天抓一遍数据,把这三件事合成一个可以反复打开、�
 - 🎯 **动量分,不看总星看加速度** —— 速度 / 加速度 / HN 热度 / 新鲜度,加权求和
 - 🧭 **五个视图** —— 概览、涨得最快、新项目、分类分布、全部项目
 - 🔍 **能筛选、能搜索** —— 按领域 / 语言 / 最小动量过滤,`/` 聚焦搜索,点任意行看右侧详情
-- 💾 **零后端、零数据库、零构建** —— 数据直接内联进 HTML,离线双击即开,不依赖任何 CDN
+- 💾 **零后端、零数据库、零构建** —— 数据直接内联进 HTML,双击即开;配合常驻本地服务还能自动刷新
 - 🧾 **数据口径诚实** —— 实测日增标 `+`,推算值标 `~`,拿不到的数据宁可空着,绝不编一个
 - 📅 **每天自动跑** —— cron / launchd / 本地服务器三种方式,历史快照越攒越准
 
@@ -88,26 +88,33 @@ GitHub 每天只放出 12 条日榜,所以大多数仓库是估算——**这是
 
 ## 🕐 每天自动跑
 
-**cron(最简单):**
+**第一步 · 定时采集(二选一)**
+
+cron 一行(把 `/path/to/GitTrend` 换成实际路径):
 
 ```bash
 crontab -e
-# 每天早上 9:17 跑一次（把 /path/to/GitTrend 换成你的实际路径）
-# python 用 `which python3` 查到的绝对路径（macOS Homebrew 通常是 /opt/homebrew/bin/python3）
+# 每天早上 9:17 跑一次
 17 9 * * * cd /path/to/GitTrend && /opt/homebrew/bin/python3 radar.py >> data/run.log 2>&1
 ```
 
-**配合本地服务器,看板自动刷新:**
+macOS 更推荐 launchd(电脑关机错过会补跑),完整 plist 见下方折叠。
+
+**第二步 · 让看板自动刷新**
+
+看板靠本地服务器拉最新数据。把它常驻后台后,**双击 `dashboard.html` 打开就会自动连上、每 60 秒刷新**,不用手动开终端:
 
 ```bash
-python3 radar.py --loop 360   # 终端 1:每 6 小时采一轮
-python3 serve.py              # 终端 2:启动本地服务器,浏览器自动打开看板
+python3 serve.py              # 前台临时跑(自动开浏览器)
+python3 serve.py --no-browser # 后台常驻模式(不弹浏览器,配合 launchd)
 ```
 
 <details>
-<summary>macOS launchd 方式(点开看完整 plist)</summary>
+<summary>macOS launchd 完整配置:采集 + 常驻服务(点开)</summary>
 
-`~/Library/LaunchAgents/com.yourname.ghradar.plist`(把 `/path/to/GitTrend` 换成实际路径):
+把 `/path/to/GitTrend` 换成实际路径。
+
+**① 采集**(每天 9:17,存为 `~/Library/LaunchAgents/com.yourname.ghradar.plist`):
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -127,8 +134,33 @@ python3 serve.py              # 终端 2:启动本地服务器,浏览器自动�
 </dict></plist>
 ```
 
+**② 常驻服务**(存为 `~/Library/LaunchAgents/com.yourname.ghradar-serve.plist`,比上面多 `RunAtLoad` + `KeepAlive`,命令换成 `serve.py --no-browser`):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.yourname.ghradar-serve</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/python3</string>
+    <string>/path/to/GitTrend/serve.py</string>
+    <string>--no-browser</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/path/to/GitTrend</string>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>/path/to/GitTrend/data/serve.log</string>
+  <key>StandardErrorPath</key><string>/path/to/GitTrend/data/serve.log</string>
+</dict></plist>
+```
+
+加载两个:
+
 ```bash
-launchctl load ~/Library/LaunchAgents/com.yourname.ghradar.plist
+launchctl load -w ~/Library/LaunchAgents/com.yourname.ghradar.plist
+launchctl load -w ~/Library/LaunchAgents/com.yourname.ghradar-serve.plist
 ```
 
 </details>
@@ -151,7 +183,7 @@ GitTrend/
 ├── radar.py              # 采集 + 打分,主程序
 ├── template.html         # 看板模板(改 UI 改这里)
 ├── dashboard.html        # 成品看板(生成物,双击即开)
-├── serve.py              # 本地服务器,让看板自动刷新
+├── serve.py              # 本地服务器,让看板自动刷新(可 --no-browser 常驻)
 ├── build_dashboard.py    # 用已有数据重建看板
 ├── check.py              # 自检脚本
 ├── AGENTS.md             # 给协作 AI Agent 的说明
