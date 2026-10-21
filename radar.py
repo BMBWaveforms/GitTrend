@@ -100,11 +100,19 @@ DOMAINS = [
 ]
 
 
+def _key_hit(key: str, text: str) -> bool:
+    """英文单 token 用词边界匹配，避免 "ide" 误中 "video"、"rag" 误中 "storage"；
+    中文词和多词短语保持子串匹配。"""
+    if " " not in key and key.isascii():
+        return re.search(r"(?<![A-Za-z0-9])" + re.escape(key) + r"(?![A-Za-z0-9])", text) is not None
+    return key in text
+
+
 def classify(name: str, desc: str, language: str, fallback_topics=None) -> str:
     text = f"{name} {desc} {' '.join(fallback_topics or [])}".lower()
     best, best_hits = "其他", 0
     for domain, keys in DOMAINS:
-        hits = sum(1 for k in keys if k in text)
+        hits = sum(1 for k in keys if _key_hit(k, text))
         if hits > best_hits:
             best, best_hits = domain, hits
     return best
@@ -298,7 +306,14 @@ def collect_new_repos(token=None):
 
 def hn_lookup(repo: str):
     """返回该仓库在 HN 的讨论热度（近 60 天）。"""
-    name = repo.split("/")[-1]
+    if "/" in repo:
+        owner, name = repo.split("/", 1)
+    else:
+        owner, name = "", repo
+    full = f"{owner}/{name}".lower()
+    n = name.lower()
+    # 短名（<=4 字符）极易误中通用词（go / math / rust / rea ...），只认全名
+    strict = len(n) <= 4
     url = "https://hn.algolia.com/api/v1/search"
     params = {
         "query": name,
@@ -315,9 +330,14 @@ def hn_lookup(repo: str):
     except Exception:
         return None
 
-    rel = [h for h in hits
-           if name.lower() in (h.get("title") or "").lower()
-           or name.lower() in (h.get("url") or "").lower()]
+    rel = []
+    for h in hits:
+        t = (h.get("title") or "").lower()
+        u = (h.get("url") or "").lower()
+        if full in t or full in u:
+            rel.append(h)
+        elif not strict and (n in t or n in u):
+            rel.append(h)
     if not rel:
         return {"mentions": 0, "points": 0, "comments": 0, "top": None}
     top = max(rel, key=lambda h: (h.get("points") or 0))
@@ -520,7 +540,7 @@ def score(r):
     momentum = 100 * (0.52 * velocity + 0.23 * accel_n + 0.17 * hn_score + 0.08 * fresh)
     r["metrics"] = {
         "rate_day": round(rate_day, 1),
-        "rate_week": round(week / 7, 1) if week else (snap_d[0] if snap_d else None),
+        "rate_week": round(week / 7, 1) if week else None,
         "accel": round(accel, 2) if accel else None,
         "rate_basis": basis,
         "estimated": basis in ("life", "monthly", "weekly"),

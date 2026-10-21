@@ -431,6 +431,7 @@ const fmt = n => n==null ? "—"
   : String(Math.round(n));
 const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^https?:\/\//i.test(String(u||"")) ? u : "#";
 
 function spark(points){
   if(!points || points.length<2) return '<svg class="spark" role="img" aria-label="历史记录不足，暂无趋势"><title>历史记录不足，暂无趋势</title><path class="flat" d="M1 9 L63 9"/></svg>';
@@ -832,7 +833,7 @@ function openDrawer(r){
        <div style="color:var(--faint);font-size:.875rem">刚开始记录，明天起这里会出现增长曲线。</div></div>`}
 
     ${hn.points?`<div class="dsec"><h4>国外社区讨论（Hacker News）</h4>
-      <a class="hncard" href="${esc(hn.top?hn.top.url:"#")}" target="_blank" rel="noopener">
+      <a class="hncard" href="${esc(safeUrl(hn.top&&hn.top.url))}" target="_blank" rel="noopener">
         <b>${esc(hn.top?hn.top.title:"相关讨论")}</b>
         <span>${hn.mentions} 条讨论 · ${hn.points} 个赞 · ${hn.comments} 条评论</span></a></div>`:""}
 
@@ -848,7 +849,7 @@ function openDrawer(r){
 
     <div class="links">
       <a href="https://github.com/${esc(r.repo)}" target="_blank" rel="noopener">打开项目</a>
-      ${r.homepage?`<a href="${esc(r.homepage)}" target="_blank" rel="noopener">项目官网</a>`:""}
+      ${r.homepage?`<a href="${esc(safeUrl(r.homepage))}" target="_blank" rel="noopener">项目官网</a>`:""}
       <a href="https://star-history.com/#${esc(r.repo)}&Date" target="_blank" rel="noopener">star 增长曲线</a>
       <a href="https://github.com/search?q=${encodeURIComponent(r.repo)}&type=issues" target="_blank" rel="noopener">相关讨论</a>
     </div>
