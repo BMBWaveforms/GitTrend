@@ -65,7 +65,7 @@
 ## 三、怎么用
 
 ```bash
-cd "GITHUB 趋势监控给你"
+cd GitTrend
 python3 radar.py
 ```
 
@@ -84,10 +84,10 @@ python3 radar.py --meta-limit 50      # 单轮多补一些创建时间
 
 ### 五个视图
 
-- **概览** — 动量前 5 的卡片、领域分布、今日值得注意的四五条自动结论
-- **增速榜** — 按今日新增 star 排序，看「谁在猛涨」
-- **新项目** — 90 天内创建的项目，按生命期日均 star 排序，看「谁是新物种」
-- **领域雷达** — 按赛道分组，看今天的热度集中在哪里
+- **概览** — 热度前 5 的卡片、分类分布、「今天值得关注」的四五条自动结论
+- **涨得最快** — 按每天新增 star 排序，看「谁在猛涨」
+- **新项目** — 90 天内创建的项目，按平均每天新增 star 排序，看「谁是新物种」
+- **分类分布** — 按方向分组，看今天的热点集中在哪里
 - **全部项目** — 完整表格，点表头排序
 
 左侧可以按领域、语言、最小动量筛选。右上搜索框按 `/` 聚焦、`Esc` 清空。点任意一行打开右侧详情。
@@ -103,7 +103,7 @@ python3 radar.py --meta-limit 50      # 单轮多补一些创建时间
 | `+` | 日榜标注 / 本地快照差 | 真实日增，最可信 |
 | `~` | 周榜 ÷ 7、月榜 ÷ 30、或生命期均速 × 0.35 | 推算值，只能看量级 |
 
-首屏右侧会写明「日榜实测 12 个 · 推算 178 个」。推算值偏多是正常的——GitHub 每天只放出 12 个日榜条目。
+首屏右侧会写明「真实日增 12 个 · 估算 178 个」。估算值偏多是正常的——GitHub 每天只放出 12 个日榜条目。
 
 另外注意：`morluto/rea` 这种「总星 33 万、本周涨 20 万」的项目，日增 2.8 万是从周榜推算的，它可能今天只涨了 5000、也可能涨了 5 万，周榜给不出更细的答案。**要精确，就多跑几天，让本地快照积累起来**——历史快照差是比周榜更准的口径。
 
@@ -115,37 +115,56 @@ python3 radar.py --meta-limit 50      # 单轮多补一些创建时间
 
 ```bash
 crontab -e
-# 每天早上 9:17 跑一次
-17 9 * * * cd "/Users/bmb/AI/Projects/GITHUB 趋势监控/GITHUB 趋势监控给你" && /usr/bin/python3 radar.py >> data/run.log 2>&1
+# 每天早上 9:17 跑一次（把 /path/to/GitTrend 换成你 clone 的实际路径）
+17 9 * * * cd /path/to/GitTrend && /usr/bin/python3 radar.py >> data/run.log 2>&1
 ```
 
 选 17 分而不是 0 分，是为了避开整点大家都在跑的时段。
 
 ### 方式二：macOS launchd
 
-`~/Library/LaunchAgents/com.bmb.ghradar.plist`：
+`~/Library/LaunchAgents/com.yourname.ghradar.plist`（把 /path/to/GitTrend 换成实际路径）：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-  <key>Label</key><string>com.bmb.ghradar</string>
+  <key>Label</key><string>com.yourname.ghradar</string>
   <key>ProgramArguments</key>
   <array>
     <string>/usr/bin/python3</string>
-    <string>/Users/bmb/AI/Projects/GITHUB 趋势监控/GITHUB 趋势监控给你/radar.py</string>
+    <string>/path/to/GitTrend/radar.py</string>
   </array>
   <key>WorkingDirectory</key>
-  <string>/Users/bmb/AI/Projects/GITHUB 趋势监控/GITHUB 趋势监控给你</string>
+  <string>/path/to/GitTrend</string>
   <key>StartCalendarInterval</key><dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>17</integer></dict>
-  <key>StandardOutPath</key><string>/Users/bmb/AI/Projects/GITHUB 趋势监控/GITHUB 趋势监控给你/data/run.log</string>
-  <key>StandardErrorPath</key><string>/Users/bmb/AI/Projects/GITHUB 趋势监控/GITHUB 趋势监控给你/data/run.log</string>
+  <key>StandardOutPath</key><string>/path/to/GitTrend/data/run.log</string>
+  <key>StandardErrorPath</key><string>/path/to/GitTrend/data/run.log</string>
 </dict></plist>
 ```
 
 ```bash
-launchctl load ~/Library/LaunchAgents/com.bmb.ghradar.plist
+launchctl load ~/Library/LaunchAgents/com.yourname.ghradar.plist
 ```
+
+### 方式三：页面自动刷新（配合本地服务器，真正的「动态更新」）
+
+前两种方式解决「数据每天自己更新」，但已经开着的看板页面不会自己变——得手动刷新浏览器。看板自带每 60 秒自动拉取 `data/latest.json` 的能力，但浏览器在 `file://` 下会禁止这种请求，所以要用一个本地服务器把它打开：
+
+```bash
+# 终端 1：采集（带 --loop 就让它自己每 6 小时跑一轮）
+python3 radar.py --loop 360
+
+# 终端 2：启动本地服务器，浏览器会自动打开看板
+python3 serve.py
+```
+
+打开后页面右上会显示「自动刷新中」。只要 `data/latest.json` 更新了，已经开着的页面会自动刷新，不用手动动它。
+
+几点说明：
+- `--loop 360` 是每 6 小时采一次；GitHub Trending 本身一天才换一次，6 小时一轮绰绰有余。也可以不用 `--loop`，继续靠 cron/launchd 每天采一次，`serve.py` 常开即可。
+- `serve.py` 只是把目录当静态文件发出去，不含任何数据逻辑，也只监听本机 `127.0.0.1`，不会暴露到局域网或公网。
+- 如果直接双击 `dashboard.html`（`file://`），自动刷新会自动关闭、退回内嵌数据，页面照常能看，只是不会自己更新。
 
 ---
 
@@ -167,11 +186,12 @@ launchctl load ~/Library/LaunchAgents/com.bmb.ghradar.plist
 ## 七、文件说明
 
 ```
-GITHUB 趋势监控给你/
-├── radar.py              # 采集 + 打分，主程序
+GitTrend/
+├── radar.py              # 采集 + 打分，主程序（--loop 可定时自跑）
 ├── build_dashboard.py    # 把数据灌进模板，生成 dashboard.html
 ├── template.html         # 看板模板（数据占位符在 <script> 里）
 ├── dashboard.html        # 成品看板，自包含，双击就能开
+├── serve.py              # 本地静态服务器，让看板能自动刷新（python3 serve.py）
 ├── check.py              # 自检：数据契约 + 产物完整性
 ├── AGENTS.md             # 给 AI Agent 的协作说明（改代码前读这个）
 ├── CLAUDE.md             # Claude Code 专用补充

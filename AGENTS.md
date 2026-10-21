@@ -30,7 +30,7 @@ Python 采集 GitHub 趋势数据 → 打分 → 把 JSON 内联进 HTML 模板 
 匿名限额：Search 10 次/分钟、核心 API 60 次/小时。当前设计只用 2 次 search + 最多 30 次 repo（且有 `data/repos_meta.json` 缓存）。要加 API 调用，先想清楚要不要缓存、要不要 token。
 
 **⑤ `dashboard.html` 必须保持自包含。**
-不能引 CDN、外部字体、外部图片，不能发网络请求。它要能在 `file://` 下双击打开、也能在预览面板里离线渲染。图表用内联 SVG / CSS 画，不要引 Chart.js。
+不能引 CDN、外部字体、外部图片。唯一的网络请求是页面里自动刷新逻辑对同源 `data/latest.json` 的 `fetch()`——它在 `file://` 下会被浏览器拦截并自动退回内嵌数据，所以离线双击打开、离线渲染依然可用。图表用内联 SVG / CSS 画，不要引 Chart.js。
 
 **⑥ 所有来自 GitHub / HN 的文本必须经过 `esc()`。**
 `template.html` 里的 `esc()` 是唯一转义入口。新增任何渲染路径（新的渲染函数、新的字段）都要过 `esc()`，否则一个带 `<script>` 的仓库描述就能执行。
@@ -63,7 +63,7 @@ Python 采集 GitHub 趋势数据 → 打分 → 把 JSON 内联进 HTML 模板 
               （替换 /*__DATA__*/{} 占位符，JSON 内联进 <script>）
 ```
 
-`radar.py` 打印的 6 个步骤就是上面的顺序，改流程时保持编号同步。
+`radar.py` 打印的步骤编号就是上面的顺序（main() 里用 `step()` 自动递增，不再写死 `[n/6]`），改流程时保持顺序即可。
 
 ---
 
@@ -73,8 +73,9 @@ Python 采集 GitHub 趋势数据 → 打分 → 把 JSON 内联进 HTML 模板 
 |---|---|---|
 | `radar.py` | 采集、清洗、分类、打分、写数据。**数据层的唯一入口** | ✅ 主战场 |
 | `build_dashboard.py` | 把 payload 灌进模板。只有 ~20 行，是个薄壳 | ⚠️ 基本不用改 |
-| `template.html` | 看板的全部 UI：CSS + 内联 JSON + 原生 JS | ✅ UI 改这里 |
+| `template.html` | 看板的全部 UI：CSS + 内联 JSON + 原生 JS（含自动刷新） | ✅ UI 改这里 |
 | `dashboard.html` | **生成物** | ❌ 禁止手改 |
+| `serve.py` | 本地静态服务器，让看板能自动拉取最新数据 | ⚠️ 基本不用改 |
 | `README.md` | 面向人的说明 | ✅ 功能变化时同步 |
 | `AGENTS.md` | 本文 | ✅ 协作约定变化时更新 |
 | `check.py` | 自检脚本 | ✅ 数据契约变化时同步 |
@@ -188,7 +189,7 @@ python3 check.py
 
 **开始前**
 1. 读 `AGENTS.md` → `README.md` → `python3 check.py` 确认基线是绿的。
-2. 用 `git status` 看有没有别人未提交的改动（**当前目录还不是 git 仓库，建议先 `git init` 并做一次初始提交**，否则多人并行改同一个文件无法回滚）。
+2. 用 `git status` 看有没有别人未提交的改动（项目已是 git 仓库，改动前先确认工作区干净，否则多人并行改同一个文件无法回滚）。
 
 **改动时**
 3. 一次只动一层：要么数据层（`radar.py`），要么表现层（`template.html`）。跨层改动要显式说明「我改了数据契约」。
@@ -198,7 +199,7 @@ python3 check.py
 **交出去之前**
 6. 跑 `python3 check.py`，必须 `OK`。
 7. 改了 UI → 必须打开 `dashboard.html` 截图检查桌面/平板/手机三档。
-8. 改了采集 → 至少完整跑一次 `python3 radar.py`，确认 6 个步骤都走完、Top 5 输出正常。
+8. 改了采集 → 至少完整跑一次 `python3 radar.py`，确认所有步骤都走完、Top 5 输出正常。
 9. 在回复里写清楚：改了哪一层、数据契约有没有变、验证做了什么。**不要只说"已完成"。**
 
 **不要做**

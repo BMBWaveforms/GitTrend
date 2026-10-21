@@ -179,7 +179,7 @@ def parse_trending(html: str, window: str):
                 forks = num(a.get_text(strip=True))
 
         text = art.get_text(" ", strip=True)
-        m = re.search(r"([\d,]+)\s+stars?\s+(today|this week|this month)", text)
+        m = re.search(r"([\d.,]+[kKmM]?)\s+stars?\s+(today|this week|this month)", text)
         gained = num(m.group(1)) if m else None
 
         contributors = len(art.select("a[href^='/'][data-hovercard-type='user']"))
@@ -199,7 +199,6 @@ def parse_trending(html: str, window: str):
 
 def collect_trending():
     seen = {}
-    detail = {}
     for suffix, window in TRENDING_TARGETS:
         url = f"https://github.com/trending?{suffix}"
         try:
@@ -237,8 +236,6 @@ def collect_trending():
                 rec["stars"] = it["stars"]
             if not rec.get("language") and it["language"]:
                 rec["language"] = it["language"]
-            detail.setdefault(it["window"], 0)
-            detail[it["window"]] += 1
         print(f"  · trending[{window}] {suffix}: {len(items)} 条")
         time.sleep(0.6)
     print(f"  · trending 合计去重: {len(seen)} 个仓库")
@@ -356,7 +353,9 @@ def enrich_meta(repos, token=None, limit=30):
     for r in repos:
         meta = cache.get(r["repo"].lower())
         if meta and not r.get("created_at"):
-            r.update(meta)
+            # 只补缺失字段，绝不用缓存覆盖当天刚抓到的 stars/forks/homepage
+            if meta.get("created_at"):
+                r["created_at"] = meta["created_at"]
             if meta.get("topics") and not r.get("topics"):
                 r["topics"] = meta["topics"]
 
@@ -477,26 +476,29 @@ def score(r):
     week = gain.get("weekly")
     month = gain.get("monthly")
 
-    # 每日速率：优先用 trending 自带的当日增量，其次 7 日/30 日均值，
-    # 再次本地快照差；都没有时用生命期均速打折估算（新品常见）。
+    # 每日速率按「口径可信度」取第一个可用的，而不是取最大值：
+    # 当日实测 > 本地快照差 > 榜单周/月均 > 生命期均速打折。
+    # （取最大值会在项目降温时用周均掩盖当天真实数字，违反宁缺勿编。）
+    snap_d = r.get("snap_daily")
     candidates = []
     if day:
         candidates.append((day, "daily"))
+    if snap_d:
+        candidates.append((snap_d[0], "snapshot"))
     if week:
         candidates.append((week / 7, "weekly"))
     if month:
         candidates.append((month / 30, "monthly"))
-    snap_d = r.get("snap_daily")
-    if snap_d:
-        candidates.append((snap_d[0], "snapshot"))
     life = r.get("stars_per_day_life")
-    if not candidates and life:
+    if life:
         candidates.append((life * 0.35, "life"))  # 生命期均速大约是当前速率的 3 倍
 
-    if candidates:
-        rate_day, basis = max(candidates, key=lambda c: c[0])
+    basis = next((b for b in ("daily", "snapshot", "weekly", "monthly", "life")
+                  if any(c[1] == b for c in candidates)), None)
+    if basis:
+        rate_day = next(c[0] for c in candidates if c[1] == basis)
     else:
-        rate_day, basis = 0, None
+        rate_day = 0
 
     # 加速度只在"有当日数据 + 有周均基线"时才有意义，否则留空而不是编一个 1.0
     accel = None
@@ -509,7 +511,8 @@ def score(r):
     hn_score = min(1.0, math.log1p(hn_raw) / math.log1p(600))
 
     velocity = min(1.0, math.log1p(rate_day) / math.log1p(2500))
-    accel_n = max(0.0, min(1.0, (accel - 0.8) / 2.2)) if accel else 0.45
+    # 无加速度数据时，加速度分项记 0（宁缺勿编，不塞一个 0.45 的中性值）
+    accel_n = max(0.0, min(1.0, (accel - 0.8) / 2.2)) if accel else 0.0
     fresh = 0.0
     if r.get("age_days") is not None:
         fresh = max(0.0, min(1.0, (180 - r["age_days"]) / 180))
@@ -531,25 +534,29 @@ def score(r):
 
 # ---------------------------------------------------------------- 6. 主流程
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--token", default=os.environ.get("GITHUB_TOKEN"))
-    ap.add_argument("--no-hn", action="store_true")
-    ap.add_argument("--hn-top", type=int, default=30,
-                    help="对 momentum 最高的前 N 个仓库查 HN")
-    ap.add_argument("--no-meta", action="store_true",
-                    help="跳过创建时间补全（省 API 限额）")
-    ap.add_argument("--meta-limit", type=int, default=30,
-                    help="单轮最多补全多少个仓库的创建时间")
-    args = ap.parse_args()
+def write_json_atomic(path, obj, indent=None):
+    """原子写 JSON：先写临时文件再 rename，避免看板轮询时读到半截文件。"""
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=indent),
+                   encoding="utf-8")
+    tmp.replace(path)
 
+
+def run_once(args):
     DATA.mkdir(exist_ok=True)
     today = datetime.now(timezone.utc).date().isoformat()
 
-    print("[1/6] 抓取 GitHub Trending ...")
+    _n = 0
+
+    def step(msg):
+        nonlocal _n
+        _n += 1
+        print(f"[{_n}] {msg}")
+
+    step("抓取 GitHub Trending ...")
     repos = collect_trending()
 
-    print("[2/6] 查询新仓库 ...")
+    step("查询新仓库 ...")
     new_repos = collect_new_repos(args.token)
 
     # 合并
@@ -565,7 +572,7 @@ def main():
     repos = list(by_key.values())
     print(f"  · 合并后: {len(repos)} 个仓库")
 
-    print("[3/6] 读历史快照 ...")
+    step("读历史快照 ...")
     history = load_history()
     for r in repos:
         key = r["repo"].lower()
@@ -574,18 +581,17 @@ def main():
     history = update_history(history, repos, today)
     for r in repos:  # 补齐今天这一个点
         r["history"] = history.get(r["repo"].lower(), {}).get("points", [])[-30:]
-    (DATA / "history.json").write_text(
-        json.dumps(history, ensure_ascii=False), encoding="utf-8")
+    write_json_atomic(DATA / "history.json", history)
     print(f"  · 历史库: {len(history)} 个仓库")
 
-    print("[4/6] 计算得分 ...")
+    step("计算得分 ...")
     repos = enrich(repos)
     for r in repos:
         score(r)
     repos.sort(key=lambda x: x["momentum"], reverse=True)
 
     if not args.no_meta:
-        print(f"[5/6] 补全创建时间（最多 {args.meta_limit} 个）...")
+        step(f"补全创建时间（最多 {args.meta_limit} 个）...")
         enrich_meta(repos, args.token, args.meta_limit)
         repos = enrich(repos)
         for r in repos:
@@ -593,7 +599,7 @@ def main():
         repos.sort(key=lambda x: x["momentum"], reverse=True)
 
     if not args.no_hn:
-        print(f"[5/6] 查 HN 讨论热度（前 {args.hn_top}）...")
+        step(f"查 HN 讨论热度（前 {args.hn_top}）...")
         for i, r in enumerate(repos[:args.hn_top]):
             r["hn"] = hn_lookup(r["repo"])
             if (i + 1) % 10 == 0:
@@ -612,19 +618,43 @@ def main():
         "count": len(repos),
         "repos": repos,
     }
-    (DATA / "latest.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    write_json_atomic(DATA / "latest.json", payload, indent=1)
     snap_dir = DATA / "snapshots"
     snap_dir.mkdir(exist_ok=True)
-    (snap_dir / f"{today}.json").write_text(
-        json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    write_json_atomic(snap_dir / f"{today}.json", payload)
 
-    print("[6/6] 生成看板 ...")
+    step("生成看板 ...")
     from build_dashboard import build
     out = build(payload, ROOT / "dashboard.html")
     print(f"  完成 -> {out}")
     print(f"  共 {len(repos)} 个仓库，Top: " +
           ", ".join(f"{r['repo']}({r['momentum']})" for r in repos[:5]))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--token", default=os.environ.get("GITHUB_TOKEN"))
+    ap.add_argument("--no-hn", action="store_true")
+    ap.add_argument("--hn-top", type=int, default=30,
+                    help="对 momentum 最高的前 N 个仓库查 HN")
+    ap.add_argument("--no-meta", action="store_true",
+                    help="跳过创建时间补全（省 API 限额）")
+    ap.add_argument("--meta-limit", type=int, default=30,
+                    help="单轮最多补全多少个仓库的创建时间")
+    ap.add_argument("--loop", type=int, default=0, metavar="MINUTES",
+                    help="采集一次后每隔 N 分钟自动重跑（0=只跑一次；配合 serve.py 页面会自己刷新）")
+    args = ap.parse_args()
+
+    while True:
+        run_once(args)
+        if args.loop <= 0:
+            break
+        print(f"· 休眠 {args.loop} 分钟后自动再采集（Ctrl+C 停止）...")
+        try:
+            time.sleep(args.loop * 60)
+        except KeyboardInterrupt:
+            print("\n已停止")
+            break
 
 
 if __name__ == "__main__":

@@ -8,6 +8,7 @@ dashboard.html
 data/latest.json
 data/snapshots/
 data/run.log
+*.tmp
 
 # ── 其他 ────────────────────────────────────────────────
 __pycache__/

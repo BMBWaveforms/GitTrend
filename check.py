@@ -161,7 +161,7 @@ def check_dashboard(expected_count):
 
     if "/*__DATA__*/{}" in html:
         fail("dashboard.html 里数据占位符没被替换，构建失败")
-    if "const DATA = {" not in html:
+    if not re.search(r"\b(?:const|let) DATA = \{", html):
         fail("dashboard.html 里找不到内联数据")
     if html.count("<script") != html.count("</script>"):
         fail("dashboard.html 的 script 标签不配对")

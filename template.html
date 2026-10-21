@@ -3,320 +3,375 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GitTrend</title>
+<title>GitTrend · 开源趋势观察台</title>
 <style>
 :root{
-  --ink:#121615; --panel:#191f1d; --panel2:#1f2624; --rule:#2b3431;
-  --text:#e6ebe7; --dim:#97a29b; --faint:#79857e;
-  --mint:#6fd3a6; --copper:#e07a4a; --blue:#7ea6d8;
+  color-scheme:light;
+  --ink:#fcfcfc;--panel:#ffffff;--panel2:#f3f4f5;--rule:#e9eaec;
+  --text:#202124;--dim:#50565e;--faint:#60666f;--accent-text:#a84408;--control:#878c94;
+  --mint:#e66b16;--copper:#e66b16;--blue:#8260d3;--positive:#1e714d;
   --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Helvetica Neue",Arial,sans-serif;
   --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
-  --rail:236px;
+  --serif:var(--sans);--rail:248px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:14px;
-  -webkit-font-smoothing:antialiased;line-height:1.5}
+html,body{min-height:100%}
+body{background:#eceeef;color:var(--text);font:1rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-::selection{background:rgba(111,211,166,.25)}
-
-/* ---------- shell ---------- */
-.app{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);min-height:100vh}
-
-.rail{border-right:1px solid var(--rule);padding:26px 20px 20px;
-  display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh}
-.brand{font-family:var(--serif);font-size:22px;line-height:1.15;letter-spacing:-.01em}
-.brand b{display:block;font-weight:600}
-.brand span{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.14em;
-  display:block;margin-top:8px;text-transform:uppercase}
-
-nav{display:flex;flex-direction:column;gap:2px}
-nav button{display:flex;align-items:center;justify-content:space-between;
-  padding:8px 10px;border-radius:5px;color:var(--dim);text-align:left;font-size:13.5px}
-nav button:hover{background:var(--panel);color:var(--text)}
-nav button.on{background:var(--panel2);color:var(--text)}
-nav button .n{font-family:var(--mono);font-size:11px;color:var(--faint)}
-nav button.on .n{color:var(--mint)}
-
-.filters{display:flex;flex-direction:column;gap:20px;overflow-y:auto;flex:1;min-height:0;
-  -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent);
-  mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent)}
-.fgroup>h3{font-size:10.5px;color:var(--faint);letter-spacing:.1em;margin-bottom:9px;
-  font-weight:500;font-family:var(--mono)}
-.chips{display:flex;flex-wrap:wrap;gap:5px}
-.chip{padding:3px 8px;border:1px solid var(--rule);border-radius:99px;font-size:11.5px;
-  color:var(--dim);transition:.15s}
-.chip:hover{border-color:var(--faint);color:var(--text)}
-.chip.on{background:var(--mint);border-color:var(--mint);color:#0e1512;font-weight:600}
-select{width:100%;background:var(--panel);border:1px solid var(--rule);color:var(--text);
-  padding:7px 9px;border-radius:5px;font-size:12.5px;appearance:none;
-  background-image:linear-gradient(45deg,transparent 50%,var(--faint) 50%),
-                   linear-gradient(135deg,var(--faint) 50%,transparent 50%);
-  background-position:calc(100% - 15px) 14px,calc(100% - 10px) 14px;
-  background-size:5px 5px,5px 5px;background-repeat:no-repeat}
-.rail footer{font-size:10.5px;color:var(--faint);font-family:var(--mono);line-height:1.7;
-  border-top:1px solid var(--rule);padding-top:14px}
-.rail footer b{color:var(--dim);font-weight:400}
-
-/* ---------- main ---------- */
-main{min-width:0;padding:0 40px 80px}
-.topbar{position:sticky;top:0;z-index:30;background:rgba(18,22,21,.93);
-  backdrop-filter:blur(10px);display:flex;align-items:center;gap:20px;
-  padding:20px 0 16px;border-bottom:1px solid var(--rule)}
-.dateline{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.05em;
-  display:flex;gap:14px;white-space:nowrap}
-.dateline b{color:var(--dim);font-weight:400}
-.search{margin-left:auto;position:relative;width:300px;max-width:46vw}
-.search input{width:100%;background:var(--panel);border:1px solid var(--rule);
-  border-radius:5px;padding:8px 12px 8px 32px;color:var(--text);font-size:13px;outline:none}
-.search input:focus{border-color:var(--mint)}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+button,a,input,select{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent-text);outline-offset:4px}
+::selection{background:#ffdfc7;color:#202124}
+.app{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);min-height:calc(100vh - 32px);margin:16px;border:1px solid #e2e4e7;border-radius:18px;background:var(--ink);box-shadow:0 2px 4px #00000006}
+.rail{background:#fff;border-right:1px solid var(--rule);padding:26px 14px 20px;display:flex;flex-direction:column;gap:30px;position:sticky;top:16px;height:calc(100vh - 32px);min-width:0;border-radius:18px 0 0 18px}
+.brand{display:flex;align-items:center;gap:11px;padding:0 10px}
+.brand-mark{width:32px;height:32px;color:var(--accent-text);flex:none}
+.brand b{font-size:1.375rem;letter-spacing:-1px;font-weight:650;line-height:1.2;display:block}
+.brand small{display:block;font-size:0.8125rem;letter-spacing:.05em;color:var(--faint);margin-top:5px}
+nav{display:flex;flex-direction:column;gap:5px}
+nav button{position:relative;display:flex;align-items:center;gap:11px;min-height:42px;padding:9px 12px;border-radius:7px;color:var(--dim);text-align:left;font-size:0.875rem}
+nav button:hover{background:var(--panel2);color:var(--text)}
+nav button.on{background:#f5f5f6;color:var(--text)}
+nav button.on:before{content:"";position:absolute;left:-14px;top:12px;bottom:12px;width:3px;background:var(--mint);border-radius:0 2px 2px 0}
+.nav-icon{width:17px;height:17px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+nav button .n{margin-left:auto;font:0.8125rem var(--mono);color:var(--faint)}
+nav button.on .n{color:var(--accent-text)}
+.filters{display:flex;flex-direction:column;gap:24px;overflow-y:auto;flex:1;min-height:0;padding:0 10px 10px;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.fgroup>h3{font-size:0.8125rem;color:var(--faint);margin-bottom:10px;font-weight:500;display:flex;align-items:center;justify-content:space-between}
+.reset{font-size:0.8125rem;color:var(--accent-text);padding:2px 0 2px 8px}
+.reset:hover{text-decoration:underline}
+.chips{display:flex;flex-direction:column;gap:2px}
+.chip{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;border-radius:5px;font-size:0.8125rem;color:var(--dim);text-align:left;min-height:32px}
+.chip:hover{background:var(--panel2);color:var(--text)}
+.chip.on{background:#fff0e5;color:#a84408}
+.chip-label{display:flex;align-items:center;gap:8px;min-width:0}
+.chip-dot{width:5px;height:5px;border-radius:50%;flex:none}
+.chip-count{font:0.8125rem var(--mono);color:var(--faint)}
+select{width:100%;background:var(--panel);border:1px solid var(--rule);padding:9px 28px 9px 10px;border-radius:6px;font-size:0.8125rem;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--faint) 50%),linear-gradient(135deg,var(--faint) 50%,transparent 50%);background-position:calc(100% - 15px) 16px,calc(100% - 11px) 16px;background-size:4px 4px;background-repeat:no-repeat}
+.rail footer{font-size:0.8125rem;color:var(--faint);line-height:1.9;border-top:1px solid var(--rule);padding:16px 10px 0}
+.rail footer b{color:var(--dim);font-weight:500}
+.source-dot{display:inline-block;width:5px;height:5px;background:var(--mint);border-radius:50%;margin-right:6px}
+main{min-width:0;padding:0 26px 48px;max-width:1680px;width:100%;margin:auto}
+.topbar{position:sticky;top:16px;z-index:30;background:rgba(252,252,252,.96);backdrop-filter:blur(14px);display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule);min-height:76px}
+.dateline{font-size:0.8125rem;color:var(--faint);display:flex;align-items:center;gap:12px;white-space:nowrap}
+.dateline b{font-weight:500;color:var(--dim)}
+.live{font-size:0.8125rem;color:var(--dim);display:flex;align-items:center;gap:6px;white-space:nowrap;cursor:pointer;padding:6px 9px;background:var(--panel);border:1px solid var(--rule);border-radius:5px}
+.live i{width:5px;height:5px;border-radius:50%;background:var(--mint);flex:none}
+.live.off i{background:var(--faint)}
+.search{margin-left:auto;position:relative;width:280px;min-width:120px}
+.search input{width:100%;background:var(--panel);border:1px solid var(--rule);border-radius:7px;padding:10px 32px;color:var(--text);font-size:0.8125rem;outline:none}
+.search input:focus{border-color:var(--accent-text);box-shadow:0 0 0 3px #e66b1612}
 .search input::placeholder{color:var(--faint)}
-.search svg{position:absolute;left:10px;top:9px;stroke:var(--faint)}
-.search kbd{position:absolute;right:8px;top:7px;font-family:var(--mono);font-size:10px;
-  color:var(--faint);border:1px solid var(--rule);border-radius:3px;padding:1px 5px}
-
-.view{display:none;animation:rise .3s ease both}
-.view.on{display:block}
-@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.view.on{animation:none}}
-
-/* ---------- hero ---------- */
-.hero{padding:52px 0 38px;display:grid;grid-template-columns:1fr auto;
-  align-items:end;gap:32px;border-bottom:1px solid var(--rule)}
-.hero h1{font-family:var(--serif);font-size:clamp(34px,4.6vw,54px);font-weight:400;
-  line-height:1.02;letter-spacing:-.015em}
-.hero p{color:var(--dim);max-width:44ch;font-size:13.5px;margin-top:14px;line-height:1.65}
-.hero .stamp{text-align:right;font-family:var(--mono);font-size:11px;color:var(--faint);
-  line-height:1.9;white-space:nowrap}
-.hero .stamp b{font-family:var(--serif);font-size:30px;color:var(--text);
-  display:block;font-weight:400;line-height:1;margin-bottom:6px}
-
-/* ---------- movers ---------- */
-.movers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid var(--rule)}
-.mover{padding:26px 20px 24px;border-right:1px solid var(--rule);position:relative;
-  text-align:left;transition:background .15s;display:block;min-width:0;overflow:hidden}
-.mover:last-child{border-right:none}
-.mover:hover{background:var(--panel)}
-.mover .rk{font-family:var(--mono);font-size:10px;color:var(--faint);display:block;
-  margin-bottom:18px}
-.mover .mom{font-family:var(--serif);font-size:40px;line-height:.9;letter-spacing:-.02em}
-.mover .mom i{font-style:normal;font-size:14px;color:var(--faint);margin-left:2px}
-.mover .nm{display:block;margin-top:12px;font-size:12.5px;font-weight:600;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mover .dt{display:block;margin-top:5px;font-family:var(--mono);font-size:11px;color:var(--dim)}
-.bar{position:absolute;left:20px;right:20px;bottom:0;height:2px;background:var(--rule)}
-.bar i{display:block;height:100%;background:var(--mint);transform-origin:left;
-  animation:grow .7s cubic-bezier(.2,.8,.2,1) both}
-@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media (prefers-reduced-motion:reduce){.bar i{animation:none}}
-
-/* ---------- panels ---------- */
-.split{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border-bottom:1px solid var(--rule)}
-.pane{padding:32px 0}
-.pane+.pane{border-left:1px solid var(--rule);padding-left:32px}
-.pane:first-child{padding-right:32px}
-.pane h2{font-size:12px;font-weight:600;color:var(--dim);margin-bottom:20px;letter-spacing:.02em}
-
-.domain-row{display:grid;grid-template-columns:118px minmax(0,1fr) 46px;align-items:center;
-  gap:12px;padding:5px 0;font-size:12.5px}
+.search svg{position:absolute;left:11px;top:13px;stroke:var(--faint)}
+.search kbd{position:absolute;right:10px;top:10px;font:0.8125rem var(--mono);color:var(--faint);border:1px solid var(--rule);border-radius:3px;padding:2px 5px}
+.view{display:none}.view.on{display:block}
+.hero{padding:28px 0 24px;display:grid;grid-template-columns:minmax(0,1fr) 260px;align-items:center;gap:32px}
+.hero h1{font-size:clamp(1.75rem,2.4vw,2rem);font-weight:600;line-height:1.3;letter-spacing:-.8px}
+.hero p{color:var(--dim);max-width:62ch;font-size:0.8125rem;margin-top:9px;line-height:1.9}
+.hero .stamp{border-left:1px solid var(--rule);padding-left:26px;font-size:0.8125rem;color:var(--faint);line-height:1.9}
+.stamp-label{display:block;font-size:0.8125rem;margin-bottom:3px}
+.hero .stamp b{font-size:1.9375rem;letter-spacing:-1px;color:var(--text);display:block;font-weight:500;line-height:1.3;font-variant-numeric:tabular-nums}
+.hero .stamp b small{font-size:0.8125rem;color:var(--faint);margin-left:7px;letter-spacing:0;font-weight:400}
+.coverage{display:flex;height:4px;overflow:hidden;background:var(--panel2);border-radius:2px;margin:11px 0 7px}
+.coverage i{display:block;background:var(--mint);height:100%}
+.coverage-label{display:flex;justify-content:space-between;gap:6px;font-size:0.8125rem}
+.coverage-label span:first-child{color:var(--accent-text)}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:2px 0 13px}
+.section-heading h2,.pane h2{font-size:0.875rem;font-weight:550}
+.section-heading p,.pane h2 span{font-size:0.8125rem;color:var(--faint);font-weight:400}
+.movers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mover{padding:17px 16px 20px;border:1px solid var(--rule);border-radius:9px;background:var(--panel);position:relative;text-align:left;min-width:0;overflow:hidden;transition:border-color .16s,background .16s}
+.mover:first-child{background:#fff9f4;border-color:#f4d1b8}
+.mover:hover{background:var(--panel2);border-color:#e4ac84}
+.mover .rk{display:flex;justify-content:space-between;align-items:center;font-size:0.8125rem;color:var(--faint);margin-bottom:17px;gap:6px}
+.mover .rk em{font-style:normal;color:var(--dim);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mover .mom{font-size:2.1875rem;line-height:1.1;letter-spacing:-1.5px;font-weight:500;font-variant-numeric:tabular-nums}
+.mover:first-child .mom{color:#c6580c}
+.mover .mom i{font-style:normal;font-size:0.8125rem;color:var(--faint);margin-left:5px;letter-spacing:0;font-weight:400}
+.mover .nm{display:block;margin-top:12px;font-size:0.875rem;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mover .owner{display:block;font-size:0.8125rem;color:var(--faint);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-top:2px}
+.mover .dt{display:block;margin-top:15px;font-size:0.8125rem;color:var(--positive);font-variant-numeric:tabular-nums}
+.bar{position:absolute;left:16px;right:16px;bottom:0;height:2px;background:var(--rule)}
+.bar i{display:block;height:100%;background:var(--mint)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:24px;margin-top:28px}
+.pane{min-width:0;padding:22px 24px;background:var(--panel);border:1px solid var(--rule);border-radius:10px}
+.pane h2{margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.domain-row{display:grid;grid-template-columns:100px minmax(0,1fr) 28px;align-items:center;gap:14px;padding:6px 0;font-size:0.8125rem}
 .domain-row .nm{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .domain-row .tr{height:5px;background:var(--panel2);border-radius:2px;overflow:hidden}
-.domain-row .tr i{display:block;height:100%;border-radius:2px}
-.domain-row .ct{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:right}
-
-.notes{display:flex;flex-direction:column;gap:16px}
-.note{display:grid;grid-template-columns:3px 1fr;gap:14px;font-size:12.5px;line-height:1.6}
-.note .k{background:var(--rule);border-radius:2px}
-.note.hot .k{background:var(--copper)}
-.note.cool .k{background:var(--blue)}
-.note.mint .k{background:var(--mint)}
-.note b{display:block;color:var(--text);font-weight:600;margin-bottom:2px}
+.domain-row .tr i{display:block;height:100%;border-radius:2px;opacity:.8}
+.domain-row .ct{font:0.8125rem var(--mono);color:var(--faint);text-align:right}
+.notes{display:flex;flex-direction:column;gap:15px}
+.note{display:grid;grid-template-columns:5px minmax(0,1fr);gap:12px;font-size:0.8125rem;line-height:1.8}
+.note .k{background:var(--faint);border-radius:50%;height:5px;margin-top:7px}
+.note.hot .k{background:var(--copper)}.note.cool .k{background:var(--blue)}.note.mint .k{background:var(--mint)}
+.note b{display:block;color:var(--text);font-weight:500;margin-bottom:3px;overflow-wrap:anywhere}
 .note span{color:var(--dim)}
-
-/* ---------- table ---------- */
-.tbl-head{display:flex;align-items:baseline;justify-content:space-between;
-  padding:34px 0 16px;border-bottom:1px solid var(--rule)}
-.tbl-head h2{font-family:var(--serif);font-size:24px;font-weight:400}
-.tbl-head p{font-size:12px;color:var(--faint);font-family:var(--mono)}
-.cols, .row{display:grid;
-  grid-template-columns:38px minmax(240px,1fr) 92px 84px 78px 88px 64px 110px;
-  gap:14px;align-items:center}
-.row.row-new{grid-template-columns:38px minmax(240px,1fr) 84px 84px 108px 110px}
-.cols{padding:10px 8px 10px 0;border-bottom:1px solid var(--rule);font-family:var(--mono);
-  font-size:10px;color:var(--faint);letter-spacing:.06em}
-.cols span{cursor:pointer;user-select:none;white-space:nowrap}
-.cols span:nth-child(3),.cols span:nth-child(4),.cols span:nth-child(5),
-.cols span:nth-child(6),.cols span:nth-child(7){text-align:right}
-.cols span:hover{color:var(--dim)}
-.cols .ar{color:var(--mint)}
+.tbl-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:30px 0 16px}
+.tbl-head h2{font-size:1.125rem;font-weight:550;letter-spacing:-.3px}
+.tbl-head p{font-size:0.8125rem;color:var(--faint)}
+/* The header and rows share tracks at every breakpoint. Keep the new-project grid separate. */
+.cols,.row{display:grid;grid-template-columns:26px minmax(160px,1fr) 76px 60px 70px 76px 52px 64px;gap:10px;align-items:center}
+.cols.cols-new,.row.row-new{grid-template-columns:30px minmax(180px,1fr) 80px 84px 100px 90px}
+.cols{padding:11px 12px 11px 0;background:var(--panel);border-block:1px solid var(--rule);font-size:0.8125rem;color:var(--faint);border-radius:6px 6px 0 0}
+.cols span{user-select:none;white-space:nowrap}.cols [data-s]{cursor:pointer}
+.cols span:nth-child(n+3){text-align:right}
+.cols [data-s]:hover{color:var(--text)}.cols .ar{color:var(--accent-text)}
 .rows{display:flex;flex-direction:column}
-.row{padding:13px 8px 13px 0;border-bottom:1px solid rgba(43,52,49,.55);cursor:pointer;
-  transition:background .12s;text-align:left;width:100%}
+.row{padding:15px 12px 15px 0;border-bottom:1px solid var(--rule);cursor:pointer;text-align:left;width:100%;min-width:0}
 .row:hover{background:var(--panel)}
-.row:focus-visible{outline:2px solid var(--mint);outline-offset:-2px}
-.row .rk{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:right}
+.row:focus-visible{outline-offset:-2px}
+.row .rk{font:0.8125rem var(--mono);color:var(--faint);text-align:right}
 .row .main{min-width:0}
-.row .repo{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:0;min-width:0}
-.row .repo .own{color:var(--faint);font-weight:400;flex:0 1 auto;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
+.row .repo{font-size:0.8125rem;font-weight:550;display:flex;align-items:center;min-width:0}
+.row .repo .own{color:var(--faint);font-weight:400;flex:0 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .repo .rn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:0 1 auto}
 .row .repo .dot{width:5px;height:5px;border-radius:50%;flex:none;margin-right:8px}
-.row .desc{font-size:11.5px;color:var(--faint);white-space:nowrap;overflow:hidden;
-  text-overflow:ellipsis;margin-top:3px}
-.num{font-family:var(--mono);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
-.num.big{font-size:13.5px;color:var(--text)}
-.num.up{color:var(--mint)}
-.num.dim{color:var(--dim)}
-.num.warn{color:var(--copper)}
+.row .desc{font-size:0.8125rem;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px}
+.num{font:0.8125rem var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.num.big{font-size:0.875rem;color:var(--text)}.num.up{color:var(--positive)}.num.dim{color:var(--dim)}.num.warn{color:var(--copper)}
 .mom-cell{display:flex;align-items:center;gap:8px;justify-content:flex-end}
-.mom-cell .v{font-family:var(--serif);font-size:17px;line-height:1}
-.mom-cell .track{width:44px;height:3px;background:var(--panel2);border-radius:2px;flex:none}
-.mom-cell .track i{display:block;height:100%;background:var(--mint);border-radius:2px}
-.lang{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis}
-.spark{width:64px;height:18px;display:block}
-.spark path{fill:none;stroke:var(--mint);stroke-width:1.4;stroke-linecap:round}
-.spark path.flat{stroke:var(--rule)}
-
-.empty{padding:60px 0;text-align:center;color:var(--faint);font-size:13px}
-.hn-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--copper);
-  margin-left:7px;vertical-align:middle;flex:none}
-
-/* ---------- domain view ---------- */
-.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;
-  background:var(--rule);border:1px solid var(--rule);margin-top:20px}
-.dcard{background:var(--ink);padding:22px}
-.dcard h3{font-size:13px;font-weight:600;display:flex;justify-content:space-between;
-  align-items:center;margin-bottom:14px}
-.dcard h3 em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--faint)}
-.dcard ol{list-style:none;display:flex;flex-direction:column;gap:9px}
-.dcard li{display:flex;justify-content:space-between;gap:10px;font-size:12px;cursor:pointer;
-  padding:2px 0}
-.dcard li:hover{color:var(--mint)}
-.dcard li span{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dcard li b{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--faint);flex:none}
-
-/* ---------- drawer ---------- */
-.scrim{position:fixed;inset:0;background:rgba(8,11,10,.6);opacity:0;pointer-events:none;
-  transition:opacity .2s;z-index:60}
-.scrim.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,92vw);background:var(--panel);
-  border-left:1px solid var(--rule);transform:translateX(100%);transition:transform .28s
-  cubic-bezier(.2,.8,.2,1);z-index:70;overflow-y:auto;padding:32px 34px 60px}
-.drawer.on{transform:none}
-@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
-.drawer .x{position:absolute;top:22px;right:22px;color:var(--faint);font-size:18px;
-  padding:4px 8px;border-radius:4px}
+.mom-cell .v{font-size:0.875rem;font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
+.mom-cell .track{width:32px;height:3px;background:var(--panel2);border-radius:2px;flex:none}
+.mom-cell .track i{display:block;height:100%;background:var(--mint);border-radius:2px;opacity:.75}
+.lang{font-size:0.8125rem;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spark{width:64px;height:18px;display:block;margin-left:auto}.spark path{fill:none;stroke:var(--mint);stroke-width:1.4;stroke-linecap:round}.spark path.flat{stroke:var(--faint);stroke-dasharray:2 4;opacity:.5}
+.empty{padding:60px 16px;text-align:center;color:var(--faint);font-size:0.8125rem}
+.hn-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--copper);margin-left:7px;flex:none}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:4px}
+.dcard{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:22px;min-width:0}
+.dcard h3{font-size:0.875rem;font-weight:550;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.dcard h3 em{font-style:normal;font-size:0.8125rem;color:var(--faint)}
+.dcard ol{list-style:none;display:flex;flex-direction:column;gap:10px}
+.dcard li{display:flex;justify-content:space-between;gap:10px;font-size:0.8125rem;cursor:pointer;padding:3px 0}
+.dcard li:hover span{color:var(--accent-text)}
+.dcard li span{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dcard li b{font:0.8125rem var(--mono);color:var(--faint);flex:none}
+.scrim{position:fixed;inset:0;background:#2021244d;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:60;backdrop-filter:blur(3px)}.scrim.on{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:var(--panel);border-left:1px solid var(--rule);transform:translateX(100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility .25s;z-index:70;overflow-y:auto;padding:40px 32px 50px;box-shadow:-12px 0 60px #00000014}
+.drawer.on{transform:none;visibility:visible}
+body.drawer-open{overflow:hidden}
+.drawer .x{position:absolute;top:18px;right:18px;color:var(--dim);font-size:1.0625rem;width:32px;height:32px;border:1px solid var(--rule);border-radius:6px;line-height:1}
 .drawer .x:hover{color:var(--text);background:var(--panel2)}
-.drawer .tag{font-family:var(--mono);font-size:10.5px;color:var(--mint);letter-spacing:.08em}
-.drawer h2{font-family:var(--serif);font-size:27px;font-weight:400;margin:10px 0 4px;
-  line-height:1.2;word-break:break-word}
-.drawer .sub{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
-.drawer .body{color:var(--dim);font-size:13.5px;line-height:1.75;margin:20px 0 26px}
-.dstats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);
-  border-bottom:1px solid var(--rule);margin-bottom:26px}
-.dstat{padding:16px 0;border-right:1px solid var(--rule)}
-.dstat:nth-child(3n){border-right:none}
-.dstat .k{font-size:10.5px;color:var(--faint);font-family:var(--mono);display:block;
-  margin-bottom:5px}
-.dstat .v{font-family:var(--serif);font-size:22px;line-height:1}
-.dstat .v small{font-size:11px;font-family:var(--mono);color:var(--faint);margin-left:3px}
-.dstat .v small.na{font-size:11.5px;font-family:var(--sans);color:var(--faint);margin:0}
-.dsec h4{font-size:11px;color:var(--faint);font-family:var(--mono);letter-spacing:.07em;
-  margin-bottom:10px}
-.dsec{margin-bottom:24px}
-.hncard{border:1px solid var(--rule);border-radius:6px;padding:13px 15px;font-size:12.5px;
-  line-height:1.55;display:block}
-.hncard:hover{border-color:var(--faint)}
-.hncard b{display:block;font-weight:600;margin-bottom:5px;color:var(--text)}
-.hncard span{font-family:var(--mono);font-size:11px;color:var(--faint)}
-.links{display:flex;gap:8px;flex-wrap:wrap}
-.links a{border:1px solid var(--rule);border-radius:5px;padding:7px 13px;font-size:12px;
-  color:var(--dim)}
-.links a:hover{border-color:var(--mint);color:var(--mint)}
-.tbl-mini{width:100%;font-size:12px;border-collapse:collapse}
-.tbl-mini td{padding:6px 0;border-bottom:1px solid rgba(43,52,49,.5)}
-.tbl-mini td:last-child{text-align:right;font-family:var(--mono);font-size:11.5px;
-  color:var(--dim)}
+.drawer .tag{font-size:0.8125rem;color:var(--accent-text);padding-right:32px}
+.drawer h2{font-size:1.625rem;font-weight:550;margin:14px 0 6px;line-height:1.3;overflow-wrap:anywhere;letter-spacing:-.5px}
+.drawer .sub{font-size:0.8125rem;color:var(--faint)}
+.drawer .body{color:var(--dim);font-size:0.875rem;line-height:1.9;margin:20px 0 26px;overflow-wrap:anywhere}
+.dstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--ink);border:1px solid var(--rule);border-radius:8px;margin-bottom:28px;overflow:hidden}
+.dstat{padding:16px 12px;border-right:1px solid var(--rule)}.dstat:nth-child(3n){border-right:none}.dstat:nth-child(n+4){border-top:1px solid var(--rule)}
+.dstat .k{font-size:0.8125rem;color:var(--faint);display:block;margin-bottom:7px}.dstat .v{font-size:1.375rem;line-height:1;font-variant-numeric:tabular-nums}.dstat .v small{font-size:0.8125rem;color:var(--faint);margin-left:3px}.dstat .v small.na{font-size:0.8125rem;margin:0}
+.dsec{margin-bottom:26px}.dsec h4{font-size:0.8125rem;color:var(--dim);font-weight:500;margin-bottom:12px}
+.hncard{border:1px solid var(--rule);background:var(--ink);border-radius:7px;padding:14px;font-size:0.8125rem;line-height:1.7;display:block}.hncard:hover{border-color:var(--faint)}.hncard b{display:block;font-weight:500;margin-bottom:5px;overflow-wrap:anywhere}.hncard span{font-size:0.8125rem;color:var(--faint)}
+.links{display:flex;gap:8px;flex-wrap:wrap}.links a{border:1px solid var(--rule);border-radius:6px;padding:9px 12px;font-size:0.8125rem;color:var(--dim)}.links a:first-child{background:var(--mint);border-color:var(--accent-text);color:#fff;font-weight:600}.links a:hover{border-color:var(--accent-text);color:var(--accent-text)}.links a:first-child:hover{background:#cd590c;color:#fff}
+.tbl-mini{width:100%;font-size:0.8125rem;border-collapse:collapse}.tbl-mini td{padding:9px 0;border-bottom:1px solid var(--rule)}.tbl-mini td:last-child{text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+@media(min-width:1600px){main{padding-inline:48px}.movers{gap:14px}.mover{padding:22px}}
+@media(max-width:1240px){
+  :root{--rail:236px}main{padding-inline:26px}.topbar{gap:12px}.dateline span:last-child{display:none}.search{width:240px}
+  .cols:not(.cols-new),.row:not(.row-new){grid-template-columns:26px minmax(140px,1fr) 74px 62px 68px 70px}
+  .cols:not(.cols-new)>*:nth-child(7),.cols:not(.cols-new)>*:nth-child(8),.row:not(.row-new)>*:nth-child(7),.row:not(.row-new)>*:nth-child(8){display:none}
+  .cols.cols-new,.row.row-new{grid-template-columns:26px minmax(140px,1fr) 66px 70px 86px 70px}
+  .hero{grid-template-columns:minmax(0,1fr) 225px;gap:22px}.hero .stamp{padding-left:22px}.hero h1{font-size:1.875rem}
+  .movers{grid-template-columns:repeat(5,minmax(160px,1fr));overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;scrollbar-color:var(--rule) transparent;scroll-snap-type:x proximity}.mover{scroll-snap-align:start}
+  .split{gap:16px}.pane{padding:20px}.domain-row{grid-template-columns:82px minmax(0,1fr) 24px;gap:10px}
+}
+@media(max-width:1000px) and (min-width:821px){.split{grid-template-columns:minmax(0,1fr)}.hero{grid-template-columns:minmax(0,1fr)}.hero .stamp{border-left:none;padding:16px 0 0;border-top:1px solid var(--rule);max-width:320px}.dateline b{display:none}.cols:not(.cols-new),.row:not(.row-new){grid-template-columns:24px minmax(120px,1fr) 64px 54px 60px 60px;gap:9px}.cols.cols-new,.row.row-new{grid-template-columns:24px minmax(120px,1fr) 60px 62px 74px 60px;gap:9px}.mom-cell .track{display:none}}
+@media(max-width:820px){
+  .app{grid-template-columns:minmax(0,1fr)}.rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--rule);padding:18px 18px 12px;gap:16px;border-radius:0}.brand{padding:0;gap:9px}.brand-mark{width:27px;height:27px}.brand b{font-size:1.25rem}.brand small{font-size:0.8125rem;margin-top:2px}
+  nav{flex-direction:row;overflow-x:auto;gap:4px;scrollbar-width:none}nav button{white-space:nowrap;min-height:38px;padding:8px 10px;font-size:0.8125rem;gap:7px}nav button.on:before,nav button .n{display:none}.nav-icon{width:15px;height:15px}
+  .filters{gap:14px;overflow:visible;flex:none;padding:0}.chips{flex-direction:row;overflow-x:auto;gap:6px;padding:0 0 4px;scrollbar-width:none}.chip{flex:none;border:1px solid var(--rule);padding:5px 10px;min-height:32px;border-radius:6px;font-size:0.8125rem}.chip.on{border-color:#f2bd96}.chip-count{font-size:0.8125rem}.chip-dot{display:none}
+  .fgroup>h3{display:none}.fgroup:nth-child(2),.fgroup:nth-child(3){display:none}.rail footer{display:none}
+  main{padding:0 18px 44px}.topbar{flex-wrap:wrap;gap:10px;padding:14px 0;min-height:0}.dateline{font-size:0.8125rem;gap:10px}.live{margin-left:auto;font-size:0.8125rem;padding:4px 7px}.search{order:3;flex:1 0 100%;width:100%;min-width:0}.search input{padding-block:10px}.search kbd{display:none}
+  .hero{grid-template-columns:minmax(0,1fr);padding:28px 0 24px;gap:22px}.hero h1{font-size:1.8125rem;letter-spacing:-1px}.hero p{font-size:0.8125rem;line-height:1.9;margin-top:10px}.hero .stamp{border-left:none;border-block:1px solid var(--rule);padding:14px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:20px;align-items:center}.stamp-label{grid-column:1;margin:0;font-size:0.8125rem}.hero .stamp b{grid-column:1;grid-row:2;font-size:1.5625rem}.hero .stamp b small{font-size:0.8125rem}.coverage{grid-column:2;grid-row:1;margin:0;align-self:end}.coverage-label{grid-column:2;grid-row:2;flex-direction:column;gap:0;font-size:0.8125rem}
+  .section-heading{margin-bottom:11px}.section-heading p{font-size:0.8125rem}.movers{grid-template-columns:repeat(5,158px);gap:9px}.mover{padding:16px 14px 18px}.mover .mom{font-size:2rem}.mover .nm{font-size:0.8125rem}.mover .rk{margin-bottom:14px}
+  .split{grid-template-columns:minmax(0,1fr);gap:14px;margin-top:22px}.pane{padding:20px}.pane h2{font-size:0.8125rem;margin-bottom:16px}.domain-row{grid-template-columns:96px minmax(0,1fr) 24px;padding-block:6px}.note{font-size:0.8125rem}
+  .tbl-head{align-items:flex-start;flex-direction:column;gap:5px;padding:25px 0 13px}.tbl-head h2{font-size:1.0625rem}.tbl-head p{font-size:0.8125rem}
+  .cols:not(.cols-new),.row:not(.row-new){grid-template-columns:20px minmax(80px,1fr) 57px 54px 38px;gap:8px}
+  .cols:not(.cols-new)>*:nth-child(4),.cols:not(.cols-new)>*:nth-child(7),.cols:not(.cols-new)>*:nth-child(8),.row:not(.row-new)>*:nth-child(4),.row:not(.row-new)>*:nth-child(7),.row:not(.row-new)>*:nth-child(8){display:none}
+  .cols.cols-new,.row.row-new{grid-template-columns:20px minmax(80px,1fr) 54px 57px 38px;gap:8px}.cols.cols-new>*:nth-child(3),.row.row-new>*:nth-child(3){display:none}
+  .cols,.row{padding-right:5px}.row{padding-block:14px}.row .repo .own{display:none}.row .repo{font-size:0.8125rem}.row .desc{font-size:0.8125rem}.num{font-size:0.8125rem}.row .rk{font-size:0.8125rem}.mom-cell .track{display:none}.mom-cell .v{font-size:0.8125rem}
+  .drawer{padding:48px 20px 36px}.drawer h2{font-size:1.4375rem}.dstat{padding:14px 9px}.dstat .v{font-size:1.25rem}.dcard{padding:20px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* ---------- responsive ---------- */
-@media (max-width:1080px){
-  .movers{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .mover:nth-child(4),.mover:nth-child(5){display:none}
-  .split{grid-template-columns:1fr}
-  .pane+.pane{border-left:none;padding-left:0;border-top:1px solid var(--rule)}
-  .cols:not(.cols-new),.row:not(.row-new){
-    grid-template-columns:32px minmax(160px,1fr) 84px 74px 70px 80px}
-  .cols:not(.cols-new) span:nth-child(7),.cols:not(.cols-new) span:nth-child(8),
-  .row:not(.row-new) > *:nth-child(7),.row:not(.row-new) > *:nth-child(8){display:none}
-  .cols.cols-new,.row.row-new{grid-template-columns:32px minmax(150px,1fr) 70px 70px 84px 80px}
+/* Reference direction: white surfaces, orange signals, quiet typography, precise charts. */
+.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:26px}
+.summary-card{background:var(--panel);border:1px solid var(--rule);border-radius:13px;padding:20px;min-width:0}
+.summary-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--dim);font-size:0.8125rem;margin-bottom:5px}
+.summary-label small{color:var(--faint);font-size:0.8125rem;border:1px solid var(--rule);border-radius:5px;padding:2px 6px;white-space:nowrap}
+.summary-value{font-size:1.8125rem;font-weight:550;letter-spacing:-1px;line-height:1.35;font-variant-numeric:tabular-nums}
+.summary-value small{display:inline-block;font-size:0.8125rem;letter-spacing:0;color:var(--positive);background:#e5f6ed;border-radius:5px;padding:2px 6px;margin-left:7px;font-weight:500;vertical-align:middle}
+.summary-caption{font-size:0.8125rem;color:var(--faint);margin-top:5px;line-height:1.7}
+.summary-coverage{margin-top:22px;height:9px;display:flex;gap:3px;overflow:hidden;border-radius:3px;background:var(--panel2)}
+.summary-coverage i{display:block;height:100%;background:var(--mint)}
+.summary-coverage .estimate{background:#f8d5bb}
+.summary-legend{display:flex;justify-content:space-between;gap:8px;margin-top:12px;font-size:0.8125rem;color:var(--dim)}
+.summary-legend i{width:5px;height:5px;display:inline-block;background:var(--mint);border-radius:50%;margin-right:5px;vertical-align:middle}
+.summary-legend .estimate i{background:#f8d5bb}
+.age-chart{min-height:8rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;margin-top:13px;padding:0 8px 0;position:relative;background:repeating-linear-gradient(to top,transparent 0,transparent 21px,#f0f1f3 21px,#f0f1f3 22px)}
+.age-column{position:relative;min-height:7rem;display:flex;justify-content:flex-end;flex-direction:column;align-items:center}
+.age-column i{width:min(100%,42px);min-height:2px;background:#f7c8a5;border-radius:3px 3px 0 0;display:block}
+.age-column:nth-child(2) i{background:#f4a76d}.age-column:nth-child(3) i{background:var(--mint)}
+.age-column b{font-weight:500;color:var(--dim);font-size:0.8125rem;line-height:1.6}
+.age-column span{margin-top:.5rem;text-align:center;font-size:0.8125rem;color:var(--faint);white-space:normal}
+.hn-bars{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.hn-bar{display:grid;grid-template-columns:74px minmax(0,1fr) 38px;gap:8px;align-items:center;font-size:0.8125rem;color:var(--dim)}
+.hn-bar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hn-bar .tr{height:5px;background:var(--panel2);border-radius:3px;overflow:hidden}.hn-bar i{display:block;height:100%;background:#f5a56a;border-radius:3px}.hn-bar b{text-align:right;font-weight:400;font-variant-numeric:tabular-nums}
+.segmented{display:flex;gap:3px;height:7px;margin:0 0 20px;overflow:hidden;border-radius:3px}.segmented i{display:block;height:100%;flex:none;border-radius:1px}
+.pane{border-radius:13px}.mover{border-radius:10px}.dcard{border-radius:13px}
+.pane .domain-row .tr{background:#f4f4f5}.domain-row .tr i{opacity:.9}
+.cols{background:#f6f7f8}.mom-cell .track{background:#f4e5da}.mom-cell .track i{opacity:.9}
+.hero .stamp{font-size:0.8125rem}.hero .stamp b{font-size:1.5625rem}.stamp-label{font-size:0.8125rem}.hero .stamp b small{font-size:0.8125rem}
+.row:hover{background:#faf6f2}.mover:hover{background:#fff8f2}.drawer .tag{color:#b95310}
+.tbl-head h2{font-size:1rem}.mover .mom{font-size:1.9375rem}.mover .mom i{font-size:0.8125rem}.mover .rk{margin-bottom:13px}
+.brand-mark{color:#ed7622}.brand b{font-size:1.3125rem}.brand small{font-size:0.8125rem}
+.live{background:#fff}.live i{background:var(--positive)}.live.off i{background:#a9acb0}
+.hero .coverage i{background:var(--mint)}.coverage{background:#f6e5d9}
+.rail footer{font-size:0.8125rem}.source-dot{background:var(--positive)}
+.search input{background:#fff}.topbar{border-bottom-color:var(--rule)}
+@media(max-width:1240px){.summary-grid{gap:12px}.summary-card{padding:17px}.summary-value{font-size:1.625rem}.hn-bar{grid-template-columns:62px minmax(0,1fr) 34px;gap:6px}.summary-label small{font-size:0.8125rem}.hero h1{font-size:1.75rem}}
+@media(max-width:1000px) and (min-width:821px){.summary-grid{grid-template-columns:minmax(0,1fr)}.summary-card{padding:20px}.summary-value{font-size:1.8125rem}.age-chart{max-width:360px}.hn-bars{max-width:420px}}
+@media(max-width:820px){body{background:#fff}.app{margin:0;border:0;border-radius:0;box-shadow:none;min-height:100vh}.rail{top:0;border-radius:0}.topbar{top:0}.summary-grid{grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:24px}.summary-card{padding:20px}.summary-value{font-size:1.8125rem}.summary-label small{font-size:0.8125rem}.hero h1{font-size:1.6875rem}.hero p{font-size:0.8125rem}.hn-bar{grid-template-columns:90px minmax(0,1fr) 40px}.hero .stamp b{font-size:1.4375rem}.hero .stamp{padding-block:14px}.summary-coverage{margin-top:18px}.pane .domain-row{padding-block:7px}.mover .mom{font-size:1.8125rem}.split{margin-top:20px}}
+
+/* Readability: rem-based type, text contrast >=4.5:1, stable zoom and spacing. */
+html{font-size:100%;scroll-padding-top:7rem}
+button,input,select{line-height:1.5}
+nav button{font-size:.9375rem;min-height:44px}
+.brand small,.brand small small{font-size:.8125rem;letter-spacing:0}
+.fgroup>h3{font-size:.875rem;align-items:baseline;flex-wrap:wrap;gap:6px}
+.reset{font-size:.8125rem;min-height:30px;padding-block:4px}
+.chip{font-size:.875rem;min-height:38px}.chip-count,nav button .n{font-size:.8125rem}
+select{font-size:.9375rem;min-height:44px;border-color:var(--control);background-position:calc(100% - 15px) 20px,calc(100% - 11px) 20px}
+.dateline{font-size:.875rem;flex-wrap:wrap;white-space:normal;gap:6px 12px}
+.topbar{gap:12px;flex-wrap:wrap}.live{font-size:.8125rem;min-height:36px}
+.search{min-width:14rem;max-width:100%;flex-shrink:0}
+.search input{font-size:.9375rem;min-height:44px;border-color:var(--control);padding-left:36px}
+.search svg{top:50%;left:12px;transform:translateY(-50%)}.search kbd{font-size:.8125rem;top:9px}
+.search input:focus{border-color:var(--accent-text)}
+.hero{grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:24px}
+.hero h1{font-size:clamp(1.75rem,2.5vw,2.125rem);line-height:1.35;letter-spacing:-.025em}
+.hero p{font-size:1rem;line-height:1.75;max-width:58ch}
+.hero .stamp,.stamp-label,.hero .stamp b small,.coverage-label{font-size:.8125rem;line-height:1.6}
+.hero .stamp b{font-size:1.875rem;line-height:1.4}.hero .stamp b small{display:inline-block}
+.coverage-label,.summary-legend{flex-wrap:wrap;row-gap:6px}
+.summary-grid{gap:16px}.summary-card{padding:22px}
+.summary-label{font-size:.9375rem;flex-wrap:wrap;align-items:baseline;gap:8px}
+.summary-label small{font-size:.8125rem;white-space:normal}
+.summary-value{font-size:2rem;line-height:1.4;letter-spacing:-.025em}
+.summary-value small{font-size:.8125rem;line-height:1.5}
+.summary-caption,.summary-legend{font-size:.875rem;line-height:1.6}
+.hn-bar{grid-template-columns:minmax(70px,1fr) minmax(36px,1.1fr) minmax(3.5em,auto);font-size:.8125rem;gap:10px}
+.hn-bar span:first-child{white-space:normal;overflow:visible;overflow-wrap:anywhere;line-height:1.55}
+.hn-bar .tr{height:6px}.hn-bar b{white-space:nowrap}
+.section-heading{align-items:baseline;flex-wrap:wrap;gap:8px}
+.section-heading h2,.pane h2{font-size:1.0625rem;font-weight:600}
+.section-heading p,.pane h2 span{font-size:.8125rem;line-height:1.6}
+.pane h2{flex-wrap:wrap}.split{grid-template-columns:minmax(0,1fr) minmax(0,1.12fr)}
+.mover{padding:20px 16px 22px}.mover .rk{font-size:.8125rem;align-items:flex-start;flex-wrap:wrap;gap:4px;margin-bottom:16px}
+.mover .rk em{white-space:normal;overflow:visible;overflow-wrap:anywhere}
+.mover .mom{font-size:2.125rem;line-height:1.3}.mover .mom i{font-size:.8125rem;display:inline-block;line-height:1.5}
+.mover .nm{font-size:.9375rem;white-space:normal;overflow:visible;overflow-wrap:anywhere}
+.mover .owner{font-size:.8125rem;white-space:normal;overflow:visible;overflow-wrap:anywhere}
+.mover .dt{font-size:.875rem;line-height:1.6}
+.domain-row{grid-template-columns:minmax(110px,1fr) minmax(50px,1.2fr) 3ch;gap:12px;font-size:.875rem;line-height:1.6;padding-block:8px}
+.domain-row .nm{white-space:normal;overflow:visible;overflow-wrap:anywhere}.domain-row .ct{font-size:.875rem}
+.note{font-size:.9375rem;line-height:1.75}.notes{gap:20px}.note b{font-weight:600}.note .k{margin-top:.6rem}
+.tbl-head{align-items:baseline;flex-wrap:wrap}.tbl-head h2{font-size:1.25rem}.tbl-head p{font-size:.875rem;line-height:1.6}
+.cols,.row{grid-template-columns:2rem minmax(190px,1fr) 5.25rem 4rem 5rem 5rem 4.5rem 4rem;gap:12px}
+.cols.cols-new,.row.row-new{grid-template-columns:2rem minmax(190px,1fr) 5.5rem 5.5rem 6.5rem 5rem}
+.cols{font-size:.875rem;padding-block:12px}.cols span{white-space:normal;overflow-wrap:anywhere}
+.cols [data-s]{min-height:28px;display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.cols [data-s="repo"]{justify-content:flex-start}
+.cols [data-s]:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px;border-radius:2px}
+.row{padding-block:18px;scroll-margin-top:7rem}.row .rk{font-size:.8125rem}
+.row .repo{font-size:.9375rem;line-height:1.6;flex-wrap:wrap}
+.row .repo .own,.row .repo .rn{white-space:normal;overflow:visible;overflow-wrap:anywhere}
+.row .desc{font-size:.875rem;line-height:1.65;white-space:normal;overflow:visible;overflow-wrap:anywhere;margin-top:6px}
+.num{font-size:.875rem;line-height:1.6;overflow-wrap:anywhere}.num.warn{color:var(--accent-text)}.mom-cell .v{font-size:1rem;line-height:1.6}
+.mom-cell .track{width:24px}.dcard h3{font-size:1rem;flex-wrap:wrap}.dcard h3 em{font-size:.8125rem}
+.dcard li{font-size:.9375rem;min-height:36px;align-items:baseline}.dcard li span{white-space:normal;overflow:visible;overflow-wrap:anywhere}.dcard li b{font-size:.875rem}
+.drawer{width:min(620px,96vw);padding-top:56px}.drawer .x{width:40px;height:40px}
+.drawer .tag,.drawer .sub{font-size:.875rem;line-height:1.6}.drawer .body{font-size:1rem;line-height:1.75}
+.dstat .k{font-size:.8125rem;line-height:1.6}.dstat .v{font-size:1.5rem;line-height:1.5;overflow-wrap:anywhere}.dstat .v small,.dstat .v small.na{font-size:.8125rem}
+.dsec h4{font-size:.9375rem}.tbl-mini{font-size:.875rem}.tbl-mini td{vertical-align:top;overflow-wrap:anywhere}
+.hncard{font-size:.9375rem}.hncard span{font-size:.8125rem}.links a{font-size:.9375rem;min-height:44px;display:flex;align-items:center}
+.links a:first-child{background:var(--accent-text);border-color:var(--accent-text)}
+.rail footer{font-size:.8125rem;line-height:1.75}.rail{gap:22px;overflow-y:auto}.filters{min-height:10rem}
+.view{container-type:inline-size;container-name:content}
+.mobile-sort{display:none}
+@container content (max-width:60rem){
+ .hero{grid-template-columns:minmax(0,1fr)}.hero .stamp{border-left:0;border-top:1px solid var(--rule);padding:16px 0 0;max-width:26rem}
+ .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-card:last-child{grid-column:1/-1}
+ .split{grid-template-columns:minmax(0,1fr)}.movers{grid-template-columns:repeat(5,minmax(13rem,1fr));overflow-x:auto}
 }
-@media (max-width:820px){
-  .app{grid-template-columns:minmax(0,1fr)}
-  .rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--rule);
-    padding:16px 18px 12px;gap:14px;min-width:0}
-  .brand{font-size:15px}
-  .brand span{display:none}
-  nav{flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:2px}
-  nav button{white-space:nowrap;padding:6px 10px;font-size:13px}
-  nav button .n{display:none}
-  .filters{flex-direction:row;gap:10px;overflow-x:auto;flex:none;padding-bottom:2px}
-  .fgroup>h3{display:none}
-  .fgroup{flex:none}
-  .fgroup:nth-child(2),.fgroup:nth-child(3){display:none}
-  .chips{flex-wrap:nowrap}
-  .rail footer{display:none}
-  main{padding:0 18px 60px}
-  .hero{grid-template-columns:1fr;padding:26px 0 22px}
-  .hero h1{font-size:32px}
-  .hero .stamp{display:none}
-  .movers{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .mover:nth-child(3){display:none}
-  .mover{padding:16px 14px}
-  .mover .mom{font-size:30px}
-  .cols:not(.cols-new),.row:not(.row-new){
-    grid-template-columns:22px minmax(100px,1fr) 58px 52px 54px;gap:9px}
-  .cols:not(.cols-new) span:nth-child(4),.cols:not(.cols-new) span:nth-child(7),
-  .cols:not(.cols-new) span:nth-child(8),
-  .row:not(.row-new) > *:nth-child(4),
-  .row:not(.row-new) > *:nth-child(7),
-  .row:not(.row-new) > *:nth-child(8){display:none}
-  .cols.cols-new,.row.row-new{grid-template-columns:22px minmax(100px,1fr) 52px 58px 54px;gap:9px}
-  .cols.cols-new > *:nth-child(3),.row.row-new > *:nth-child(3){display:none}
-  .num{font-size:11.5px}
-  .mom-cell .track{display:none}
-  .row .repo .own{display:none}
-  .dateline span:last-child{display:none}
-  .search{width:auto;flex:1;max-width:none;min-width:0}
-  .search kbd{display:none}
-  .topbar{gap:10px}
-  .drawer{padding:28px 22px 50px}
+@container content (max-width:40rem){
+ .summary-grid{grid-template-columns:minmax(0,1fr)}.summary-card:last-child{grid-column:auto}
+ .cols:not(.cols-new),.cols.cols-new{display:none}
+ .row:not(.row-new),.row.row-new{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px;padding:20px 0}
+ .row>.rk{display:none}.row>.main{grid-column:1/-1}
+ .row .num,.row .mom-cell{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;justify-content:flex-start}
+ .row [data-label]:before{content:attr(data-label);display:block;color:var(--faint);font-size:.8125rem;line-height:1.6;font-family:var(--sans);font-weight:400}
+ .row:not(.row-new)>*:nth-child(4),.row:not(.row-new)>*:nth-child(7),.row:not(.row-new)>*:nth-child(8),.row-new>.num[data-label="出生"],.mom-cell .track{display:none}
+ .mobile-sort{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 8px;font-size:.875rem}
+ .mobile-sort select{width:auto;max-width:100%;flex:1;min-width:8rem}.mobile-sort button{min-height:44px;padding:8px 10px;border:1px solid var(--control);border-radius:6px;color:var(--dim)}
 }
+@media(min-width:1241px){.movers{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:1240px){
+ .cols:not(.cols-new),.row:not(.row-new){grid-template-columns:1.75rem minmax(165px,1fr) 5rem 3.75rem 4.75rem 4.75rem;gap:10px}
+ .cols.cols-new,.row.row-new{grid-template-columns:1.75rem minmax(165px,1fr) 4.75rem 4.75rem 6rem 4.75rem;gap:10px}
+ .movers{grid-template-columns:repeat(5,minmax(205px,1fr))}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-card:last-child{grid-column:1/-1}.summary-card:last-child .hn-bars{max-width:38rem}
+ .split{grid-template-columns:minmax(0,1fr)}.hero{grid-template-columns:minmax(0,1fr)}.hero .stamp{border-left:0;padding:16px 0 0;border-top:1px solid var(--rule);max-width:24rem}
+ .dateline span:last-child{display:none}.search{width:16rem}
+}
+@media(max-width:1000px) and (min-width:821px){
+ .cols:not(.cols-new),.row:not(.row-new){grid-template-columns:1.5rem minmax(120px,1fr) 4.5rem 3.25rem 4.25rem 3.5rem;gap:8px}
+ .cols.cols-new,.row.row-new{grid-template-columns:1.5rem minmax(120px,1fr) 4.25rem 4.25rem 5.25rem 3.5rem;gap:8px}
+ .summary-grid{grid-template-columns:minmax(0,1fr)}.mom-cell .track{display:none}
+}
+@media(max-width:820px){
+ .rail{gap:16px;overflow:visible}.filters{min-height:0}.topbar{top:0}.dateline{font-size:.8125rem}.search{min-width:0;flex:1 0 100%}.search input{font-size:1rem}
+ nav button{font-size:.9375rem;min-height:44px}.chip{font-size:.875rem;min-height:38px}.chip-count{font-size:.8125rem}
+ .summary-grid{grid-template-columns:minmax(0,1fr)}.summary-card:last-child{grid-column:auto}.hero{gap:18px}.hero h1{font-size:1.75rem}.hero p{font-size:1rem}
+ .hero .stamp{display:block;max-width:none}.hero .stamp b{font-size:1.875rem}.hero .stamp b small{font-size:.8125rem}.coverage{margin:12px 0 8px}.coverage-label{flex-direction:row;font-size:.8125rem}
+ .section-heading p{font-size:.8125rem}.movers{grid-template-columns:repeat(5,210px)}.mover .mom{font-size:2rem}
+ .pane h2{font-size:1.0625rem}.note{font-size:.9375rem}.domain-row{grid-template-columns:minmax(100px,1fr) minmax(50px,1.1fr) 3ch}
+ .tbl-head{gap:8px}.tbl-head h2{font-size:1.25rem}.tbl-head p{font-size:.875rem}
+ /* Keep full project names/descriptions readable; label each metric in a second row. */
+ .cols:not(.cols-new),.cols.cols-new{display:none}
+ .row:not(.row-new),.row.row-new{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px;padding:20px 0}
+ .row>.rk{display:none}.row>.main{grid-column:1/-1}.row .repo{font-size:.9375rem}.row .repo .own{display:inline}.row .desc{font-size:.875rem;line-height:1.65}
+ .row .num,.row .mom-cell{font-size:.875rem;text-align:left;justify-content:flex-start;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+ .row [data-label]:before{content:attr(data-label);display:block;color:var(--faint);font-size:.8125rem;line-height:1.6;font-family:var(--sans);font-weight:400}
+ .mom-cell .v{font-size:1rem}.mom-cell .track{display:none}.row-new>.num[data-label="出生"]{display:none}
+ .dstat{padding:14px 10px}.dstat .v{font-size:1.375rem}.drawer h2{font-size:1.5rem}.drawer .body{font-size:1rem}
+}
+@media(max-width:360px){main{padding-inline:14px}.rail{padding-inline:14px}.pane,.summary-card{padding:18px}.domain-row{grid-template-columns:minmax(90px,1fr) minmax(36px,1fr) 3ch;gap:8px}.dstats{grid-template-columns:repeat(2,minmax(0,1fr))}.dstat:nth-child(3n){border-right:1px solid var(--rule)}.dstat:nth-child(2n){border-right:0}.dstat:nth-child(n+3){border-top:1px solid var(--rule)}}
+@media(max-height:700px) and (min-width:821px){.rail{position:static;height:auto}.rail .filters{overflow:visible}.topbar{position:static}}
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="rail">
-    <div class="brand"><b>GitTrend</b><span>GitHub 趋势雷达</span></div>
-    <nav id="nav"></nav>
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="15" stroke="currentColor" stroke-opacity=".35"/><circle cx="18" cy="18" r="9" stroke="currentColor" stroke-opacity=".65"/><path d="M18 3v15l10-10" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="18" r="2.5" fill="currentColor"/><circle cx="10" cy="24" r="2" fill="currentColor"/></svg>
+      <div><b>GitTrend</b><small>开源趋势观察台</small></div>
+    </div>
+    <nav id="nav" aria-label="看板视图"></nav>
     <div class="filters">
       <div class="fgroup">
-        <h3>领域</h3>
+        <h3>探索领域<button class="reset" id="resetFilters" type="button">重置筛选</button></h3>
         <div class="chips" id="domainChips"></div>
       </div>
       <div class="fgroup">
         <h3>语言</h3>
-        <select id="langSel"></select>
+        <select id="langSel" aria-label="筛选编程语言"></select>
       </div>
       <div class="fgroup">
-        <h3>最小动量</h3>
-        <select id="momSel">
+        <h3>最低热度</h3>
+        <select id="momSel" aria-label="筛选最低热度">
           <option value="0">不限</option>
-          <option value="30">30 以上</option>
-          <option value="45">45 以上</option>
-          <option value="60">60 以上</option>
+          <option value="30">30 分以上</option>
+          <option value="45">45 分以上</option>
+          <option value="60">60 分以上</option>
         </select>
       </div>
     </div>
@@ -326,11 +381,12 @@ main{min-width:0;padding:0 40px 80px}
   <main>
     <div class="topbar">
       <div class="dateline" id="dateline"></div>
+      <button class="live" id="live" type="button" aria-label="立即检查数据更新"></button>
       <div class="search">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke-width="1.6">
           <circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/>
         </svg>
-        <input id="q" placeholder="搜项目、描述、语言…" autocomplete="off">
+        <input id="q" type="search" aria-label="搜索项目" placeholder="搜索项目、语言或方向…" autocomplete="off">
         <kbd>/</kbd>
       </div>
     </div>
@@ -344,19 +400,26 @@ main{min-width:0;padding:0 40px 80px}
 </div>
 
 <div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true" inert></aside>
 
 <script>
-const DATA = /*__DATA__*/{};
-const REPOS = DATA.repos || [];
+let DATA = /*__DATA__*/{};
+let REPOS = DATA.repos || [];
 
 const DOMAIN_COLORS = {
-  "AI Agent":"#6fd3a6","LLM 应用":"#7ea6d8","模型 / 训练":"#b39ddb","AI 基建":"#8ecfc9",
-  "开发工具":"#e0b464","数据 / 数据库":"#d99b6c","云原生 / 基础设施":"#9fb8d0",
-  "前端 / Web":"#e8a3b8","移动 / 跨端":"#a8c98a","安全":"#e2857a","效率 / 个人工具":"#c3b1e1",
-  "学习资源":"#b9b9a8","音视频 / 图形":"#d8a7c8","区块链 / Web3":"#c9a86a","其他":"#8b958f"
+  "AI Agent":"#ee843b","LLM 应用":"#48b5d7","模型 / 训练":"#9163d7","AI 基建":"#53afa3",
+  "开发工具":"#e7b62f","数据 / 数据库":"#ca9266","云原生 / 基础设施":"#788fc0",
+  "前端 / Web":"#d87eab","移动 / 跨端":"#8ea950","安全":"#d46c68","效率 / 个人工具":"#a38ac6",
+  "学习资源":"#a7a173","音视频 / 图形":"#b984b1","区块链 / Web3":"#b79854","其他":"#a7adb4"
 };
 const dc = d => DOMAIN_COLORS[d] || "#8b958f";
+const DOMAIN_LABELS = {
+  "AI Agent":"AI 助手","LLM 应用":"大模型应用","模型 / 训练":"模型训练","AI 基建":"AI 基础设施",
+  "开发工具":"开发工具","数据 / 数据库":"数据库","云原生 / 基础设施":"云与服务器","前端 / Web":"网页开发",
+  "移动 / 跨端":"手机 App","安全":"安全","效率 / 个人工具":"效率工具","学习资源":"学习资料",
+  "音视频 / 图形":"音视频 / 图形","区块链 / Web3":"区块链 / Web3","其他":"其他"
+};
+const dl = d => DOMAIN_LABELS[d] || d;
 
 const state = { view:"overview", domain:"全部", lang:"全部", minMom:0, q:"", sort:"momentum", dir:-1 };
 
@@ -370,7 +433,7 @@ const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 function spark(points){
-  if(!points || points.length<2) return '<svg class="spark"><path class="flat" d="M1 9 L63 9"/></svg>';
+  if(!points || points.length<2) return '<svg class="spark" role="img" aria-label="历史记录不足，暂无趋势"><title>历史记录不足，暂无趋势</title><path class="flat" d="M1 9 L63 9"/></svg>';
   const vals = points.map(p=>p[1]);
   const mn = Math.min(...vals), mx = Math.max(...vals), span = Math.max(mx-mn,1);
   const step = 62/(points.length-1);
@@ -414,18 +477,26 @@ function filtered(){
 
 /* ---------- nav ---------- */
 const VIEWS = [
-  ["overview","概览"],["velocity","增速榜"],["new","新项目"],
-  ["domains","领域雷达"],["all","全部项目"]
+  ["overview","概览"],["velocity","涨得最快"],["new","新项目"],
+  ["domains","分类分布"],["all","全部项目"]
 ];
+const NAV_ICONS = {
+  overview:'<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="13" y="3" width="6" height="6" rx="1"/><rect x="3" y="13" width="6" height="6" rx="1"/><rect x="13" y="13" width="6" height="6" rx="1"/>',
+  velocity:'<path d="m3 16 5-5 4 3 7-10M13 4h6v6"/>',
+  new:'<path d="m11 2 2.5 6.5L20 11l-6.5 2.5L11 20l-2.5-6.5L2 11l6.5-2.5Z"/>',
+  domains:'<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="13" y="3" width="6" height="6" rx="1"/><rect x="3" y="13" width="6" height="6" rx="1"/><path d="M13 16h6m-3-3v6"/>',
+  all:'<path d="M8 5h11M8 11h11M8 17h11M3 5h.1M3 11h.1M3 17h.1"/>'
+};
 function renderNav(){
   document.getElementById("nav").innerHTML = VIEWS.map(([k,label])=>{
     let n = REPOS.length;
     if(k==="new") n = REPOS.filter(r=>r.age_days!=null && r.age_days<=90).length;
-    return `<button data-v="${k}" class="${state.view===k?"on":""}">
+    return `<button data-v="${k}" class="${state.view===k?"on":""}" aria-current="${state.view===k?'page':'false'}">
+      <svg class="nav-icon" viewBox="0 0 22 22" aria-hidden="true">${NAV_ICONS[k]}</svg>
       <span>${label}</span><span class="n">${n}</span></button>`;
   }).join("");
   document.querySelectorAll("#nav button").forEach(b=>{
-    b.onclick = ()=>{ state.view=b.dataset.v; render(); window.scrollTo({top:0,behavior:"smooth"}); };
+    b.onclick = ()=>{ state.view=b.dataset.v; render(); window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"}); };
   });
 }
 
@@ -435,7 +506,7 @@ function renderChips(){
   const all = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
   const items = ["全部", ...all];
   document.getElementById("domainChips").innerHTML = items.map(d=>
-    `<button class="chip ${state.domain===d?"on":""}" data-d="${esc(d)}">${esc(d)}</button>`
+    `<button class="chip ${state.domain===d?"on":""}" data-d="${esc(d)}" aria-pressed="${state.domain===d}"><span class="chip-label"><i class="chip-dot" style="background:${d==="全部"?'var(--mint)':dc(d)}" aria-hidden="true"></i>${esc(dl(d))}</span><span class="chip-count">${d==="全部"?REPOS.length:counts[d]}</span></button>`
   ).join("");
   document.querySelectorAll("#domainChips .chip").forEach(b=>{
     b.onclick = ()=>{ state.domain=b.dataset.d; render(); };
@@ -452,18 +523,18 @@ function renderChips(){
 
 /* ---------- table ---------- */
 const COLS_ALL = [
-  ["repo","项目"],["rate_day","日增"],["accel","加速度"],["stars","总星"],
-  ["momentum","动量"],["hn","讨论"],["spark","7 日走势"]
+  ["repo","项目"],["rate_day","日增星"],["accel","加速"],["stars","总星数"],
+  ["momentum","热度"],["hn","讨论"],["spark","走势"]
 ];
 const COLS_BASE = [
-  ["repo","项目"],["rate_day","日增"],["accel","加速度"],["stars","总星"],["momentum","动量"]
+  ["repo","项目"],["rate_day","日增星"],["accel","加速"],["stars","总星数"],["momentum","热度"]
 ];
 
 function renderTable(rows, opts={}){
   const cols = opts.cols || COLS_ALL;
   const head = cols.map(([k,label])=>{
     const on = state.sort===k;
-    return `<span data-s="${k}" class="${on?"ar":""}">${label}${on?(state.dir<0?" ↓":" ↑"):""}</span>`;
+    return `<span data-s="${k}" role="button" tabindex="0" aria-label="按${esc(label)}排序" class="${on?"ar":""}">${label}${on?(state.dir<0?" ↓":" ↑"):""}</span>`;
   }).join("");
   const html = rows.map((r,i)=>{
     const m = r.metrics||{};
@@ -473,29 +544,34 @@ function renderTable(rows, opts={}){
       repo:`<div class="main"><div class="repo">
               <i class="dot" style="background:${dc(r.domain)}"></i>
               <span class="own">${esc(own)}/</span><span class="rn">${esc(name)}</span>
-              ${hn.points?`<i class="hn-dot" title="HN 讨论"></i>`:""}
+              ${hn.points?`<i class="hn-dot" title="国外社区在讨论"></i>`:""}
             </div>
             <div class="desc">${esc(r.desc||"—")}</div></div>`,
-      rate_day:`<div class="num up" title="${m.rate_basis==="daily"?"GitHub 日榜标注的今日新增":m.rate_basis==="weekly"?"周榜新增 ÷ 7":m.rate_basis==="monthly"?"月榜新增 ÷ 30":m.rate_basis==="snapshot"?"本地快照差值":"生命期均速推算"}">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</div>`,
-      accel:`<div class="num ${m.accel==null?"dim":(m.accel>=1.6?"warn":"dim")}">${m.accel==null?"—":m.accel.toFixed(1)+"×"}</div>`,
-      stars:`<div class="num dim">${fmt(r.stars)}</div>`,
-      momentum:`<div class="mom-cell"><span class="v">${(r.momentum||0).toFixed(0)}</span>
+      rate_day:`<div data-label="日增星" class="num up" title="${m.rate_basis==="daily"?"GitHub 官方标注的今天新增":m.rate_basis==="weekly"?"本周新增 ÷ 7":m.rate_basis==="monthly"?"本月新增 ÷ 30":m.rate_basis==="snapshot"?"自己记录的历史差值":"按项目生命周期平均估算"}">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</div>`,
+      accel:`<div data-label="加速" class="num ${m.accel==null?"dim":(m.accel>=1.6?"warn":"dim")}">${m.accel==null?"—":m.accel.toFixed(1)+"×"}</div>`,
+      stars:`<div data-label="总星数" class="num dim">${fmt(r.stars)}</div>`,
+      momentum:`<div data-label="热度" class="mom-cell"><span class="v">${(r.momentum||0).toFixed(0)}</span>
                 <span class="track"><i style="width:${Math.min(100,r.momentum||0)}%"></i></span></div>`,
-      hn:`<div class="num dim">${hn.points?fmt(hn.points):"—"}</div>`,
+      hn:`<div data-label="讨论" class="num dim">${hn.points?fmt(hn.points):"—"}</div>`,
       spark:`<div class="sparkcell">${spark(r.history)}</div>`
     };
     return `<div class="row" tabindex="0" data-i="${REPOS.indexOf(r)}">
       <div class="rk">${i+1}</div>${cols.map(([k])=>cells[k]).join("")}</div>`;
   }).join("");
-  return `<div class="cols"><span></span>${head}</div><div class="rows">${html}</div>`;
+  const sortControl=["overview","all"].includes(state.view)?`<div class="mobile-sort"><label for="sort-${state.view}">排序</label><select id="sort-${state.view}" data-mobile-sort>${cols.filter(([k])=>k!=="spark").map(([k,label])=>`<option value="${k}" ${state.sort===k?"selected":""}>${esc(label)}</option>`).join("")}</select><button type="button" data-sort-direction aria-label="切换排序方向">${state.dir<0?"从高到低 ↓":"从低到高 ↑"}</button></div>`:"";
+  return `${sortControl}<div class="cols"><span></span>${head}</div><div class="rows">${html || '<div class="empty">没有匹配的项目，试试其他关键词或重置筛选。</div>'}</div>`;
 }
 
 function bindTable(root){
+  root.querySelectorAll("[data-mobile-sort]").forEach(s=>{s.onchange=()=>{state.sort=s.value;render();document.querySelector(`#view-${state.view} [data-mobile-sort]`)?.focus({preventScroll:true});};});
+  root.querySelectorAll("[data-sort-direction]").forEach(b=>{b.onclick=()=>{state.dir*=-1;render();document.querySelector(`#view-${state.view} [data-sort-direction]`)?.focus({preventScroll:true});};});
   root.querySelectorAll(".cols span[data-s]").forEach(s=>{
+    s.onkeydown = e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();s.click();}};
     s.onclick = ()=>{
       const k=s.dataset.s;
       if(state.sort===k) state.dir*=-1; else { state.sort=k; state.dir=-1; }
       render();
+      document.querySelector(`#view-${state.view} .cols [data-s="${k}"]`)?.focus({preventScroll:true});
     };
   });
   root.querySelectorAll(".row").forEach(row=>{
@@ -506,6 +582,39 @@ function bindTable(root){
 }
 
 /* ---------- views ---------- */
+function renderSummary(rows){
+  const measured=rows.filter(r=>["daily","snapshot"].includes((r.metrics||{}).rate_basis)).length;
+  const estimated=rows.filter(r=>(r.metrics||{}).estimated).length;
+  const unknown=rows.length-measured-estimated;
+  const young=rows.filter(r=>r.age_days!=null && r.age_days<=90);
+  const buckets=[young.filter(r=>r.age_days<=7).length,young.filter(r=>r.age_days>7 && r.age_days<=30).length,young.filter(r=>r.age_days>30).length];
+  const maxBucket=Math.max(...buckets,1);
+  const discussion=rows.filter(r=>(r.hn||{}).points>0);
+  const hnTop=[...discussion].sort((a,b)=>b.hn.points-a.hn.points).slice(0,3);
+  const maxPoints=hnTop.length?hnTop[0].hn.points:1;
+  const domains=new Set(rows.map(r=>r.domain)).size;
+  return `<div class="summary-grid">
+    <article class="summary-card">
+      <div class="summary-label">监控项目<small>${domains} 个领域</small></div>
+      <div class="summary-value">${rows.length}<small>当前筛选</small></div>
+      <p class="summary-caption">日增数据覆盖，区分实测与估算</p>
+      <div class="summary-coverage" aria-hidden="true"><i style="width:${measured/Math.max(rows.length,1)*100}%"></i><i class="estimate" style="width:${estimated/Math.max(rows.length,1)*100}%"></i></div>
+      <div class="summary-legend"><span><i></i>实测 ${measured}</span><span class="estimate"><i></i>估算 ${estimated}</span>${unknown?`<span>待补充 ${unknown}</span>`:""}</div>
+    </article>
+    <article class="summary-card">
+      <div class="summary-label">新项目<small>创建不满 90 天</small></div>
+      <div class="summary-value">${young.length}<small>${Math.round(young.length/Math.max(rows.length,1)*100)}% 占比</small></div>
+      <div class="age-chart" role="img" aria-label="新项目年龄分布：7天内 ${buckets[0]} 个，8至30天 ${buckets[1]} 个，31至90天 ${buckets[2]} 个">${buckets.map((c,i)=>`<div class="age-column"><b>${c}</b><i style="height:${c/maxBucket*48}px"></i><span>${["7 天内","8–30 天","31–90 天"][i]}</span></div>`).join("")}</div>
+    </article>
+    <article class="summary-card">
+      <div class="summary-label">有社区讨论的项目<small>Hacker News</small></div>
+      <div class="summary-value">${discussion.length}</div>
+      <p class="summary-caption">仅统计已采样项目，条形表示讨论点数</p>
+      <div class="hn-bars">${hnTop.map(r=>`<div class="hn-bar" title="${esc(r.repo)}：${r.hn.points} 点"><span>${esc(r.repo.split("/")[1])}</span><span class="tr"><i style="width:${r.hn.points/maxPoints*100}%"></i></span><b>${fmt(r.hn.points)}</b></div>`).join("") || '<p class="summary-caption">当前筛选下暂无讨论记录</p>'}</div>
+    </article>
+  </div>`;
+}
+
 function renderOverview(){
   const rows = filtered();
   const top = rows.slice(0,5);
@@ -517,9 +626,9 @@ function renderOverview(){
   const movers = top.map((r,i)=>{
     const m=r.metrics||{};
     return `<button class="mover" data-i="${REPOS.indexOf(r)}">
-      <span class="rk">${String(i+1).padStart(2,"0")}</span>
-      <span class="mom">${(r.momentum||0).toFixed(0)}<i>动量</i></span>
-      <span class="nm">${esc(r.repo)}</span>
+      <span class="rk"><span>排名 ${String(i+1).padStart(2,"0")}</span><em>${esc(dl(r.domain))}</em></span>
+      <span class="mom">${(r.momentum||0).toFixed(0)}<i>/ 100 热度</i></span>
+      <span class="nm">${esc(r.repo.split("/")[1])}</span><span class="owner">${esc(r.repo.split("/")[0])}</span>
       <span class="dt">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))} 星 / 天</span>
       <span class="bar"><i style="width:${Math.min(100,r.momentum||0)}%"></i></span>
     </button>`;
@@ -529,40 +638,42 @@ function renderOverview(){
 
   const totalGain = rows.reduce((s,r)=>s+((r.metrics||{}).rate_day||0),0);
   const measured = rows.filter(r=>["daily","snapshot"].includes((r.metrics||{}).rate_basis)).length;
-  const newest = rows.filter(r=>r.age_days!=null && r.age_days<=30)
-                     .sort((a,b)=>(b.momentum||0)-(a.momentum||0))[0];
 
   document.getElementById("view-overview").innerHTML = `
     <div class="hero">
       <div>
-        <h1>今天什么在起势</h1>
-        <p>${rows.length} 个项目在榜。动量分综合 star 增速、加速度、HN 讨论热度与项目新鲜度。</p>
+        <h1>开源趋势概览</h1>
+        <p>追踪项目增长、发现新方向，看看今天的开源世界正在发生什么。</p>
       </div>
       <div class="stamp">
-        <b>+${fmt(Math.round(totalGain))}</b>合计日均新增 star
-        <br>日榜实测 ${measured} 个 · 推算 ${rows.length - measured} 个
-        <br>${newest?`最新面孔 ${esc(newest.repo.split("/")[1])} · ${ageText(newest.age_days)}`:"—"}
+        <span class="stamp-label">日均新增 star 合计（含估算）</span>
+        <b>≈${fmt(Math.round(totalGain))}<small>star / 天</small></b>
+        <div class="coverage" aria-hidden="true"><i style="width:${rows.length?measured/rows.length*100:0}%"></i></div>
+        <div class="coverage-label"><span>实测 ${measured} 个</span><span>估算 ${rows.length-measured} 个</span></div>
       </div>
     </div>
-    <div class="movers">${movers}</div>
+    ${renderSummary(rows)}
+    <div class="section-heading"><h2>重点项目</h2><p>当前排序前 ${top.length} 位 · 点击查看详情</p></div>
+    <div class="movers">${movers || '<div class="empty">没有匹配的项目</div>'}</div>
     <div class="split">
       <div class="pane">
-        <h2>领域分布</h2>
+        <h2>热门领域<span>项目数量</span></h2>
+        <div class="segmented" aria-hidden="true">${doms.map(([d,c])=>`<i style="width:${c/Math.max(rows.length,1)*100}%;background:${dc(d)}"></i>`).join("")}</div>
         ${doms.map(([d,c])=>`
           <div class="domain-row">
-            <span class="nm">${esc(d)}</span>
+            <span class="nm">${esc(dl(d))}</span>
             <span class="tr"><i style="width:${Math.round(c/maxD*100)}%;background:${dc(d)}"></i></span>
             <span class="ct">${c}</span>
           </div>`).join("") || '<div class="empty">暂无数据</div>'}
       </div>
       <div class="pane">
-        <h2>今日值得注意</h2>
+        <h2>今天值得关注<span>从数据中发现信号</span></h2>
         <div class="notes">${notes}</div>
       </div>
     </div>
     <div class="tbl-head">
-      <h2>动量前 15</h2>
-      <p>~ 表示由周榜/月榜推算，非当日实测</p>
+      <h2>热度前 15</h2>
+      <p>带 ~ 的是估算值，带 + 的是真实日增</p>
     </div>
     ${renderTable(rows.slice(0,15), {cols:COLS_ALL})}
   `;
@@ -578,37 +689,37 @@ function buildNotes(rows){
   if(hottest){
     const hm=hottest.metrics||{};
     const txt = hm.estimated
-      ? `约 ${fmt(Math.round(hm.rate_day||0))} star / 天（由周榜或生命期推算）`
-      : `今日 +${fmt(Math.round(hm.rate_day||0))} star`;
+      ? `约 ${fmt(Math.round(hm.rate_day||0))} star / 天（由周榜或历史估算）`
+      : `今天新增 ${fmt(Math.round(hm.rate_day||0))} star`;
     out.push(`<div class="note hot"><i class="k"></i><div>
-      <b>单日最猛：${esc(hottest.repo)}</b>
-      <span>${txt}，总星 ${fmt(hottest.stars)}。</span></div></div>`);
+      <b>今天涨得最猛：${esc(hottest.repo)}</b>
+      <span>${txt}，目前共 ${fmt(hottest.stars)} 个 star。</span></div></div>`);
   }
 
   const accel = [...rows].filter(r=>(r.metrics||{}).accel>0)
     .sort((a,b)=>(b.metrics.accel)-(a.metrics.accel))[0];
   if(accel && accel.metrics.accel>=1.5) out.push(`<div class="note mint"><i class="k"></i><div>
-    <b>加速中：${esc(accel.repo)}</b>
-    <span>当日速率是周均的 ${accel.metrics.accel.toFixed(1)} 倍，说明热度刚被点燃而不是惯性。</span></div></div>`);
+    <b>正在加速：${esc(accel.repo)}</b>
+    <span>今天比最近一周平均快 ${accel.metrics.accel.toFixed(1)} 倍，热度刚刚被点燃，还在升温。</span></div></div>`);
 
   const young = [...rows].filter(r=>r.age_days!=null && r.age_days<=90 && r.stars>500)
     .sort((a,b)=>(b.stars_per_day_life||0)-(a.stars_per_day_life||0))[0];
   if(young) out.push(`<div class="note cool"><i class="k"></i><div>
-    <b>新面孔：${esc(young.repo)}</b>
-    <span>${ageText(young.age_days)}前创建，已 ${fmt(young.stars)} 星，生命期日均 +${fmt(Math.round(young.stars_per_day_life||0))}。</span></div></div>`);
+    <b>刚冒出来的新项目：${esc(young.repo)}</b>
+    <span>${ageText(young.age_days)}前创建，已经有 ${fmt(young.stars)} 个 star，平均每天 +${fmt(Math.round(young.stars_per_day_life||0))}。</span></div></div>`);
 
   const hnTop = [...rows].filter(r=>(r.hn||{}).points>0)
     .sort((a,b)=>(b.hn.points)-(a.hn.points))[0];
   if(hnTop) out.push(`<div class="note"><i class="k"></i><div>
-    <b>有人在聊：${esc(hnTop.repo)}</b>
-    <span>HN 上 ${hnTop.hn.mentions} 条相关讨论，累计 ${hnTop.hn.points} 分、${hnTop.hn.comments} 条评论。</span></div></div>`);
+    <b>有人在讨论：${esc(hnTop.repo)}</b>
+    <span>国外社区 Hacker News 上有 ${hnTop.hn.mentions} 条讨论，共 ${hnTop.hn.points} 个赞、${hnTop.hn.comments} 条评论。</span></div></div>`);
 
   const domCount = {};
   rows.forEach(r=>domCount[r.domain]=(domCount[r.domain]||0)+1);
   const topDom = Object.entries(domCount).sort((a,b)=>b[1]-a[1])[0];
   if(topDom) out.push(`<div class="note"><i class="k"></i><div>
-    <b>今日主线：${esc(topDom[0])}</b>
-    <span>包揽 ${topDom[1]} 个项目，占了榜单的 ${Math.round(topDom[1]/Math.max(rows.length,1)*100)}%。</span></div></div>`);
+    <b>今天最热的分类：${esc(dl(topDom[0]))}</b>
+    <span>这个分类下有 ${topDom[1]} 个项目，占了榜单的 ${Math.round(topDom[1]/Math.max(rows.length,1)*100)}%。</span></div></div>`);
 
   return out.join("") || '<div class="empty">当前筛选下没有数据</div>';
 }
@@ -616,8 +727,8 @@ function buildNotes(rows){
 function renderVelocity(){
   const rows = [...filtered()].sort((a,b)=>(b.metrics.rate_day||0)-(a.metrics.rate_day||0));
   document.getElementById("view-velocity").innerHTML = `
-    <div class="tbl-head"><h2>增速榜</h2>
-      <p>按今日新增 star 排序 · ${rows.length} 个项目</p></div>
+    <div class="tbl-head"><h2>涨得最快</h2>
+      <p>按每天新增 star 排序 · ${rows.length} 个项目</p></div>
     ${renderTable(rows, {cols:COLS_ALL})}`;
   bindTable(document.getElementById("view-velocity"));
 }
@@ -626,8 +737,8 @@ function renderNew(){
   const rows = filtered().filter(r=>r.age_days!=null && r.age_days<=90)
     .sort((a,b)=>(b.stars_per_day_life||0)-(a.stars_per_day_life||0));
   const body = rows.length ? `<div class="cols cols-new">
-      <span></span><span>项目</span><span>存活</span><span>总星</span>
-      <span>生命期日均</span><span>动量</span>
+      <span></span><span>项目</span><span>出生</span><span>总星数</span>
+      <span>平均每天</span><span>热度</span>
     </div><div class="rows">${rows.map((r,i)=>{
       const [own,name]=(r.repo||"").split("/");
       return `<div class="row row-new" tabindex="0" data-i="${REPOS.indexOf(r)}">
@@ -635,17 +746,17 @@ function renderNew(){
         <div class="main"><div class="repo"><i class="dot" style="background:${dc(r.domain)}"></i>
           <span class="own">${esc(own)}/</span><span class="rn">${esc(name)}</span></div>
           <div class="desc">${esc(r.desc||"—")}</div></div>
-        <div class="num dim">${ageText(r.age_days)}</div>
-        <div class="num dim">${fmt(r.stars)}</div>
-        <div class="num up">+${fmt(Math.round(r.stars_per_day_life||0))}</div>
-        <div class="mom-cell"><span class="v">${(r.momentum||0).toFixed(0)}</span>
+        <div class="num dim" data-label="出生">${ageText(r.age_days)}</div>
+        <div class="num dim" data-label="总星数">${fmt(r.stars)}</div>
+        <div class="num up" data-label="平均每天">+${fmt(Math.round(r.stars_per_day_life||0))}</div>
+        <div class="mom-cell" data-label="热度"><span class="v">${(r.momentum||0).toFixed(0)}</span>
           <span class="track"><i style="width:${Math.min(100,r.momentum||0)}%"></i></span></div>
       </div>`;}).join("")}</div>`
-    : `<div class="empty">90 天内没有符合条件的新项目。试试放宽筛选。</div>`;
+    : `<div class="empty">90 天内没有符合条件的新项目，试试放宽筛选。</div>`;
 
   document.getElementById("view-new").innerHTML = `
-    <div class="tbl-head"><h2>新项目首发</h2>
-      <p>创建不超过 90 天 · 按生命期日均 star 排序 · ${rows.length} 个</p></div>${body}`;
+    <div class="tbl-head"><h2>刚冒出来的新项目</h2>
+      <p>出生不到 90 天 · 按平均每天新增 star 排序 · ${rows.length} 个</p></div>${body}`;
   document.querySelectorAll("#view-new .row").forEach(row=>{
     const open=()=>openDrawer(REPOS[+row.dataset.i]);
     row.onclick=open;
@@ -661,15 +772,15 @@ function renderDomains(){
     const top = [...list].sort((a,b)=>(b.momentum||0)-(a.momentum||0)).slice(0,5);
     const avg = list.reduce((s,r)=>s+(r.momentum||0),0)/list.length;
     return `<div class="dcard">
-      <h3><span style="color:${dc(d)}">${esc(d)}</span><em>${list.length} 个 · 均分 ${avg.toFixed(0)}</em></h3>
+      <h3><span style="border-left:3px solid ${dc(d)};padding-left:10px;color:var(--text)">${esc(dl(d))}</span><em>${list.length} 个 · 平均热度 ${avg.toFixed(0)}</em></h3>
       <ol>${top.map(r=>`<li data-i="${REPOS.indexOf(r)}">
         <span>${esc(r.repo)}</span><b>${(r.momentum||0).toFixed(0)}</b></li>`).join("")}</ol>
     </div>`;
   }).join("");
 
   document.getElementById("view-domains").innerHTML = `
-    <div class="tbl-head"><h2>领域雷达</h2>
-      <p>看看今天的热度集中在哪条赛道</p></div>
+    <div class="tbl-head"><h2>分类分布</h2>
+      <p>看看今天的热点集中在哪些方向</p></div>
     ${cards?`<div class="dgrid">${cards}</div>`:'<div class="empty">暂无数据</div>'}`;
   document.querySelectorAll("#view-domains .dcard li").forEach(li=>{
     li.onclick=()=>openDrawer(REPOS[+li.dataset.i]);
@@ -680,63 +791,65 @@ function renderAll(){
   const rows = filtered();
   document.getElementById("view-all").innerHTML = `
     <div class="tbl-head"><h2>全部项目</h2>
-      <p>${rows.length} / ${REPOS.length} 个 · 点击表头排序</p></div>
+      <p>${rows.length} / ${REPOS.length} 个 · 可按指标排序</p></div>
     ${renderTable(rows, {cols:COLS_ALL})}`;
   bindTable(document.getElementById("view-all"));
 }
 
 /* ---------- drawer ---------- */
+let drawerTrigger = null;
 function openDrawer(r){
   if(!r) return;
+  drawerTrigger = document.activeElement;
   const m=r.metrics||{}, hn=r.hn||{};
   const [own,name]=(r.repo||"").split("/");
   const hist = (r.history||[]).slice(-14);
   const histRows = hist.map(([d,v],i)=>{
     const prev = i>0?hist[i-1][1]:null;
     const delta = prev!=null? v-prev : null;
-    return `<tr><td>${d}</td><td>${fmt(v)}${delta!=null?` <span style="color:${delta>=0?"#6fd3a6":"#e07a4a"}">${delta>=0?"+":""}${delta}</span>`:""}</td></tr>`;
+    return `<tr><td>${d}</td><td>${fmt(v)}${delta!=null?` <span style="color:${delta>=0?"var(--positive)":"#cc4f59"}">${delta>=0?"+":""}${delta}</span>`:""}</td></tr>`;
   }).reverse().join("");
 
   document.getElementById("drawer").innerHTML = `
     <button class="x" id="drawerX" aria-label="关闭">✕</button>
-    <div class="tag" style="color:${dc(r.domain)}">${esc(r.domain)}${r.language?" · "+esc(r.language):""}</div>
-    <h2>${esc(r.repo)}</h2>
-    <div class="sub">${r.created_at?"创建于 "+r.created_at+"（"+ageText(r.age_days)+"）":"创建时间未知"}</div>
-    <div class="body">${esc(r.desc||"这个项目还没有写简介。")}</div>
+    <div class="tag" style="border-left:3px solid ${dc(r.domain)};padding-left:10px;color:var(--dim)">${esc(dl(r.domain))}${r.language?" · "+esc(r.language):""}</div>
+    <h2 id="drawerTitle">${esc(r.repo)}</h2>
+    <div class="sub">${r.created_at?"创建于 "+r.created_at+"（"+ageText(r.age_days)+"）":"不知道什么时候创建的"}</div>
+    <div class="body">${esc(r.desc||"这个项目还没有自我介绍。")}</div>
 
     <div class="dstats">
-      <div class="dstat"><span class="k">动量</span><span class="v">${(r.momentum||0).toFixed(0)}<small>/100</small></span></div>
-      <div class="dstat"><span class="k">日均 star</span><span class="v">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</span></div>
-      <div class="dstat"><span class="k">加速度</span><span class="v">${m.accel==null?'<small class="na">暂无基线</small>':m.accel.toFixed(1)+'<small>×</small>'}</span></div>
-      <div class="dstat"><span class="k">总星</span><span class="v">${fmt(r.stars)}</span></div>
+      <div class="dstat"><span class="k">热度</span><span class="v">${(r.momentum||0).toFixed(0)}<small>/100</small></span></div>
+      <div class="dstat"><span class="k">每天新增 star</span><span class="v">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</span></div>
+      <div class="dstat"><span class="k">加速</span><span class="v">${m.accel==null?'<small class="na">还没有数据</small>':m.accel.toFixed(1)+'<small>×</small>'}</span></div>
+      <div class="dstat"><span class="k">总 star</span><span class="v">${fmt(r.stars)}</span></div>
       <div class="dstat"><span class="k">Fork</span><span class="v">${fmt(r.forks)}</span></div>
-      <div class="dstat"><span class="k">周均速</span><span class="v">${m.rate_week==null?"—":"+"+fmt(Math.round(m.rate_week))}</span></div>
+      <div class="dstat"><span class="k">近一周平均</span><span class="v">${m.rate_week==null?"—":"+"+fmt(Math.round(m.rate_week))}</span></div>
     </div>
 
-    ${histRows?`<div class="dsec"><h4>STAR 历史</h4>
+    ${histRows?`<div class="dsec"><h4>star 历史</h4>
       <table class="tbl-mini">${histRows}</table></div>`:
-      `<div class="dsec"><h4>STAR 历史</h4>
-       <div style="color:#5d6a64;font-size:12px">首次采集，明天起会在这里积累曲线。</div></div>`}
+      `<div class="dsec"><h4>star 历史</h4>
+       <div style="color:var(--faint);font-size:.875rem">刚开始记录，明天起这里会出现增长曲线。</div></div>`}
 
-    ${hn.points?`<div class="dsec"><h4>HACKER NEWS</h4>
+    ${hn.points?`<div class="dsec"><h4>国外社区讨论（Hacker News）</h4>
       <a class="hncard" href="${esc(hn.top?hn.top.url:"#")}" target="_blank" rel="noopener">
         <b>${esc(hn.top?hn.top.title:"相关讨论")}</b>
-        <span>${hn.mentions} 条提及 · 累计 ${hn.points} 分 · ${hn.comments} 评论</span></a></div>`:""}
+        <span>${hn.mentions} 条讨论 · ${hn.points} 个赞 · ${hn.comments} 条评论</span></a></div>`:""}
 
-    <div class="dsec"><h4>为什么在榜</h4>
+    <div class="dsec"><h4>为什么上榜</h4>
       <table class="tbl-mini">
-        ${r.gain&&r.gain.daily?`<tr><td>今日新增</td><td>+${fmt(r.gain.daily)}</td></tr>`:""}
+        ${r.gain&&r.gain.daily?`<tr><td>今天新增</td><td>+${fmt(r.gain.daily)}</td></tr>`:""}
         ${r.gain&&r.gain.weekly?`<tr><td>本周新增</td><td>+${fmt(r.gain.weekly)}</td></tr>`:""}
         ${r.gain&&r.gain.monthly?`<tr><td>本月新增</td><td>+${fmt(r.gain.monthly)}</td></tr>`:""}
-        ${r.stars_per_day_life?`<tr><td>生命期日均</td><td>+${fmt(Math.round(r.stars_per_day_life))}</td></tr>`:""}
-        <tr><td>出现在</td><td>${(r.windows||[]).map(w=>({daily:"日榜",weekly:"周榜",monthly:"月榜"}[w]||w)).join(" / ")||"搜索发现"}</td></tr>
+        ${r.stars_per_day_life?`<tr><td>平均每天（从创建到现在）</td><td>+${fmt(Math.round(r.stars_per_day_life))}</td></tr>`:""}
+        <tr><td>上了哪些榜</td><td>${(r.windows||[]).map(w=>({daily:"日榜",weekly:"周榜",monthly:"月榜"}[w]||w)).join(" / ")||"搜索发现"}</td></tr>
       </table>
     </div>
 
     <div class="links">
-      <a href="https://github.com/${esc(r.repo)}" target="_blank" rel="noopener">打开仓库</a>
-      ${r.homepage?`<a href="${esc(r.homepage)}" target="_blank" rel="noopener">项目主页</a>`:""}
-      <a href="https://star-history.com/#${esc(r.repo)}&Date" target="_blank" rel="noopener">Star 历史图</a>
+      <a href="https://github.com/${esc(r.repo)}" target="_blank" rel="noopener">打开项目</a>
+      ${r.homepage?`<a href="${esc(r.homepage)}" target="_blank" rel="noopener">项目官网</a>`:""}
+      <a href="https://star-history.com/#${esc(r.repo)}&Date" target="_blank" rel="noopener">star 增长曲线</a>
       <a href="https://github.com/search?q=${encodeURIComponent(r.repo)}&type=issues" target="_blank" rel="noopener">相关讨论</a>
     </div>
   `;
@@ -744,11 +857,20 @@ function openDrawer(r){
   document.getElementById("drawer").classList.add("on");
   document.getElementById("drawer").setAttribute("aria-hidden","false");
   document.getElementById("scrim").classList.add("on");
+  document.getElementById("drawer").inert = false;
+  document.querySelector(".app").inert = true;
+  document.body.classList.add("drawer-open");
+  document.getElementById("drawer").scrollTop = 0;
+  document.getElementById("drawerX").focus();
 }
 function closeDrawer(){
   document.getElementById("drawer").classList.remove("on");
   document.getElementById("drawer").setAttribute("aria-hidden","true");
   document.getElementById("scrim").classList.remove("on");
+  document.getElementById("drawer").inert = true;
+  document.querySelector(".app").inert = false;
+  document.body.classList.remove("drawer-open");
+  if(drawerTrigger && drawerTrigger.isConnected) drawerTrigger.focus({preventScroll:true});
 }
 document.getElementById("scrim").onclick = closeDrawer;
 
@@ -761,29 +883,110 @@ function render(){
     domains:renderDomains, all:renderAll})[state.view]();
 }
 
-/* ---------- init ---------- */
-(function init(){
+/* ---------- live refresh ---------- */
+const REFRESH_SECONDS = 60;
+let _liveTimer = null;
+
+function renderDateline(){
   const d = DATA.date || new Date().toISOString().slice(0,10);
   const tm = (DATA.generated_at||"").split(" ")[1] || "";
   document.getElementById("dateline").innerHTML =
-    `<span>${d}</span><b>${DATA.count||0} 个仓库</b><span>${tm?"更新 "+esc(tm):""}</span>`;
+    `<span>${d}</span><b>${DATA.count||0} 个项目</b><span>${tm?"更新于 "+esc(tm):""}</span>`;
+}
+
+function setLive(mode, text){
+  const el = document.getElementById("live");
+  if(!el) return;
+  if(mode === "off"){
+    el.className = "live off";
+    el.innerHTML = "<i></i>离线模式";
+    el.title = "用 file:// 打开时无法自动刷新，跑 python3 serve.py 即可在线刷新";
+  } else {
+    el.className = "live";
+    el.innerHTML = "<i></i>" + (text || "自动刷新中");
+    el.title = "点击立即刷新";
+  }
+}
+
+function applyData(obj){
+  if(!obj || !Array.isArray(obj.repos)) return false;
+  DATA = obj;
+  REPOS = obj.repos;
+  render();
+  renderDateline();
+  return true;
+}
+
+async function checkRefresh(){
+  try{
+    const res = await fetch("data/latest.json?t=" + Date.now(), {cache:"no-store"});
+    if(!res.ok) throw new Error("http " + res.status);
+    const obj = await res.json();
+    if(obj && Array.isArray(obj.repos)){
+      if(obj.generated_at !== DATA.generated_at){
+        if(applyData(obj)){
+          setLive("ok", "已更新 " + (obj.generated_at||"").split(" ")[1]);
+          return "updated";
+        }
+      } else {
+        setLive("ok");
+        return "same";
+      }
+    }
+    return "same";
+  }catch(e){
+    // file:// 下 fetch 会被浏览器拦截，退回内嵌数据，并停止无意义的轮询
+    setLive("off");
+    if(_liveTimer){ clearInterval(_liveTimer); _liveTimer = null; }
+    return "offline";
+  }
+}
+
+function manualRefresh(){
+  const el = document.getElementById("live");
+  if(!el || el.dataset.busy) return;
+  el.dataset.busy = "1";
+  setLive("ok", "刷新中…");
+  checkRefresh().then(r=>{
+    delete el.dataset.busy;
+    if(r === "same") setLive("ok", "已是最新");
+  });
+}
+
+/* ---------- init ---------- */
+(function init(){
+  renderDateline();
+  setLive(location.protocol === "file:" ? "off" : "ok");
   document.getElementById("foot").innerHTML =
-    `<b>数据源</b><br>GitHub Trending<br>GitHub Search API<br>Hacker News<br><br>
-     <b>更新</b> python3 radar.py`;
+    `<b><i class="source-dot" aria-hidden="true"></i>多源趋势观察</b><br>GitHub 热门榜与搜索<br>Hacker News 社区讨论<br><br>+ 实测日增　~ 估算日增`;
 
   const q = document.getElementById("q");
   let t;
   q.oninput = ()=>{ clearTimeout(t); t=setTimeout(()=>{ state.q=q.value.trim(); render(); },140); };
 
+  document.getElementById("resetFilters").onclick = ()=>{
+    state.domain="全部";state.lang="全部";state.minMom=0;state.q="";
+    q.value="";document.getElementById("momSel").value="0";render();
+  };
+
   document.getElementById("langSel").onchange = e=>{ state.lang=e.target.value; render(); };
   document.getElementById("momSel").onchange = e=>{ state.minMom=+e.target.value; render(); };
 
   document.addEventListener("keydown", e=>{
-    if(e.key==="/" && document.activeElement!==q){ e.preventDefault(); q.focus(); }
+    const drawer = document.getElementById("drawer");
+    if(drawer.classList.contains("on") && e.key==="Tab"){
+      const focusable = [...drawer.querySelectorAll('button,a[href],[tabindex="0"]')];
+      const first=focusable[0],last=focusable[focusable.length-1];
+      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    }
+    if(e.key==="/" && !drawer.classList.contains("on") && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){ e.preventDefault(); q.focus(); }
     if(e.key==="Escape"){ if(document.getElementById("drawer").classList.contains("on")) closeDrawer();
       else if(document.activeElement===q){ q.blur(); q.value=""; state.q=""; render(); } }
   });
 
+  document.getElementById("live").onclick = manualRefresh;
+  if(location.protocol !== "file:") _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
   render();
 })();
 </script>
