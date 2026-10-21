@@ -92,8 +92,9 @@ GitHub 每天只放出 12 条日榜,所以大多数仓库是估算——**这是
 
 ```bash
 crontab -e
-# 每天早上 9:17 跑一次(把 /path/to/GitTrend 换成你的实际路径)
-17 9 * * * cd /path/to/GitTrend && /usr/bin/python3 radar.py >> data/run.log 2>&1
+# 每天早上 9:17 跑一次（把 /path/to/GitTrend 换成你的实际路径）
+# python 用 `which python3` 查到的绝对路径（macOS Homebrew 通常是 /opt/homebrew/bin/python3）
+17 9 * * * cd /path/to/GitTrend && /opt/homebrew/bin/python3 radar.py >> data/run.log 2>&1
 ```
 
 **配合本地服务器,看板自动刷新:**
@@ -115,7 +116,7 @@ python3 serve.py              # 终端 2:启动本地服务器,浏览器自动�
   <key>Label</key><string>com.yourname.ghradar</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/usr/bin/python3</string>
+    <string>/opt/homebrew/bin/python3</string>
     <string>/path/to/GitTrend/radar.py</string>
   </array>
   <key>WorkingDirectory</key>
