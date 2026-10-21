@@ -886,6 +886,9 @@ function render(){
 
 /* ---------- live refresh ---------- */
 const REFRESH_SECONDS = 60;
+// file:// 下改从本地服务读数据，这样双击打开也能连上 serve.py 自动刷新
+const LIVE_BASE = location.protocol === "file:" ? "http://localhost:8765/" : "";
+const liveUrl = () => LIVE_BASE + "data/latest.json?t=" + Date.now();
 let _liveTimer = null;
 
 function renderDateline(){
@@ -901,7 +904,7 @@ function setLive(mode, text){
   if(mode === "off"){
     el.className = "live off";
     el.innerHTML = "<i></i>离线模式";
-    el.title = "用 file:// 打开时无法自动刷新，跑 python3 serve.py 即可在线刷新";
+    el.title = "未连接本地服务。运行 python3 serve.py 后点这里重试";
   } else {
     el.className = "live";
     el.innerHTML = "<i></i>" + (text || "自动刷新中");
@@ -920,7 +923,7 @@ function applyData(obj){
 
 async function checkRefresh(){
   try{
-    const res = await fetch("data/latest.json?t=" + Date.now(), {cache:"no-store"});
+    const res = await fetch(liveUrl(), {cache:"no-store"});
     if(!res.ok) throw new Error("http " + res.status);
     const obj = await res.json();
     if(obj && Array.isArray(obj.repos)){
@@ -951,6 +954,9 @@ function manualRefresh(){
   checkRefresh().then(r=>{
     delete el.dataset.busy;
     if(r === "same") setLive("ok", "已是最新");
+    if(r !== "offline" && !_liveTimer){
+      _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
+    }
   });
 }
 
@@ -987,7 +993,16 @@ function manualRefresh(){
   });
 
   document.getElementById("live").onclick = manualRefresh;
-  if(location.protocol !== "file:") _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
+  if(location.protocol !== "file:"){
+    _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
+  } else {
+    // 双击打开时也试一次本地服务，连上就自动进入在线刷新
+    checkRefresh().then(r=>{
+      if(r !== "offline" && !_liveTimer){
+        _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
+      }
+    });
+  }
   render();
 })();
 </script>

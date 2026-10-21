@@ -7,7 +7,7 @@ dashboard.html
 # 每次采集都会整体重写，属于运行时产物；历史价值在 data/history.json 里
 data/latest.json
 data/snapshots/
-data/run.log
+data/*.log
 *.tmp
 
 # ── 其他 ────────────────────────────────────────────────

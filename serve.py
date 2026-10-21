@@ -15,8 +15,9 @@
 不用手动刷新浏览器，也不用关掉重开。
 
 用法:
-    python3 serve.py            # 默认端口 8765，自动打开浏览器
-    python3 serve.py 9000       # 指定端口
+    python3 serve.py               # 默认端口 8765，自动打开浏览器
+    python3 serve.py 9000          # 指定端口
+    python3 serve.py --no-browser  # 不自动打开浏览器（launchd 常驻用）
 """
 
 import http.server
@@ -27,10 +28,27 @@ import webbrowser
 from functools import partial
 from pathlib import Path
 
-PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
+PORT = 8765
+NO_BROWSER = False
+for a in sys.argv[1:]:
+    if a == "--no-browser":
+        NO_BROWSER = True
+    elif a.isdigit():
+        PORT = int(a)
+
 ROOT = str(Path(__file__).resolve().parent)
 
-Handler = partial(http.server.SimpleHTTPRequestHandler, directory=ROOT)
+
+class CORSHandler(http.server.SimpleHTTPRequestHandler):
+    """带 CORS 头的静态服务：允许 file:// 打开的看板跨域拉取 latest.json。"""
+
+    def end_headers(self):
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
+
+Handler = partial(CORSHandler, directory=ROOT)
 socketserver.TCPServer.allow_reuse_address = True
 
 
@@ -41,8 +59,10 @@ def open_browser():
 if __name__ == "__main__":
     with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
         print(f"服务已启动: http://localhost:{PORT}/dashboard.html")
-        print("页面会自动刷新，看到「自动刷新中」即可；Ctrl+C 停止。")
-        threading.Timer(0.6, open_browser).start()
+        if NO_BROWSER:
+            print("(--no-browser 模式，不自动打开浏览器)")
+        else:
+            threading.Timer(0.6, open_browser).start()
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
