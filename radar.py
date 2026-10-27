@@ -651,9 +651,22 @@ def run_once(args):
           ", ".join(f"{r['repo']}({r['momentum']})" for r in repos[:5]))
 
 
+def _load_token():
+    """token 优先级：环境变量 GITHUB_TOKEN > data/.github_token 文件。"""
+    tok = os.environ.get("GITHUB_TOKEN")
+    if tok:
+        return tok
+    tf = DATA / ".github_token"
+    if tf.exists():
+        tok = tf.read_text(encoding="utf-8").strip()
+        if tok:
+            return tok
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--token", default=os.environ.get("GITHUB_TOKEN"))
+    ap.add_argument("--token", default=_load_token())
     ap.add_argument("--no-hn", action="store_true")
     ap.add_argument("--hn-top", type=int, default=30,
                     help="对 momentum 最高的前 N 个仓库查 HN")

@@ -8,6 +8,7 @@ dashboard.html
 data/latest.json
 data/snapshots/
 data/*.log
+data/.github_token
 *.tmp
 
 # ── 其他 ────────────────────────────────────────────────
