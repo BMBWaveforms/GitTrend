@@ -30,7 +30,7 @@ Python 采集 GitHub 趋势数据 → 打分 → 把 JSON 内联进 HTML 模板 
 匿名限额：Search 10 次/分钟、核心 API 60 次/小时。当前设计只用 2 次 search + 最多 30 次 repo（且有 `data/repos_meta.json` 缓存）。要加 API 调用，先想清楚要不要缓存、要不要 token。
 
 **⑤ `dashboard.html` 必须保持自包含。**
-不能引 CDN、外部字体、外部图片。唯一的网络请求是页面里自动刷新逻辑对同源 `data/latest.json` 的 `fetch()`——它在 `file://` 下会被浏览器拦截并自动退回内嵌数据，所以离线双击打开、离线渲染依然可用。图表用内联 SVG / CSS 画，不要引 Chart.js。
+不能引 CDN、外部字体、外部图片。页面自动刷新仅请求本地服务的 `data/latest.json` 和 `data/project_summaries_zh.json`；直接预览模板还会读取本地 `assets/project-avatars.json` 及头像文件，生成看板的头像全部内联；`file://` 下尝试连接 localhost，服务不可用时退回内嵌数据与说明，所以离线双击打开、离线渲染依然可用。图表用内联 SVG / CSS 画，不要引 Chart.js。
 
 **⑥ 所有来自 GitHub / HN 的文本必须经过 `esc()`。**
 `template.html` 里的 `esc()` 是唯一转义入口。新增任何渲染路径（新的渲染函数、新的字段）都要过 `esc()`，否则一个带 `<script>` 的仓库描述就能执行。
@@ -72,7 +72,10 @@ Python 采集 GitHub 趋势数据 → 打分 → 把 JSON 内联进 HTML 模板 
 | 文件 | 职责 | 能改吗 |
 |---|---|---|
 | `radar.py` | 采集、清洗、分类、打分、写数据。**数据层的唯一入口** | ✅ 主战场 |
-| `build_dashboard.py` | 把 payload 灌进模板。只有 ~20 行，是个薄壳 | ⚠️ 基本不用改 |
+| `build_dashboard.py` | 将采集数据、中文说明、星星 PNG 和维护者头像内联进模板 | ⚠️ 保持离线自包含 |
+| `assets/project-avatars.json`、`assets/project-avatars/` | GitHub 维护者头像来源及缓存，构建时内联 | ✅ 用 `scripts/cache_project_avatars.py` 补充，不依赖在线外链 |
+| `assets/star-3d.png` | 总览星星的透明素材；原图与生成提示词同目录留存 | ✅ 更换后重新构建 |
+| `data/project_summaries_zh.json` | 中文用途说明及来源；构建时内联 | ✅ 原文变化须重新核对，不能凭项目名编造功能 |
 | `template.html` | 看板的全部 UI：CSS + 内联 JSON + 原生 JS（含自动刷新） | ✅ UI 改这里 |
 | `dashboard.html` | **生成物** | ❌ 禁止手改 |
 | `serve.py` | 本地静态服务器，让看板能自动拉取最新数据 | ⚠️ 基本不用改 |
@@ -149,6 +152,12 @@ python3 check.py
 
 ---
 
+### 中文说明展示契约
+
+采集 payload 与 `radar.py` 不变。新增独立展示目录 `data/project_summaries_zh.json`，键为小写 `owner/name`，值包含 `summary_zh`、`source_desc`、`source_url`、`source_kind`（`description` / `readme`）及 `reviewed_at`。
+
+`build_dashboard.py` 将目录注入 `/*__SUMMARIES__*/{}`；与原始 payload 一样转义 `</`，保持离线、自包含。页面通过 `summaryEntry()` 同时匹配仓库名和原文，卡片、表格、分类、详情和搜索共用 `projectDescription()`。新增/变化的简介暂时显示原文，不以待补充提示替代用途内容。首次加载与自动刷新同步读取说明目录，目录变化时即使项目时间戳不变也重新渲染；读取失败保留内嵌说明。目录不调用模型，也不自动翻译新项目。更新目录后须重建页面，`check.py` 校验格式、来源和当前覆盖情况。
+
 ## 6. 扩展点
 
 | 想做的事 | 改哪里 | 注意 |
@@ -217,3 +226,7 @@ python3 check.py
 - **没有去重"同一团队批量发项目"的现象。** 今天 `storytold/` 一个组织占了 5 个位置，这在真实趋势里是有意义的信号，但目前只是散落在各领域里。
 - **HN 只查了前 30 个。** 长尾项目的讨论热度是空的，UI 会显示「—」，容易被误读成「没人讨论」。
 - **没有告警/推送。** 目前纯看板，没有「某项目日增破千就通知我」这类能力。
+
+### 发现视图的排布
+
+“涨得最快”由 `renderVelocity()` 单独渲染，默认按日均新增降序，以大数字为主、走势为辅，保留总星数、热度、加速和 HN 数据以及排序控件。“新项目”由 `renderNew()` 单独渲染，保留 90 天内范围，按 `age_days` 升序，优先展示创建时间与中文用途。两个视图共用真实维护者头像与详情入口，不复用普通表格的窄屏列宽。

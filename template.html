@@ -148,7 +148,7 @@ main{min-width:0;padding:0 26px 48px;max-width:1680px;width:100%;margin:auto}
 .dcard li:hover span{color:var(--accent-text)}
 .dcard li span{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dcard li b{font:0.8125rem var(--mono);color:var(--faint);flex:none}
 .scrim{position:fixed;inset:0;background:#2021244d;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:60;backdrop-filter:blur(3px)}.scrim.on{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:var(--panel);border-left:1px solid var(--rule);transform:translateX(100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility .25s;z-index:70;overflow-y:auto;padding:40px 32px 50px;box-shadow:-12px 0 60px #00000014}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:var(--panel);border-left:1px solid var(--rule);transform:translateX(100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1);z-index:70;overflow-y:auto;padding:40px 32px 50px;box-shadow:-12px 0 60px #00000014}
 .drawer.on{transform:none;visibility:visible}
 body.drawer-open{overflow:hidden}
 .drawer .x{position:absolute;top:18px;right:18px;color:var(--dim);font-size:1.0625rem;width:32px;height:32px;border:1px solid var(--rule);border-radius:6px;line-height:1}
@@ -286,7 +286,7 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
 .row .repo{font-size:.9375rem;line-height:1.6;flex-wrap:wrap}
 .row .repo .own,.row .repo .rn{white-space:normal;overflow:visible;overflow-wrap:anywhere}
 .row .desc{font-size:.875rem;line-height:1.65;white-space:normal;overflow:visible;overflow-wrap:anywhere;margin-top:6px}
-.num{font-size:.875rem;line-height:1.6;overflow-wrap:anywhere}.num.warn{color:var(--accent-text)}.mom-cell .v{font-size:1rem;line-height:1.6}
+.num{font-size:.875rem;line-height:1.6;white-space:nowrap;overflow-wrap:normal}.num.warn{color:var(--accent-text)}.mom-cell .v{font-size:1rem;line-height:1.6;white-space:nowrap}
 .mom-cell .track{width:24px}.dcard h3{font-size:1rem;flex-wrap:wrap}.dcard h3 em{font-size:.8125rem}
 .dcard li{font-size:.9375rem;min-height:36px;align-items:baseline}.dcard li span{white-space:normal;overflow:visible;overflow-wrap:anywhere}.dcard li b{font-size:.875rem}
 .drawer{width:min(620px,96vw);padding-top:56px}.drawer .x{width:40px;height:40px}
@@ -302,17 +302,6 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
  .hero{grid-template-columns:minmax(0,1fr)}.hero .stamp{border-left:0;border-top:1px solid var(--rule);padding:16px 0 0;max-width:26rem}
  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-card:last-child{grid-column:1/-1}
  .split{grid-template-columns:minmax(0,1fr)}.movers{grid-template-columns:repeat(5,minmax(13rem,1fr));overflow-x:auto}
-}
-@container content (max-width:40rem){
- .summary-grid{grid-template-columns:minmax(0,1fr)}.summary-card:last-child{grid-column:auto}
- .cols:not(.cols-new),.cols.cols-new{display:none}
- .row:not(.row-new),.row.row-new{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px;padding:20px 0}
- .row>.rk{display:none}.row>.main{grid-column:1/-1}
- .row .num,.row .mom-cell{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;justify-content:flex-start}
- .row [data-label]:before{content:attr(data-label);display:block;color:var(--faint);font-size:.8125rem;line-height:1.6;font-family:var(--sans);font-weight:400}
- .row:not(.row-new)>*:nth-child(4),.row:not(.row-new)>*:nth-child(7),.row:not(.row-new)>*:nth-child(8),.row-new>.num[data-label="出生"],.mom-cell .track{display:none}
- .mobile-sort{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 8px;font-size:.875rem}
- .mobile-sort select{width:auto;max-width:100%;flex:1;min-width:8rem}.mobile-sort button{min-height:44px;padding:8px 10px;border:1px solid var(--control);border-radius:6px;color:var(--dim)}
 }
 @media(min-width:1241px){.movers{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:1240px){
@@ -346,6 +335,105 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
 }
 @media(max-width:360px){main{padding-inline:14px}.rail{padding-inline:14px}.pane,.summary-card{padding:18px}.domain-row{grid-template-columns:minmax(90px,1fr) minmax(36px,1fr) 3ch;gap:8px}.dstats{grid-template-columns:repeat(2,minmax(0,1fr))}.dstat:nth-child(3n){border-right:1px solid var(--rule)}.dstat:nth-child(2n){border-right:0}.dstat:nth-child(n+3){border-top:1px solid var(--rule)}}
 @media(max-height:700px) and (min-width:821px){.rail{position:static;height:auto}.rail .filters{overflow:visible}.topbar{position:static}}
+
+/* Container layout must follow viewport rules so metric tracks stay together. */
+@container content (max-width:40rem){
+ .summary-grid{grid-template-columns:minmax(0,1fr)}.summary-card:last-child{grid-column:auto}
+ .cols:not(.cols-new),.cols.cols-new{display:none}
+ .row:not(.row-new),.row.row-new{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px;padding:20px 0}
+ .row>.rk{display:none}.row>.main{grid-column:1/-1}
+ .row .num,.row .mom-cell{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;justify-content:flex-start}
+ .row [data-label]:before{content:attr(data-label);display:block;color:var(--faint);font-size:.8125rem;line-height:1.6;font-family:var(--sans);font-weight:400}
+ .row:not(.row-new)>*:nth-child(4),.row:not(.row-new)>*:nth-child(7),.row:not(.row-new)>*:nth-child(8),.row-new>.num[data-label="出生"],.mom-cell .track{display:none}
+ .mobile-sort{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 8px;font-size:.875rem}
+ .mobile-sort select{width:auto;max-width:100%;flex:1;min-width:8rem}.mobile-sort button{min-height:44px;padding:8px 10px;border:1px solid var(--control);border-radius:6px;color:var(--dim)}
+}
+
+/* The total is the primary visual anchor. */
+.hero{grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);align-items:center;gap:40px;padding:32px;margin:24px 0;background:#bd490a;border:1px solid #bd490a;border-radius:14px}
+.hero h1{font-size:1.875rem;line-height:1.35;letter-spacing:-.025em;color:#fff}
+.hero p{font-size:1rem;line-height:1.75;margin-top:12px;max-width:40ch;color:#fff3e8}
+.hero .stamp{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;max-width:none;width:100%;border:0;border-radius:0;padding:0;background:none;color:#fff3e8}
+.hero .stamp-primary{min-width:0}
+.hero .stamp-value{display:flex;align-items:center;gap:12px}
+.hero .stamp-label{display:block;font-size:.875rem;line-height:1.6;margin:0 0 8px;color:#fff3e8}
+.hero .stamp b{font-size:4.5rem;line-height:1.05;letter-spacing:-.035em;font-weight:600;color:#fff;white-space:nowrap}
+.hero .stamp b small{font-size:.875rem;line-height:1.5;margin-left:10px;letter-spacing:0;color:#fff3e8}
+.hero .stamp-star{display:block;flex:0 0 auto;width:72px;height:72px;object-fit:contain}
+.mover{display:flex;flex-direction:column}
+.mover .nm{margin-top:0;font-size:1rem}
+.project-description{display:block;margin:14px 0 20px;font-size:.875rem;line-height:1.75;color:var(--dim);overflow-wrap:anywhere}
+.project-metrics{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:auto}
+.mover .mom{font-size:1.25rem;line-height:1.5;letter-spacing:0}
+.mover .mom i{font-size:.75rem}
+.mover .dt{font-size:.8125rem;margin-top:0}
+.domain-project{display:flex;flex-direction:column;gap:6px;min-width:0}
+.dcard .domain-project small{font-size:.8125rem;font-weight:400;color:var(--faint);line-height:1.65}
+.original-description{margin:-8px 0 24px;color:var(--dim);font-size:.875rem}
+.original-description summary{cursor:pointer;min-height:32px;padding:4px 0}
+.original-description p{margin:12px 0;overflow-wrap:anywhere}
+.original-description a{display:inline-block;color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;padding-block:8px}
+@container content (max-width:52rem){
+ .hero{grid-template-columns:minmax(0,1fr);gap:24px;padding:28px}
+ .hero p{max-width:60ch;margin-top:8px}
+ .hero .stamp{grid-template-columns:minmax(0,1fr);gap:16px;align-items:end}
+ .hero .stamp b{font-size:4rem}
+}
+@container content (max-width:32rem){
+ .hero{padding:24px 20px;gap:24px;margin:20px 0}
+ .hero h1{font-size:1.5rem}.hero p{font-size:.875rem}
+ .hero .stamp{grid-template-columns:minmax(0,1fr);gap:20px}
+ .hero .stamp b{font-size:3.5rem}
+ .hero .stamp-value{gap:8px}
+ .hero .stamp-star{width:56px;height:56px}
+ .hero .stamp-label{font-size:.8125rem}
+}
+
+/* Growth emphasizes speed; discovery emphasizes project age and purpose. */
+.list-tools{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px;color:var(--dim);font-size:.875rem}
+.list-tools select{width:auto;min-width:10rem;min-height:40px}.list-tools button{padding:8px 12px;min-height:40px;border:1px solid var(--rule);border-radius:6px}
+.project-card{min-width:0;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:24px;cursor:pointer;transition:border-color .15s,background .15s}
+.project-card:hover{border-color:#e8b38f;background:#fffdfb}.project-card:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px}
+.project-identity{display:flex;align-items:center;gap:14px;min-width:0}.project-identity>div{min-width:0}
+.project-avatar{display:grid;place-items:center;position:relative;width:48px;height:48px;flex:0 0 48px;border-radius:10px;overflow:hidden;background:#f4f1ec;color:var(--dim);font-size:1.25rem;font-weight:600;border:1px solid #00000008}
+.project-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.project-avatar img[hidden]{display:none}
+.project-owner{display:block;color:var(--faint);font-size:.8125rem;line-height:1.5;overflow-wrap:anywhere}
+.project-identity h3{font-size:1.125rem;line-height:1.45;letter-spacing:-.02em;font-weight:600;overflow-wrap:anywhere}
+.project-copy{font-size:.9375rem;line-height:1.8;color:var(--dim);margin-top:16px;overflow-wrap:anywhere}
+.growth-list{display:flex;flex-direction:column;gap:16px;padding-bottom:24px}
+.growth-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
+.growth-title{display:flex;align-items:center;gap:14px}.growth-rank{font: .875rem var(--mono);color:var(--faint);min-width:2ch}
+.growth-primary{text-align:right;min-width:160px}.growth-primary>span,.growth-stats>div>span,.new-project-stats>div>span{display:block;font-size:.8125rem;color:var(--faint);line-height:1.6}
+.growth-primary strong{display:block;margin-top:4px;font-size:2.75rem;line-height:1.15;font-weight:650;letter-spacing:-.04em;color:var(--positive);font-variant-numeric:tabular-nums;white-space:nowrap}
+.growth-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(100px,1.1fr);gap:20px;margin-top:24px;padding-top:20px;border-top:1px solid var(--rule)}
+.growth-stats>div,.new-project-stats>div{min-width:0}.growth-stats b{display:block;margin-top:4px;font-size:1.5rem;font-weight:550;line-height:1.4;font-variant-numeric:tabular-nums;white-space:nowrap}
+.growth-stats b small{font-size:.75rem;font-weight:400;color:var(--faint)}
+.growth-trend .spark{width:100%;max-width:144px;height:36px;margin:5px 0 0}.growth-trend .spark path{stroke:var(--positive)}
+.new-projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding-bottom:24px}
+.new-project-card{display:flex;flex-direction:column}
+.new-project-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.project-age{font-size:.9375rem;font-weight:550;color:var(--accent-text)}.project-age.recent{padding:3px 8px;border-radius:5px;background:#fff1e6}
+.new-project-meta time{font-size:.8125rem;color:var(--faint);font-variant-numeric:tabular-nums}
+.new-project-card .project-copy{margin-top:20px;margin-bottom:18px;font-size:1rem;line-height:1.85}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.8125rem;color:var(--faint);margin-bottom:24px}
+.project-tags span+span::before{content:"·";margin-right:16px}
+.new-project-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border-top:1px solid var(--rule);padding-top:18px;margin-top:auto}
+.new-project-stats b{display:block;font-size:1.375rem;line-height:1.4;font-weight:550;margin-top:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+@container content (max-width:48rem){
+ .new-projects{grid-template-columns:minmax(0,1fr)}
+ .growth-stats{gap:12px;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(80px,1fr)}
+ .growth-primary{min-width:140px}.growth-primary strong{font-size:2.5rem}
+}
+@container content (max-width:32rem){
+ .project-card{padding:20px}.growth-head{grid-template-columns:minmax(0,1fr);gap:20px}
+ .growth-primary{text-align:left;min-width:0}.growth-primary strong{font-size:2.5rem}
+ .growth-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 12px;margin-top:20px;padding-top:18px}
+ .growth-stats b{font-size:1.375rem}.growth-trend{grid-column:span 2}
+ .growth-title{gap:10px}.project-identity{gap:12px}.project-identity h3{font-size:1.0625rem}
+ .project-copy{font-size:.875rem}.new-project-card .project-copy{font-size:.9375rem}
+ .new-project-meta{margin-bottom:20px}.new-project-stats b{font-size:1.25rem}
+}
+@media(prefers-reduced-motion:reduce){.project-card{transition:none}}
 </style>
 </head>
 <body>
@@ -405,6 +493,18 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
 <script>
 let DATA = /*__DATA__*/{};
 let REPOS = DATA.repos || [];
+let PROJECT_SUMMARIES = /*__SUMMARIES__*/{};
+let PROJECT_AVATARS = /*__AVATARS__*/{};
+function summaryEntry(r){
+  const entry=PROJECT_SUMMARIES[(r.repo||"").toLowerCase()];
+  return entry && typeof entry.summary_zh==="string" && entry.summary_zh.trim() && entry.source_desc===(r.desc||"") ? entry : null;
+}
+function projectDescription(r){
+  const entry=summaryEntry(r);
+  if(entry) return entry.summary_zh;
+  const original=(r.desc||"").trim();
+  return original || "仓库暂未提供说明，可打开项目查看 README。";
+}
 
 const DOMAIN_COLORS = {
   "AI Agent":"#ee843b","LLM 应用":"#48b5d7","模型 / 训练":"#9163d7","AI 基建":"#53afa3",
@@ -421,7 +521,7 @@ const DOMAIN_LABELS = {
 };
 const dl = d => DOMAIN_LABELS[d] || d;
 
-const state = { view:"overview", domain:"全部", lang:"全部", minMom:0, q:"", sort:"momentum", dir:-1 };
+const state = { view:"overview", domain:"全部", lang:"全部", minMom:0, q:"", sort:"momentum", dir:-1, velocitySort:"rate_day", velocityDir:-1 };
 
 /* ---------- helpers ---------- */
 const fmt = n => n==null ? "—"
@@ -457,7 +557,7 @@ function filtered(){
     if((r.momentum||0) < state.minMom) return false;
     if(state.q){
       const q=state.q.toLowerCase();
-      const hay=(r.repo+" "+(r.desc||"")+" "+(r.language||"")+" "+(r.domain||"")+" "+
+      const hay=(r.repo+" "+(r.desc||"")+" "+projectDescription(r)+" "+(r.language||"")+" "+(r.domain||"")+" "+
         ((r.topics||[]).join(" "))).toLowerCase();
       if(!hay.includes(q)) return false;
     }
@@ -547,7 +647,7 @@ function renderTable(rows, opts={}){
               <span class="own">${esc(own)}/</span><span class="rn">${esc(name)}</span>
               ${hn.points?`<i class="hn-dot" title="国外社区在讨论"></i>`:""}
             </div>
-            <div class="desc">${esc(r.desc||"—")}</div></div>`,
+            <div class="desc">${esc(projectDescription(r))}</div></div>`,
       rate_day:`<div data-label="日增星" class="num up" title="${m.rate_basis==="daily"?"GitHub 官方标注的今天新增":m.rate_basis==="weekly"?"本周新增 ÷ 7":m.rate_basis==="monthly"?"本月新增 ÷ 30":m.rate_basis==="snapshot"?"自己记录的历史差值":"按项目生命周期平均估算"}">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</div>`,
       accel:`<div data-label="加速" class="num ${m.accel==null?"dim":(m.accel>=1.6?"warn":"dim")}">${m.accel==null?"—":m.accel.toFixed(1)+"×"}</div>`,
       stars:`<div data-label="总星数" class="num dim">${fmt(r.stars)}</div>`,
@@ -628,9 +728,10 @@ function renderOverview(){
     const m=r.metrics||{};
     return `<button class="mover" data-i="${REPOS.indexOf(r)}">
       <span class="rk"><span>排名 ${String(i+1).padStart(2,"0")}</span><em>${esc(dl(r.domain))}</em></span>
-      <span class="mom">${(r.momentum||0).toFixed(0)}<i>/ 100 热度</i></span>
       <span class="nm">${esc(r.repo.split("/")[1])}</span><span class="owner">${esc(r.repo.split("/")[0])}</span>
-      <span class="dt">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))} 星 / 天</span>
+      <span class="project-description">${esc(projectDescription(r))}</span>
+      <span class="project-metrics"><span class="mom">${(r.momentum||0).toFixed(0)}<i>/ 100 热度</i></span>
+      <span class="dt">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))} 星 / 天</span></span>
       <span class="bar"><i style="width:${Math.min(100,r.momentum||0)}%"></i></span>
     </button>`;
   }).join("");
@@ -638,7 +739,6 @@ function renderOverview(){
   const notes = buildNotes(rows);
 
   const totalGain = rows.reduce((s,r)=>s+((r.metrics||{}).rate_day||0),0);
-  const measured = rows.filter(r=>["daily","snapshot"].includes((r.metrics||{}).rate_basis)).length;
 
   document.getElementById("view-overview").innerHTML = `
     <div class="hero">
@@ -647,10 +747,15 @@ function renderOverview(){
         <p>追踪项目增长、发现新方向，看看今天的开源世界正在发生什么。</p>
       </div>
       <div class="stamp">
-        <span class="stamp-label">日均新增 star 合计（含估算）</span>
-        <b>≈${fmt(Math.round(totalGain))}<small>star / 天</small></b>
-        <div class="coverage" aria-hidden="true"><i style="width:${rows.length?measured/rows.length*100:0}%"></i></div>
-        <div class="coverage-label"><span>实测 ${measured} 个</span><span>估算 ${rows.length-measured} 个</span></div>
+        <div class="stamp-primary">
+          <span class="stamp-label">
+            <span class="stamp-label-text">日均新增 star 合计</span>
+          </span>
+          <div class="stamp-value">
+            <img class="stamp-star" src="assets/star-3d.png" width="72" height="72" alt="" aria-hidden="true">
+            <b>≈${fmt(Math.round(totalGain))}<small>star / 天</small></b>
+          </div>
+        </div>
       </div>
     </div>
     ${renderSummary(rows)}
@@ -725,44 +830,81 @@ function buildNotes(rows){
   return out.join("") || '<div class="empty">当前筛选下没有数据</div>';
 }
 
+function projectAvatar(r){
+  const owner=(r.repo||"").split("/")[0];
+  const entry=PROJECT_AVATARS[owner.toLowerCase()];
+  const src=entry?.src||"";
+  const allowed=/^data:image\/(png|jpeg);base64,/.test(src)||/^assets\/project-avatars\/[a-z0-9-]+\.(png|jpg)$/.test(src);
+  return `<span class="project-avatar" aria-hidden="true"><span>${esc(owner.slice(0,1).toUpperCase())}</span>${allowed?`<img src="${esc(src)}" width="48" height="48" alt="" loading="lazy" decoding="async">`:""}</span>`;
+}
+
+function projectIdentity(r){
+  const [owner,name]=(r.repo||"").split("/");
+  return `<div class="project-identity">${projectAvatar(r)}<div><span class="project-owner">${esc(owner)}</span><h3>${esc(name)}</h3></div></div>`;
+}
+
+function bindProjectCards(root){
+  root.querySelectorAll(".project-card").forEach(card=>{
+    const open=()=>openDrawer(REPOS[+card.dataset.i]);
+    card.onclick=open;
+    card.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};
+  });
+  root.querySelectorAll(".project-avatar img").forEach(img=>{
+    img.onerror=()=>{img.hidden=true;};
+    if(img.complete && !img.naturalWidth) img.hidden=true;
+  });
+}
+
+const VELOCITY_SORTS=[["rate_day","日均新增"],["accel","加速倍数"],["stars","总星数"],["momentum","热度"],["hn","社区讨论"],["repo","项目名称"]];
+function velocityValue(r,key){
+  if(key==="rate_day"||key==="accel") return (r.metrics||{})[key]??-1;
+  if(key==="hn") return (r.hn||{}).points||0;
+  return r[key]??0;
+}
 function renderVelocity(){
-  const rows = [...filtered()].sort((a,b)=>(b.metrics.rate_day||0)-(a.metrics.rate_day||0));
-  document.getElementById("view-velocity").innerHTML = `
-    <div class="tbl-head"><h2>涨得最快</h2>
-      <p>按每天新增 star 排序 · ${rows.length} 个项目</p></div>
-    ${renderTable(rows, {cols:COLS_ALL})}`;
-  bindTable(document.getElementById("view-velocity"));
+  const rows=[...filtered()].sort((a,b)=>{
+    const av=velocityValue(a,state.velocitySort),bv=velocityValue(b,state.velocitySort);
+    return (typeof av==="string"?av.localeCompare(bv):av-bv)*state.velocityDir;
+  });
+  const root=document.getElementById("view-velocity");
+  root.innerHTML=`<div class="tbl-head"><h2>涨得最快</h2><p>${rows.length} 个项目 · 关注增长速度与趋势</p></div>
+    <div class="list-tools"><label for="velocity-sort">排序</label><select id="velocity-sort">${VELOCITY_SORTS.map(([key,label])=>`<option value="${key}" ${state.velocitySort===key?"selected":""}>${label}</option>`).join("")}</select><button id="velocity-direction" type="button" aria-label="切换排序方向">${state.velocityDir<0?"从高到低 ↓":"从低到高 ↑"}</button></div>
+    <div class="growth-list">${rows.map((r,i)=>{
+      const m=r.metrics||{},hn=r.hn||{};
+      return `<article class="project-card growth-card" role="button" tabindex="0" data-i="${REPOS.indexOf(r)}" aria-label="查看 ${esc(r.repo)} 项目详情">
+        <div class="growth-head"><div class="growth-intro"><div class="growth-title"><span class="growth-rank">${String(i+1).padStart(2,"0")}</span>${projectIdentity(r)}</div><p class="project-copy">${esc(projectDescription(r))}</p></div>
+          <div class="growth-primary"><span>日均新增 star</span><strong>${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</strong></div></div>
+        <div class="growth-stats">
+          <div><span>总星数</span><b>${fmt(r.stars)}</b></div>
+          <div><span>热度</span><b>${(r.momentum||0).toFixed(0)}<small> / 100</small></b></div>
+          <div><span>加速倍数</span><b>${m.accel==null?"—":m.accel.toFixed(1)+"×"}</b></div>
+          <div><span>社区讨论热度</span><b>${hn.points?fmt(hn.points):"—"}</b></div>
+          <div class="growth-trend"><span>增长走势</span>${spark(r.history)}</div>
+        </div></article>`;
+    }).join("")||'<div class="empty">没有匹配的项目，试试其他关键词或重置筛选。</div>'}</div>`;
+  root.querySelector("#velocity-sort").onchange=e=>{state.velocitySort=e.target.value;renderVelocity();root.querySelector("#velocity-sort").focus({preventScroll:true});};
+  root.querySelector("#velocity-direction").onclick=()=>{state.velocityDir*=-1;renderVelocity();root.querySelector("#velocity-direction").focus({preventScroll:true});};
+  bindProjectCards(root);
 }
 
 function renderNew(){
-  const rows = filtered().filter(r=>r.age_days!=null && r.age_days<=90)
-    .sort((a,b)=>(b.stars_per_day_life||0)-(a.stars_per_day_life||0));
-  const body = rows.length ? `<div class="cols cols-new">
-      <span></span><span>项目</span><span>出生</span><span>总星数</span>
-      <span>平均每天</span><span>热度</span>
-    </div><div class="rows">${rows.map((r,i)=>{
-      const [own,name]=(r.repo||"").split("/");
-      return `<div class="row row-new" tabindex="0" data-i="${REPOS.indexOf(r)}">
-        <div class="rk">${i+1}</div>
-        <div class="main"><div class="repo"><i class="dot" style="background:${dc(r.domain)}"></i>
-          <span class="own">${esc(own)}/</span><span class="rn">${esc(name)}</span></div>
-          <div class="desc">${esc(r.desc||"—")}</div></div>
-        <div class="num dim" data-label="出生">${ageText(r.age_days)}</div>
-        <div class="num dim" data-label="总星数">${fmt(r.stars)}</div>
-        <div class="num up" data-label="平均每天">+${fmt(Math.round(r.stars_per_day_life||0))}</div>
-        <div class="mom-cell" data-label="热度"><span class="v">${(r.momentum||0).toFixed(0)}</span>
-          <span class="track"><i style="width:${Math.min(100,r.momentum||0)}%"></i></span></div>
-      </div>`;}).join("")}</div>`
-    : `<div class="empty">90 天内没有符合条件的新项目，试试放宽筛选。</div>`;
-
-  document.getElementById("view-new").innerHTML = `
-    <div class="tbl-head"><h2>刚冒出来的新项目</h2>
-      <p>出生不到 90 天 · 按平均每天新增 star 排序 · ${rows.length} 个</p></div>${body}`;
-  document.querySelectorAll("#view-new .row").forEach(row=>{
-    const open=()=>openDrawer(REPOS[+row.dataset.i]);
-    row.onclick=open;
-    row.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};
-  });
+  const rows=filtered().filter(r=>r.age_days!=null && r.age_days<=90)
+    .sort((a,b)=>a.age_days-b.age_days||String(b.created_at||"").localeCompare(String(a.created_at||""))||b.stars-a.stars);
+  const root=document.getElementById("view-new");
+  root.innerHTML=`<div class="tbl-head"><h2>刚冒出来的新项目</h2><p>创建 90 天内 · 按创建时间从新到旧 · ${rows.length} 个</p></div>
+    <div class="new-projects">${rows.map(r=>{
+      const days=Math.max(0,Math.floor(r.age_days));
+      const birth=days===0?"今天创建":`创建 ${days} 天`;
+      const date=(r.created_at||"").slice(0,10);
+      return `<article class="project-card new-project-card" role="button" tabindex="0" data-i="${REPOS.indexOf(r)}" aria-label="查看 ${esc(r.repo)} 项目详情">
+        <div class="new-project-meta"><span class="project-age ${days<=30?"recent":""}">${birth}</span><time datetime="${esc(date)}">${esc(date)}</time></div>
+        ${projectIdentity(r)}
+        <p class="project-copy">${esc(projectDescription(r))}</p>
+        <div class="project-tags"><span>${esc(dl(r.domain))}</span>${r.language?`<span>${esc(r.language)}</span>`:""}</div>
+        <div class="new-project-stats"><div><span>总星数</span><b>${fmt(r.stars)}</b></div><div><span>平均每天新增</span><b>~${fmt(Math.round(r.stars_per_day_life||0))}</b></div><div><span>热度</span><b>${(r.momentum||0).toFixed(0)}</b></div></div>
+      </article>`;
+    }).join("")||'<div class="empty">90 天内没有符合条件的新项目，试试放宽筛选。</div>'}</div>`;
+  bindProjectCards(root);
 }
 
 function renderDomains(){
@@ -774,8 +916,8 @@ function renderDomains(){
     const avg = list.reduce((s,r)=>s+(r.momentum||0),0)/list.length;
     return `<div class="dcard">
       <h3><span style="border-left:3px solid ${dc(d)};padding-left:10px;color:var(--text)">${esc(dl(d))}</span><em>${list.length} 个 · 平均热度 ${avg.toFixed(0)}</em></h3>
-      <ol>${top.map(r=>`<li data-i="${REPOS.indexOf(r)}">
-        <span>${esc(r.repo)}</span><b>${(r.momentum||0).toFixed(0)}</b></li>`).join("")}</ol>
+      <ol>${top.map(r=>`<li tabindex="0" role="button" data-i="${REPOS.indexOf(r)}">
+        <span class="domain-project"><span>${esc(r.repo)}</span><small>${esc(projectDescription(r))}</small></span><b>${(r.momentum||0).toFixed(0)}</b></li>`).join("")}</ol>
     </div>`;
   }).join("");
 
@@ -785,6 +927,7 @@ function renderDomains(){
     ${cards?`<div class="dgrid">${cards}</div>`:'<div class="empty">暂无数据</div>'}`;
   document.querySelectorAll("#view-domains .dcard li").forEach(li=>{
     li.onclick=()=>openDrawer(REPOS[+li.dataset.i]);
+    li.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();li.click();}};
   });
 }
 
@@ -816,7 +959,11 @@ function openDrawer(r){
     <div class="tag" style="border-left:3px solid ${dc(r.domain)};padding-left:10px;color:var(--dim)">${esc(dl(r.domain))}${r.language?" · "+esc(r.language):""}</div>
     <h2 id="drawerTitle">${esc(r.repo)}</h2>
     <div class="sub">${r.created_at?"创建于 "+r.created_at+"（"+ageText(r.age_days)+"）":"不知道什么时候创建的"}</div>
-    <div class="body">${esc(r.desc||"这个项目还没有自我介绍。")}</div>
+    <div class="body">${esc(projectDescription(r))}</div>
+    <details class="original-description"><summary>查看原文与来源</summary>
+      ${r.desc?`<p>${esc(r.desc)}</p>`:""}
+      <a href="${esc(safeUrl(summaryEntry(r)?.source_url||'https://github.com/'+r.repo))}" target="_blank" rel="noopener">${summaryEntry(r)?.source_kind==='readme'?'查看项目 README':'查看仓库简介'} ↗</a>
+    </details>
 
     <div class="dstats">
       <div class="dstat"><span class="k">热度</span><span class="v">${(r.momentum||0).toFixed(0)}<small>/100</small></span></div>
@@ -921,13 +1068,44 @@ function applyData(obj){
   return true;
 }
 
+async function loadProjectAvatars(){
+  if(Object.keys(PROJECT_AVATARS).length) return false;
+  try{
+    const res=await fetch(LIVE_BASE+"assets/project-avatars.json",{cache:"no-store"});
+    if(!res.ok) return false;
+    const catalog=await res.json();
+    if(!catalog || typeof catalog!=="object" || Array.isArray(catalog)) return false;
+    PROJECT_AVATARS=catalog;
+    return true;
+  }catch(e){return false;}
+}
+
+async function refreshSummaries(){
+  try{
+    const res=await fetch(LIVE_BASE+"data/project_summaries_zh.json?t="+Date.now(), {cache:"no-store"});
+    if(!res.ok) return false;
+    const catalog=await res.json();
+    if(!catalog || typeof catalog!=="object" || Array.isArray(catalog)) return false;
+    const entries=Object.entries(catalog);
+    if(!entries.length || entries.some(([,entry])=>!entry || typeof entry.source_desc!=="string" || typeof entry.summary_zh!=="string" || !entry.summary_zh.trim())) return false;
+    if(JSON.stringify(catalog)===JSON.stringify(PROJECT_SUMMARIES)) return false;
+    PROJECT_SUMMARIES=catalog;
+    return true;
+  }catch(e){
+    // 说明服务不可用时保留内嵌目录，离线仍能阅读已有中文说明。
+    return false;
+  }
+}
+
 async function checkRefresh(){
   try{
-    const res = await fetch(liveUrl(), {cache:"no-store"});
+    const [res, summariesChanged, avatarsChanged] = await Promise.all([
+      fetch(liveUrl(), {cache:"no-store"}), refreshSummaries(), loadProjectAvatars()
+    ]);
     if(!res.ok) throw new Error("http " + res.status);
     const obj = await res.json();
     if(obj && Array.isArray(obj.repos)){
-      if(obj.generated_at !== DATA.generated_at){
+      if(obj.generated_at !== DATA.generated_at || summariesChanged || avatarsChanged){
         if(applyData(obj)){
           setLive("ok", "已更新 " + (obj.generated_at||"").split(" ")[1]);
           return "updated";
@@ -982,8 +1160,9 @@ function manualRefresh(){
   document.addEventListener("keydown", e=>{
     const drawer = document.getElementById("drawer");
     if(drawer.classList.contains("on") && e.key==="Tab"){
-      const focusable = [...drawer.querySelectorAll('button,a[href],[tabindex="0"]')];
-      const first=focusable[0],last=focusable[focusable.length-1];
+      const focusable = [...drawer.querySelectorAll('button,a[href],summary,[tabindex="0"]')];
+      const visible=focusable.filter(el=>{const closed=el.closest('details:not([open])');return !closed||el===closed.querySelector('summary');});
+      const first=visible[0],last=visible[visible.length-1];
       if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
       else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
     }
@@ -993,17 +1172,13 @@ function manualRefresh(){
   });
 
   document.getElementById("live").onclick = manualRefresh;
-  if(location.protocol !== "file:"){
-    _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
-  } else {
-    // 双击打开时也试一次本地服务，连上就自动进入在线刷新
-    checkRefresh().then(r=>{
-      if(r !== "offline" && !_liveTimer){
-        _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
-      }
-    });
-  }
   render();
+  // 模板预览和生成看板都立即同步项目及中文说明，之后每分钟刷新。
+  checkRefresh().then(r=>{
+    if(r !== "offline" && !_liveTimer){
+      _liveTimer = setInterval(checkRefresh, REFRESH_SECONDS * 1000);
+    }
+  });
 })();
 </script>
 </body>

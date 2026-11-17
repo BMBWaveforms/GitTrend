@@ -1,0 +1,1290 @@
+{
+  "backnotprop/plannotator": {
+    "source_desc": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click.",
+    "summary_zh": "管理 AI 编程助手工作过程的协作界面。可以规划任务、批注方案、审查代码，再把反馈统一发回助手。",
+    "source_url": "https://github.com/backnotprop/plannotator",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "tradermonty/claude-trading-skills": {
+    "source_desc": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development.",
+    "summary_zh": "面向股票投资者的 Claude Code 技能集。覆盖行情分析、技术图表、经济日历、选股和交易策略开发。",
+    "source_url": "https://github.com/tradermonty/claude-trading-skills",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "edge0-ai/edge0": {
+    "source_desc": "Device-native foundation models: 145B on a laptop, 35B on a phone. Latent MoE, SSD-streamed weights, a router that predicts loads a step ahead. Mac, iPhone, Android, Windows.",
+    "summary_zh": "在电脑和手机上运行大模型的方案。通过专家模型、硬盘加载等技术，尝试降低大型模型对设备内存的要求。",
+    "source_url": "https://github.com/Edge0-AI/Edge0",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/craft-anything": {
+    "source_desc": "Craft Anything: understand how any software works, and craft your own.",
+    "summary_zh": "帮助理解现有软件如何工作，再制作自己版本的工具。适合探索软件实现思路和原型开发。",
+    "source_url": "https://github.com/storytold/craft-anything",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "zagitta/gpu-unlock": {
+    "source_desc": "Your GeForce runs AI at half speed. This fixes it for 20/30/40 series cards. Up to 2× FP16 / BF16 / TF32 tensor throughput",
+    "summary_zh": "针对 GeForce 20、30、40 系列显卡的 AI 计算优化工具。目标是释放部分低精度计算的吞吐能力，具体提升取决于硬件和任务。",
+    "source_url": "https://github.com/Zagitta/gpu-unlock",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "niko1221/strata": {
+    "source_desc": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
+    "summary_zh": "在 Windows、Linux 上一键部署 Qwen 模型的本地推理工具。提供兼容 OpenAI、Anthropic 的本地接口，也可接收图片输入。",
+    "source_url": "https://github.com/Niko1221/Strata",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "google-labs-code/stitch-skills": {
+    "source_desc": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
+    "summary_zh": "配合 Stitch MCP 服务使用的 AI 编程技能库。采用开放的技能格式，可接入 Claude Code、Cursor 等编程助手。",
+    "source_url": "https://github.com/google-labs-code/stitch-skills",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "alibaba/open-code-review": {
+    "source_desc": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+    "summary_zh": "结合规则检查和大模型的代码审查工具。支持多种语言，检查空指针、线程安全及常见安全问题，并给出行级评论。",
+    "source_url": "https://github.com/alibaba/open-code-review",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "pingdotgg/t3code": {
+    "source_desc": "The best way to control Claude Code, Codex and more from any computer or phone",
+    "summary_zh": "远程管理 Claude Code、Codex 等编程助手的工具。可从电脑或手机查看和控制它们的工作。",
+    "source_url": "https://github.com/pingdotgg/t3code",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "gathin23/cleanyourtv": {
+    "source_desc": "Debloat any Android or Google TV over Wi-Fi and get an Apple TV-style home.",
+    "summary_zh": "通过 Wi-Fi 清理 Android TV、Google TV 预装应用的工具。还能把电视首页换成类似 Apple TV 的简洁界面。",
+    "source_url": "https://github.com/Gathin23/cleanyourtv",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ebony-vinyl/dsh-our-free-model": {
+    "source_desc": "在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 DeepSeek V4.1 Flash、Kimi K3 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier models are just there, DeepSeek V4.1 Flash and Kimi K3 among them. Completely free, with no usage cap.",
+    "summary_zh": "为 DeepSeek Harness 接入多种模型的插件。仓库介绍称无需登录或填写 API Key，具体可用模型和使用条件以项目说明为准。",
+    "source_url": "https://github.com/Ebony-Vinyl/dsh-our-free-model",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "heydamir/unslop": {
+    "source_desc": "A Claude skill that turns vibecoded, AI-looking UI into a designed interface",
+    "summary_zh": "用于改善 AI 生成界面的 Claude 技能。把模板感较强的页面调整为更有设计感的界面。",
+    "source_url": "https://github.com/heydamir/unslop",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "googlechrome/modern-web-guidance-src": {
+    "source_desc": "Keep your coding agent up to date with the latest web best practices",
+    "summary_zh": "供 AI 编程助手读取的现代 Web 开发指导。用于让生成的网页代码更贴近当前的开发实践。",
+    "source_url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ccch1mneyyy/dsh-go": {
+    "source_desc": "dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑。",
+    "summary_zh": "把 DeepSeek Harness 带到手机上的工具。既能在手机本地运行，也能远程控制电脑。",
+    "source_url": "https://github.com/ccch1mneyyy/dsh-Go",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "sherlock-project/sherlock": {
+    "source_desc": "Hunt down social media accounts by username across social networks",
+    "summary_zh": "按用户名跨多个社交网站查找账号的工具。用于检索同一用户名可能对应的公开社交资料。",
+    "source_url": "https://github.com/sherlock-project/sherlock",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "yetone/magpie": {
+    "source_desc": "Every agent's model. One place. Codex on DeepSeek, Claude Code on Kimi, from the menu bar.",
+    "summary_zh": "统一管理编程助手模型的菜单栏工具。可为 Codex、Claude Code 等助手配置 DeepSeek、Kimi 等模型。",
+    "source_url": "https://github.com/yetone/magpie",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anefzaoui/misterdownloadmanager": {
+    "source_desc": "misterdownloadmanager: The ultimate open-source, clean-room download manager written from scratch in pure Rust for Windows, Mac, and Linux",
+    "summary_zh": "用 Rust 编写的开源下载管理器。支持 Windows、macOS 和 Linux。",
+    "source_url": "https://github.com/anefzaoui/misterdownloadmanager",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "meta/astryx": {
+    "source_desc": "An open source design system that's fully customizable and agent ready",
+    "summary_zh": "可自定义的开源设计系统。面向设计和开发团队，也考虑了 AI 助手参与界面制作的使用方式。",
+    "source_url": "https://github.com/meta/astryx",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "likely7/veyra-nrvideo": {
+    "source_desc": "Bring PS5 GTA6 to 120FPS with DLSS 5. An advanced Windows video player and capture enhancement tool featuring real-time preview for videos, images, and capture card sources. Combine AI-powered Super Resolution, DLSS5 image enhancement, and Frame Generation to deliver a next-generation visual experience.",
+    "summary_zh": "Windows 视频播放与采集增强工具。支持视频、图片和采集卡预览，并结合 AI 超分辨率、图像增强和补帧改善画面。",
+    "source_url": "https://github.com/Likely7/Veyra-NRVideo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "lemomo-ai/lemo-opuscar": {
+    "source_desc": "A toolbox of film styles made in code for Claude Code: 99 ready to use, and your own. Each style is a style prompt plus a demo film made entirely in code by Claude Opus 5.5, with no video model. By Lemomo. · 一套用代码做片的风格工具箱：99 种现成风格，也能做出你自己的",
+    "summary_zh": "让 Claude Code 用代码制作影片的风格工具箱。提供现成风格提示词和演示片，也可扩展自己的风格。",
+    "source_url": "https://github.com/lemomo-ai/lemo-opuscar",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "google/elephant-goldfish-model": {
+    "source_desc": "Open-source plugin for designing and reviewing software with agents",
+    "summary_zh": "辅助 AI 助手进行软件设计和评审的开源插件。用于在开发过程中讨论方案、检查设计。",
+    "source_url": "https://github.com/google/elephant-goldfish-model",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "knifelemon/filee": {
+    "source_desc": "Free, open-source file converter. Convert 263 formats offline by drag & drop — images, PDF, Word, Excel, PowerPoint, HWP/HWPX, video, audio, e-books and archives. No upload, no Office needed.",
+    "summary_zh": "支持图片、办公文档、音视频等格式的离线文件转换器。拖入文件即可转换，无需上传，也不要求安装 Office。",
+    "source_url": "https://github.com/KnifeLemon/Filee",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "dream-num/univer": {
+    "source_desc": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core.",
+    "summary_zh": "把文档编辑、计算、协作和文件处理嵌入产品的办公 SDK。可供普通用户和 AI 助手共同使用。",
+    "source_url": "https://github.com/dream-num/univer",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "milind-soni/openmausbot": {
+    "source_desc": "Open-source Grok Bot alternative with a virtual machine that bots can use",
+    "summary_zh": "开源 AI 机器人项目，为机器人提供可操作的虚拟机。定位为 Grok Bot 的替代方案。",
+    "source_url": "https://github.com/milind-soni/OpenMausBot",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "cloudflare/security-audit-skill": {
+    "source_desc": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
+    "summary_zh": "让编程助手分阶段执行安全审计的技能。审计发现会经过独立验证，并输出可被程序读取的结果。",
+    "source_url": "https://github.com/cloudflare/security-audit-skill",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "leonxlnx/taste-skill": {
+    "source_desc": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages",
+    "summary_zh": "改善 AI 编程助手设计表现的技能集。通过视觉方向、参考图和浏览器检查，减少千篇一律的生成页面。",
+    "source_url": "https://github.com/Leonxlnx/taste-skill",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "chromedevtools/chrome-devtools-mcp": {
+    "source_desc": "Chrome DevTools for coding agents",
+    "summary_zh": "让 AI 编程助手使用 Chrome 开发者工具的 MCP 服务。方便助手检查网页、调试浏览器问题。",
+    "source_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "tencent/loopforge": {
+    "source_desc": "Self-hosted workflows for coding-agent delivery. Orchestrate CodeBuddy, Codex and Claude Code with scripts and human approval gates. Includes Local workflows for coding assistants.",
+    "summary_zh": "可自行部署的 AI 编程交付工作流。通过脚本和人工审批，协调 CodeBuddy、Codex、Claude Code 完成开发任务。",
+    "source_url": "https://github.com/Tencent/LoopForge",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "pbakaus/impeccable": {
+    "source_desc": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.",
+    "summary_zh": "为 AI 编程助手提供界面设计、评审和优化能力的技能集。覆盖布局打磨、视觉强化、设计批评与审计。",
+    "source_url": "https://github.com/pbakaus/impeccable",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "zhulinsen/daily_stock_analysis": {
+    "source_desc": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs.",
+    "summary_zh": "用大模型分析多个市场股票的系统。整合行情与新闻，提供决策看板、定时分析和自动推送。",
+    "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "pengchujin/aerial-tv": {
+    "source_desc": "给国产电视的一块干净桌面：参照 tvOS 设计的开源 Android TV 桌面，没有广告，开机自动接管。A tvOS-style launcher for Xiaomi, TCL and other China-market TVs.",
+    "summary_zh": "面向国产 Android 电视的开源桌面。采用类似 tvOS 的设计，无广告，可在开机后自动接管首页。",
+    "source_url": "https://github.com/pengchujin/aerial-tv",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "we-promise/sure": {
+    "source_desc": "The personal finance app for everyone (by everyone)",
+    "summary_zh": "面向个人用户的开源财务管理应用。用于集中管理自己的日常财务。",
+    "source_url": "https://github.com/we-promise/sure",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "openai/codex-security": {
+    "source_desc": "OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security",
+    "summary_zh": "用于查找、验证和修复安全漏洞的 Codex Security 工具。提供命令行程序及 TypeScript SDK。",
+    "source_url": "https://github.com/openai/codex-security",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "droid-deck/droiddeck": {
+    "source_desc": "DroidDeck brings the SteamOS experience to Android",
+    "summary_zh": "为 Android 设备打造类似 SteamOS 使用体验的项目。面向希望把安卓设备当作游戏终端的用户。",
+    "source_url": "https://github.com/Droid-Deck/DroidDeck",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/photocraft": {
+    "source_desc": "PhotoCraft: An open-source photo editor written from scratch in pure Rust",
+    "summary_zh": "用 Rust 从头编写的开源照片编辑器。用于处理和编辑照片。",
+    "source_url": "https://github.com/storytold/photocraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "seedds/nxnative": {
+    "source_desc": "Switch games running natively on iPhone, iPad and Mac: an NSP folder becomes an unsigned IPA (NSO rewriter, Horizon HLE host, NVN→Metal)",
+    "summary_zh": "尝试让 Switch 游戏在 iPhone、iPad、Mac 上原生运行的工具。将游戏文件转换为适配苹果设备的应用包。",
+    "source_url": "https://github.com/seedds/nxnative",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "heygen-com/hyperframes": {
+    "source_desc": "Write HTML. Render video. Built for agents.",
+    "summary_zh": "用 HTML 编写画面并渲染成视频的工具。面向 AI 助手通过代码制作视频的场景。",
+    "source_url": "https://github.com/heygen-com/hyperframes",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "wheresryan22/anatomy": {
+    "source_desc": "An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems. Generates polished SVGs with optional WebGL shaders and 3D effects.",
+    "summary_zh": "让 AI 助手生成机器和复杂系统等距插画的技能。输出可交互的 SVG，也可加入 WebGL 和三维效果。",
+    "source_url": "https://github.com/wheresryan22/anatomy",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nutlope/hallmark": {
+    "source_desc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+    "summary_zh": "用于改善 AI 生成界面设计的技能。支持 Claude Code、Cursor 和 Codex。",
+    "source_url": "https://github.com/Nutlope/hallmark",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "jub0t/concat": {
+    "source_desc": "Beta: The truly free, open-source, local-first, cross-platform video editor. Scriptable through a JSON-RPC API & MCP.",
+    "summary_zh": "支持多平台的开源视频编辑器，目前处于测试阶段。优先在本地处理，也能通过 API 和 MCP 自动操作。",
+    "source_url": "https://github.com/jub0t/Concat",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anthropics/skills": {
+    "source_desc": "Public repository for Agent Skills",
+    "summary_zh": "Anthropic 公开的 AI 助手技能仓库。用于查看和复用 Agent Skills。",
+    "source_url": "https://github.com/anthropics/skills",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "tangency-labs/solidcraft": {
+    "source_desc": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.",
+    "summary_zh": "用 Rust 编写的参数化三维 CAD 应用。支持桌面、网页，以及通过 MCP 自动化建模。",
+    "source_url": "https://github.com/tangency-labs/solidcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "vercel-labs/agent-browser": {
+    "source_desc": "Browser automation CLI for AI agents",
+    "summary_zh": "供 AI 助手使用的浏览器自动化命令行工具。让助手以程序方式操作网页。",
+    "source_url": "https://github.com/vercel-labs/agent-browser",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "eternity4719/howtolivebetter": {
+    "source_desc": "高性价比人生指南: 长寿防病、急救、省钱理财、法律红线、失业与工伤、医保社保、恋爱婚育、怀孕育儿、创业与做平台合规、出国与技能。每条写明成本、收益、证据等级和原始出处，只引期刊论文与官方文件。",
+    "summary_zh": "覆盖健康、生活成本、工作权益和家庭等主题的生活指南。按条目说明成本、收益、证据等级和原始出处。",
+    "source_url": "https://github.com/eternity4719/HowToLiveBetter",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "vercel-labs/agent-desktop": {
+    "source_desc": "Computer use CLI for AI agents",
+    "summary_zh": "供 AI 助手操作电脑的命令行工具。用于构建自动化桌面操作流程。",
+    "source_url": "https://github.com/vercel-labs/agent-desktop",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "addyosmani/agent-skills": {
+    "source_desc": "Production-grade engineering skills for AI coding agents.",
+    "summary_zh": "面向 AI 编程助手的工程技能集。用于把工程实践引入日常代码开发流程。",
+    "source_url": "https://github.com/addyosmani/agent-skills",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "vincentwei1021/video-shotcraft": {
+    "source_desc": "AI video skill for Claude Code & Codex — cinematic, editable product promos with Remotion: 124 shot recipe cards, 150 motion previews, beat sync, sound design, Motion Workbench & JianYing (CapCut CN) export.",
+    "summary_zh": "通过 Claude Code、Codex 和 Remotion 制作产品宣传视频的技能。提供镜头方案、动效参考、节拍同步和剪映导出。",
+    "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "google-research/harness2": {
+    "source_desc": "",
+    "summary_zh": "自动改进 AI 助手运行方式的研究框架。在不修改模型权重的情况下，反复调整提示词、工具、记忆等配置，并积累任务经验。",
+    "source_url": "https://github.com/google-research/harness2#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "agricidaniel/claude-seo": {
+    "source_desc": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data.",
+    "summary_zh": "面向 Claude Code 的 SEO 技能集。涵盖技术检查、内容与结构化数据、外链、本地搜索及报告生成。",
+    "source_url": "https://github.com/AgriciDaniel/claude-seo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "deepseek-ai/dsh-superagent-prototype": {
+    "source_desc": "Towards a More Autonomous Agent System",
+    "summary_zh": "探索更自主 AI 助手系统的原型项目。用于研究如何让助手承担更多自主执行任务。",
+    "source_url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "juliusbrussee/caveman": {
+    "source_desc": "🪨 why use many token when few token do trick. Viral skill + proxy for coding agents that cuts 65% of tokens by talking like a caveman.",
+    "summary_zh": "通过压缩表达来减少编程助手 token 用量的技能和代理。核心思路是让模型以更简短的语言交流。",
+    "source_url": "https://github.com/JuliusBrussee/caveman",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "harry0703/moneyprinterturbo": {
+    "source_desc": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+    "summary_zh": "根据主题或关键词自动生成短视频的工具。用大模型和自动化工作流串联视频制作步骤。",
+    "source_url": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ag-ui-protocol/ag-ui": {
+    "source_desc": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications.",
+    "summary_zh": "连接 AI 助手与前端应用的交互协议。用于把助手的运行过程和响应接入用户界面。",
+    "source_url": "https://github.com/ag-ui-protocol/ag-ui",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "superplanehq/superplane": {
+    "source_desc": "Open source factory for one-shot engineering",
+    "summary_zh": "面向一次性工程交付的开源自动化平台。项目定位是把工程任务组织成可执行的生产流程。",
+    "source_url": "https://github.com/superplanehq/superplane",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nvidia/auto-ontology": {
+    "source_desc": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows.",
+    "summary_zh": "在数据之上构建语义图谱和推理层的 Python 框架。用于改进查询生成、上下文检索和 AI 结果的可解释性。",
+    "source_url": "https://github.com/NVIDIA/auto-ontology",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "kajisho5/ffmpeg-skill": {
+    "source_desc": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys.",
+    "summary_zh": "让编程助手在本地剪辑视频的 FFmpeg 工具集。支持裁剪、字幕、画幅调整、音量处理和平台导出，无需云服务。",
+    "source_url": "https://github.com/kajisho5/ffmpeg-skill",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "hkuds/deeptutor": {
+    "source_desc": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/ .",
+    "summary_zh": "面向长期个性化辅导的 AI 导师项目。用于探索持续适应学习者的教学助手。",
+    "source_url": "https://github.com/HKUDS/DeepTutor",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ranxianglei/billion-context": {
+    "source_desc": "A context-compression plugin for month-long single sessions (billions of tokens) and small context windows (a 100K context is enough), billion-context is all you need .",
+    "summary_zh": "为超长会话压缩上下文的插件。目标是在有限上下文窗口内保留长期任务所需的信息。",
+    "source_url": "https://github.com/ranxianglei/billion-context",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "copilotkit/openbot": {
+    "source_desc": "Open-source AI coworkers that each get a computer of their own: a browser, files and tools, with every action decided before it happens and recorded after. Bring any AG-UI agent.",
+    "summary_zh": "为每个 AI 同事提供独立电脑环境的开源项目。环境包含浏览器、文件和工具，并记录行动过程，支持接入 AG-UI 助手。",
+    "source_url": "https://github.com/CopilotKit/OpenBot",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "thedotmack/claude-mem": {
+    "source_desc": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+    "summary_zh": "给 AI 助手增加跨会话记忆的工具。记录任务过程、压缩内容，并在后续会话中找回相关上下文。",
+    "source_url": "https://github.com/thedotmack/claude-mem",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/pdfcraft": {
+    "source_desc": "PdfCraft: An open-source PDF reader and editor written from scratch in pure Rust",
+    "summary_zh": "用 Rust 编写的开源 PDF 阅读器和编辑器。用于查看与修改 PDF 文档。",
+    "source_url": "https://github.com/storytold/pdfcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "elie222/rakazo": {
+    "source_desc": "Open-source Grok Bot alternative. Choose your own model and sandbox.",
+    "summary_zh": "可自选模型和沙箱环境的开源 AI 机器人。定位为 Grok Bot 的替代方案。",
+    "source_url": "https://github.com/elie222/rakazo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "qwenlm/qwen-code": {
+    "source_desc": "An open-source AI coding agent that lives in your terminal.",
+    "summary_zh": "在终端中使用的开源 AI 编程助手。面向通过命令行完成代码开发任务。",
+    "source_url": "https://github.com/QwenLM/qwen-code",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "financeflash/unvibecode": {
+    "source_desc": "Complex code hides connections, workflows, and business risks.Unvibe complex code. Trace business workflows.",
+    "summary_zh": "帮助理解复杂代码与业务流程关系的工具。用于追踪工作流，识别隐藏的关联和业务风险。",
+    "source_url": "https://github.com/FinanceFlash/unvibecode",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "521xueweihan/hellogithub": {
+    "source_desc": "分享 GitHub 上有趣、入门级的开源项目。Share interesting, entry-level open source projects on GitHub.",
+    "summary_zh": "分享有趣、适合入门的 GitHub 开源项目。适合发现工具、学习案例和练手项目。",
+    "source_url": "https://github.com/521xueweihan/HelloGitHub",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "yihui-dev/awesome-opus5-5-videos": {
+    "source_desc": "A growing collection of viral videos made with Claude Opus 5.5 and the prompts behind them. Watch each original next to a live remake on Skillry. Updated regularly.",
+    "summary_zh": "收集用 Claude 制作的视频及其提示词。可对照原片和复刻效果，学习用 AI 编程制作视频。",
+    "source_url": "https://github.com/yihui-dev/awesome-opus5-5-videos",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ggml-org/llama.cpp": {
+    "source_desc": "LLM inference in C/C++",
+    "summary_zh": "用 C/C++ 实现的大语言模型推理项目。用于运行大模型，而非训练模型。",
+    "source_url": "https://github.com/ggml-org/llama.cpp",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "deepseek-ai/deepinfer": {
+    "source_desc": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models",
+    "summary_zh": "面向 DeepSeek 模型的高性能推理框架。重点支持大规模模型服务和计算。",
+    "source_url": "https://github.com/deepseek-ai/DeepInfer",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "liguobao/ds-harness-remote": {
+    "source_desc": "基于 DeepSeek Harness 插件机制构建的远程访问方案，通过低延迟、端到端加密的 P2P 网络，支持使用 PC、移动端 和 Web 随时访问本地设备上的DSH 、CodeX、Cursor、Claude Code等工作区。 (Built on DeepSeek Harness plugins, this low-latency, end-to-end encrypted P2P solution lets PC, mobile, and web clients access local DSH, Codex, Cursor, and Claude Code workspaces.)",
+    "summary_zh": "远程访问本地 AI 编程工作区的工具。通过加密 P2P 连接，让电脑、手机和网页访问 DSH、Codex、Cursor 等工作区。",
+    "source_url": "https://github.com/liguobao/ds-harness-remote",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "lobehub/lobehub": {
+    "source_desc": "🤯 LobeHub - Super-Agents on Your Team. Add super-agents to the chats your team already uses.They take on work by themselves and get better every week.",
+    "summary_zh": "把 AI 助手加入团队现有聊天环境的协作项目。让助手在团队交流中承担工作。",
+    "source_url": "https://github.com/lobehub/lobehub",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "elementalsouls/claude-bughunter": {
+    "source_desc": "A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices.",
+    "summary_zh": "面向漏洞排查和红队评估的 Claude Code 技能包。整理多类漏洞模式、工作命令和安全测试资料。",
+    "source_url": "https://github.com/elementalsouls/Claude-BugHunter",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/filmcraft": {
+    "source_desc": "FilmCraft: An open-source, nonlinear video editor written from scratch in pure Rust",
+    "summary_zh": "用 Rust 编写的开源非线性视频编辑器。用于在时间线上组织和剪辑视频素材。",
+    "source_url": "https://github.com/storytold/filmcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nvidia/skillspector": {
+    "source_desc": "Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, security risks, prompt injection, data exfiltration, and supply-chain risks in Claude Code, Codex, and MCP skills before you install them.",
+    "summary_zh": "安装 AI 技能前使用的安全扫描器。检查恶意指令、提示词注入、数据外传及供应链等风险。",
+    "source_url": "https://github.com/NVIDIA/SkillSpector",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "tailscale/tailcat": {
+    "source_desc": "like netcat, but over Tailscale's data plane, without Tailscale's control plane",
+    "summary_zh": "类似 netcat 的网络通信工具。使用 Tailscale 的数据传输机制，但不依赖其控制平面。",
+    "source_url": "https://github.com/tailscale/tailcat",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "kkkkhazix/aihot": {
+    "source_desc": "一个自己找热点、自己写日报的网站框架。把信源和精选标准换成你的，它就是你的行业热点站。",
+    "summary_zh": "自动寻找热点并生成日报的网站框架。替换信源和筛选标准后，可用于自己的行业资讯站。",
+    "source_url": "https://github.com/KKKKhazix/AIHOT",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "multica-ai/multica": {
+    "source_desc": "Make humans and AI agents work as one team — open-source and self-hostable.",
+    "summary_zh": "让人和 AI 助手作为同一团队协作的平台。支持开源部署和自行托管。",
+    "source_url": "https://github.com/multica-ai/multica",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nvidia/skillevaluator": {
+    "source_desc": "Multi-tier framework for evaluating AI agent skills with quality gates, semantic overlap detection, synthetic evaluation dataset generation, and live agent evaluation that measures how skills affect agent behavior.",
+    "summary_zh": "评估 AI 助手技能的框架。包含质量门槛、语义重复检查、评测数据生成，以及技能对实际行为影响的测试。",
+    "source_url": "https://github.com/NVIDIA/SkillEvaluator",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "herdrdev/herdr": {
+    "source_desc": "the runtime your coding agents live on",
+    "summary_zh": "为 AI 编程助手提供运行环境的项目。用于承载助手的工作过程。",
+    "source_url": "https://github.com/herdrdev/herdr",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "every-app/open-seo": {
+    "source_desc": "Open source alternative to Semrush and Ahrefs",
+    "summary_zh": "开源 SEO 工具项目。定位为 Semrush、Ahrefs 等搜索优化平台的替代方案。",
+    "source_url": "https://github.com/every-app/open-seo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "block/buzz": {
+    "source_desc": "A hive mind communication platform",
+    "summary_zh": "面向群体协作的通信平台。项目定位是让参与者共享信息、协同工作。",
+    "source_url": "https://github.com/block/buzz",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/wordcraft": {
+    "source_desc": "WordCraft: an open-source, clean-room word processor in pure Rust",
+    "summary_zh": "用 Rust 编写的开源文字处理软件。用于撰写和编辑文档。",
+    "source_url": "https://github.com/storytold/wordcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "shihabal3amri/diplay": {
+    "source_desc": "Independent CarPlay receiver for compatible Android head units. Wired and wireless public preview.",
+    "summary_zh": "让兼容的 Android 车机接收 CarPlay 的项目。支持有线和无线连接，目前为公开预览版本。",
+    "source_url": "https://github.com/shihabal3amri/DiPlay",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "soxoj/maigret": {
+    "source_desc": "🕵️‍♂️ Collect a dossier on a person by username from 6K websites",
+    "summary_zh": "按用户名在大量网站查找公开资料的工具。将搜索到的关联账号信息汇总成档案。",
+    "source_url": "https://github.com/soxoj/maigret",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "garrytan/gbrain": {
+    "source_desc": "Garry's Opinionated OpenClaw/Hermes Agent Brain",
+    "summary_zh": "为 OpenClaw、Hermes 助手准备的个人化配置方案。体现作者对助手工作方式的配置偏好。",
+    "source_url": "https://github.com/garrytan/gbrain",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/lightcraft": {
+    "source_desc": "LightCraft: An open-source non-destructive photo editor written from scratch in pure Rust",
+    "summary_zh": "用 Rust 编写的开源照片编辑器。采用非破坏性编辑方式，便于保留原始照片。",
+    "source_url": "https://github.com/storytold/lightcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "rustdesk/rustdesk": {
+    "source_desc": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
+    "summary_zh": "可自行部署的开源远程桌面软件。用于远程访问电脑，定位为 TeamViewer 的替代方案。",
+    "source_url": "https://github.com/rustdesk/rustdesk",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "cdyforever/how-to-live-better": {
+    "source_desc": "《高性价比人生指南》全书 528 条的在线单页阅读版：手机可读、可搜索、零依赖、支持离线",
+    "summary_zh": "《高性价比人生指南》的在线阅读版。支持手机浏览、搜索和离线阅读，无需额外依赖。",
+    "source_url": "https://github.com/cdyforever/how-to-live-better",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "mvanhorn/last30days-skill": {
+    "source_desc": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+    "summary_zh": "跨 Reddit、X、YouTube、Hacker News 等来源研究主题的 AI 技能。汇总检索结果，形成有来源依据的摘要。",
+    "source_url": "https://github.com/mvanhorn/last30days-skill",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "peach-mitao/peach": {
+    "source_desc": "Peach: Local-first video metadata scraper and media manager.",
+    "summary_zh": "优先在本地运行的视频资料管理工具。用于抓取视频元数据并整理媒体库。",
+    "source_url": "https://github.com/peach-mitao/peach",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anthropics/claude-quickstarts": {
+    "source_desc": "A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API",
+    "summary_zh": "帮助开发者快速上手 Claude API 的示例项目集。包含可继续开发和部署的应用起点。",
+    "source_url": "https://github.com/anthropics/claude-quickstarts",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "router-for-me/cliproxyapi": {
+    "source_desc": "Wrap Antigravity, ChatGPT Codex, Claude Code, Grok Build, Muse Code, Devin as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini Series, GPT Series, Grok Series, Claude model through API",
+    "summary_zh": "把多种 AI 编程工具封装成兼容模型 API 的代理服务。方便其他应用使用统一接口调用它们。",
+    "source_url": "https://github.com/router-for-me/CLIProxyAPI",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "google-deepmind/mujoco": {
+    "source_desc": "Multi-Joint dynamics with Contact. A general purpose physics simulator.",
+    "summary_zh": "通用物理仿真器，重点处理多关节系统和接触动力学。用于模拟物体运动与相互作用。",
+    "source_url": "https://github.com/google-deepmind/mujoco",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "bradautomates/claude-video": {
+    "source_desc": "Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.",
+    "summary_zh": "让 Claude 理解视频内容的工具。先下载视频、提取画面并转写音频，再把这些内容交给模型分析。",
+    "source_url": "https://github.com/bradautomates/claude-video",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "crmne/spotifast": {
+    "source_desc": "Spotify, native and fast. One lightweight Rust app for your whole library, local playback, and Spotify Connect on Linux, macOS, and Windows.",
+    "summary_zh": "用 Rust 编写的轻量 Spotify 客户端。支持音乐库、本地播放和 Spotify Connect，可运行于三大桌面系统。",
+    "source_url": "https://github.com/crmne/spotifast",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anthropics/knowledge-work-plugins": {
+    "source_desc": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
+    "summary_zh": "主要面向 Claude Cowork 的知识工作插件集。用于扩展日常知识工作场景中的助手能力。",
+    "source_url": "https://github.com/anthropics/knowledge-work-plugins",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ggml-org/ggml": {
+    "source_desc": "Tensor library for machine learning",
+    "summary_zh": "用于机器学习的张量计算库。提供模型计算所需的底层数据结构与运算能力。",
+    "source_url": "https://github.com/ggml-org/ggml",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "dashdogy/mfg-unlocker": {
+    "source_desc": "DLSS Multi Frame Generation Unlock and controls for any supported MFG title on RTX series GPUs",
+    "summary_zh": "针对 RTX 显卡的 DLSS 多帧生成功能控制工具。用于支持该功能的游戏和应用。",
+    "source_url": "https://github.com/dashdogy/MFG-Unlocker",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "davila7/claude-code-templates": {
+    "source_desc": "Open-source registry and CLI for Claude Code components: agents, commands, skills, hooks, MCPs, settings and mods",
+    "summary_zh": "Claude Code 组件的开源目录和命令行工具。可管理助手、命令、技能、钩子、MCP 和配置等组件。",
+    "source_url": "https://github.com/davila7/claude-code-templates",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "longbridge/gpui-kit": {
+    "source_desc": "Rust GUI components for building fantastic cross-platform desktop application by using GPUI.",
+    "summary_zh": "基于 GPUI 的 Rust 图形界面组件库。用于开发跨平台桌面应用。",
+    "source_url": "https://github.com/longbridge/gpui-kit",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anthropics/prompt-eng-interactive-tutorial": {
+    "source_desc": "Anthropic's Interactive Prompt Engineering Tutorial",
+    "summary_zh": "Anthropic 提供的交互式提示词工程教程。通过练习学习如何编写和改进提示词。",
+    "source_url": "https://github.com/anthropics/prompt-eng-interactive-tutorial",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "storytold/vectorcraft": {
+    "source_desc": "VectorCraft: An open-source vector art tool written from scratch in pure Rust",
+    "summary_zh": "用 Rust 编写的开源矢量绘图工具。用于制作可缩放的图形作品。",
+    "source_url": "https://github.com/storytold/vectorcraft",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anthropics/courses": {
+    "source_desc": "Anthropic's educational courses",
+    "summary_zh": "Anthropic 的教学课程仓库。供开发者学习相关 AI 技术和使用方法。",
+    "source_url": "https://github.com/anthropics/courses",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "microsoft/ai-agents-for-beginners": {
+    "source_desc": "18 Lessons to Get Started Building AI Agents",
+    "summary_zh": "微软面向初学者的 AI 助手开发课程。通过系列课程学习如何构建 AI Agent。",
+    "source_url": "https://github.com/microsoft/ai-agents-for-beginners",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "astrbotdevs/astrbot": {
+    "source_desc": "AI Agent Assistant & development framework that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨",
+    "summary_zh": "可接入多种即时通信平台的 AI 助手与开发框架。整合大模型、插件和 AI 功能，支持扩展机器人能力。",
+    "source_url": "https://github.com/AstrBotDevs/AstrBot",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "google/skills": {
+    "source_desc": "Agent Skills for Google products and technologies",
+    "summary_zh": "面向 Google 产品和技术的 AI 助手技能集。用于让助手按相应工作流程完成任务。",
+    "source_url": "https://github.com/google/skills",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "homeassistant-ai/ha-mcp": {
+    "source_desc": "Configure and automate Home Assistant with Claude, ChatGPT, and other AI assistants.",
+    "summary_zh": "让 Claude、ChatGPT 等助手配置和控制 Home Assistant 的工具。用于智能家居自动化。",
+    "source_url": "https://github.com/homeassistant-ai/ha-mcp",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nandhakishorm/laya": {
+    "source_desc": "Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward pass, in 100+ languages, with a router that picks the right checkpoint per request.",
+    "summary_zh": "对文本进行选择、评分或判断的决策引擎。通过单次模型计算输出结果，支持多种语言及模型路由。",
+    "source_url": "https://github.com/NandhaKishorM/laya",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "a2ui-project/a2ui": {
+    "source_desc": "Open-source generative UI framework: agents stream layout data, and apps render it with native components in React, Angular, Lit, Flutter, SwiftUI and Jetpack Compose.",
+    "summary_zh": "让 AI 助手生成应用界面的框架。助手输出布局数据，应用再用 React、Flutter、SwiftUI 等原生组件渲染。",
+    "source_url": "https://github.com/a2ui-project/a2ui",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ruvnet/ruview": {
+    "source_desc": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.",
+    "summary_zh": "利用普通 Wi-Fi 信号进行空间感知的项目。用于人员存在检测、生命体征监测等探索，无需拍摄视频。",
+    "source_url": "https://github.com/ruvnet/RuView",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "capsoftware/cap": {
+    "source_desc": "Open source Loom alternative. Beautiful, shareable screen recordings.",
+    "summary_zh": "开源录屏和视频分享工具。定位为 Loom 的替代方案。",
+    "source_url": "https://github.com/CapSoftware/Cap",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "sunshinestream/sunshine": {
+    "source_desc": "Self-hosted game stream host for Moonlight.",
+    "summary_zh": "可自行部署的游戏串流服务端。与 Moonlight 客户端配合，把游戏画面传到其他设备。",
+    "source_url": "https://github.com/SunshineStream/Sunshine",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "rasbt/llms-from-scratch": {
+    "source_desc": "Implement a ChatGPT-like LLM in PyTorch from scratch, step by step",
+    "summary_zh": "从零实现类似 ChatGPT 的大语言模型教程。使用 PyTorch，逐步讲解模型构建过程。",
+    "source_url": "https://github.com/rasbt/LLMs-from-scratch",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ruanyf/weekly": {
+    "source_desc": "科技爱好者周刊，每周五发布",
+    "summary_zh": "每周五发布的科技爱好者周刊。用于了解技术动态和有趣的资源。",
+    "source_url": "https://github.com/ruanyf/weekly",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "henrygd/beszel": {
+    "source_desc": "Lightweight server monitoring with historical data, docker stats, and alerts.",
+    "summary_zh": "轻量服务器监控工具。提供历史指标、Docker 状态统计和告警。",
+    "source_url": "https://github.com/henrygd/beszel",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "lordog/dive-into-llms": {
+    "source_desc": "《动手学大模型Dive into LLMs》系列编程实践教程",
+    "summary_zh": "《动手学大模型》系列实践教程。通过编程练习学习大语言模型相关技术。",
+    "source_url": "https://github.com/Lordog/dive-into-llms",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "facebookresearch/faiss": {
+    "source_desc": "A library for efficient similarity search and clustering of dense vectors.",
+    "summary_zh": "用于向量相似度检索和聚类的库。适合从大量向量中快速找到相似内容。",
+    "source_url": "https://github.com/facebookresearch/faiss",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anthropics/claude-cookbooks": {
+    "source_desc": "A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.",
+    "summary_zh": "Claude 使用方法的示例笔记本和配方集合。可参考具体代码学习不同应用方式。",
+    "source_url": "https://github.com/anthropics/claude-cookbooks",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "xiaojieonly/ehviewer_cn_sxj": {
+    "source_desc": "ehviewer，用爱发电，快乐前行",
+    "summary_zh": "面向 Android 的 E-Hentai 图库浏览客户端。这是 EhViewer 的社区维护版本。",
+    "source_url": "https://github.com/xiaojieonly/Ehviewer_CN_SXJ#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "trufflesecurity/trufflehog": {
+    "source_desc": "Find, verify, and analyze leaked credentials",
+    "summary_zh": "查找、验证和分析泄露凭据的安全工具。用于发现代码或其他内容中暴露的密钥。",
+    "source_url": "https://github.com/trufflesecurity/trufflehog",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "robbietilton/compositor": {
+    "source_desc": "The Photoshop alternative for Mac",
+    "summary_zh": "面向 Mac 的图像编辑工具。项目定位为 Photoshop 的替代方案。",
+    "source_url": "https://github.com/robbietilton/Compositor",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "gosom/google-maps-scraper": {
+    "source_desc": "scrape data from Google Maps. Extracts data such as the name, address, phone number, website URL, rating, reviews number, latitude and longitude, reviews,email and more for each place",
+    "summary_zh": "从 Google Maps 提取地点资料的工具。可获取名称、地址、电话、评分和评论等信息。",
+    "source_url": "https://github.com/gosom/google-maps-scraper",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "scottsloan/bili23-downloader": {
+    "source_desc": "开源、免费、跨平台的 B 站视频下载工具，支持多线程加速、音视频分离、弹幕元数据获取、自定义命名与分类等功能。Open Source, Free, Cross-Platform Bilibili Video Downloader.",
+    "summary_zh": "跨平台 B 站视频下载工具。支持多线程下载、音视频分离、弹幕信息获取，以及自定义文件命名。",
+    "source_url": "https://github.com/ScottSloan/Bili23-Downloader",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "browser-use/jev-ultrafast": {
+    "source_desc": "Fastest and cheapest web agent",
+    "summary_zh": "用于操作网页的 AI 助手项目。主要强调运行速度和使用成本。",
+    "source_url": "https://github.com/browser-use/jev-ultrafast",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "aquasecurity/trivy": {
+    "source_desc": "Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more",
+    "summary_zh": "检查容器、Kubernetes、代码仓库和云环境的安全工具。可查找漏洞、配置错误、泄露密钥并生成软件物料清单。",
+    "source_url": "https://github.com/aquasecurity/trivy",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "agent-substrate/substrate": {
+    "source_desc": "Agent Substrate: the core system",
+    "summary_zh": "在 Kubernetes 上为 AI 助手提供隔离沙箱的运行平台。可保存与恢复运行状态，并统一管理计算、网络、存储和身份隔离。",
+    "source_url": "https://github.com/agent-substrate/substrate#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "langchain-ai/rag-from-scratch": {
+    "source_desc": "",
+    "summary_zh": "从零学习检索增强生成（RAG）的教程。通过视频和代码笔记本，讲解文档索引、检索与回答生成。",
+    "source_url": "https://github.com/langchain-ai/rag-from-scratch#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "maotoumao/musicfree": {
+    "source_desc": "插件化、定制化、无广告的免费音乐播放器",
+    "summary_zh": "支持插件与界面定制的音乐播放器。开源、免费且无广告。",
+    "source_url": "https://github.com/maotoumao/MusicFree",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "gitleaks/gitleaks": {
+    "source_desc": "Find secrets with Gitleaks 🔑",
+    "summary_zh": "扫描代码中敏感信息的工具。用于查找误提交的密钥、令牌等秘密数据。",
+    "source_url": "https://github.com/gitleaks/gitleaks",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "karpathy/nn-zero-to-hero": {
+    "source_desc": "Neural Networks: Zero to Hero",
+    "summary_zh": "从入门逐步学习神经网络的课程项目。面向希望理解神经网络实现过程的学习者。",
+    "source_url": "https://github.com/karpathy/nn-zero-to-hero",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "openai/math": {
+    "source_desc": "",
+    "summary_zh": "收集 OpenAI 内部模型生成的数学研究手稿和证明材料。不同结果的验证程度不同，部分附有 Lean 形式化证明。",
+    "source_url": "https://github.com/openai/math#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "astral-sh/ruff": {
+    "source_desc": "An extremely fast Python linter and code formatter, written in Rust.",
+    "summary_zh": "用 Rust 编写的 Python 代码检查与格式化工具。用于统一代码风格并发现常见代码问题。",
+    "source_url": "https://github.com/astral-sh/ruff",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "krahets/hello-algo": {
+    "source_desc": "《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持简中、繁中、English、日本語，提供 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 等代码实现",
+    "summary_zh": "通过动画图解和可运行示例学习数据结构与算法的教程。提供多种语言版本和编程语言实现。",
+    "source_url": "https://github.com/krahets/hello-algo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "tensorflow/tensorflow": {
+    "source_desc": "An Open Source Machine Learning Framework for Everyone",
+    "summary_zh": "开源机器学习框架。用于开发和运行机器学习模型。",
+    "source_url": "https://github.com/tensorflow/tensorflow",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "orailnoor/cross-platform-llm-client": {
+    "source_desc": "A unified cross-platform AI client supporting seamless transitions between standard cloud APIs and on-device, offline execution of custom and uncensored language models.",
+    "summary_zh": "同时支持云端 API 和本地离线模型的跨平台 AI 客户端。可在不同模型来源之间切换。",
+    "source_url": "https://github.com/orailnoor/cross-platform-llm-client",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "lxgw/lxgwwenkai": {
+    "source_desc": "An open-source Chinese font derived from Fontworks' Klee One. 一款开源中文字体，基于 FONTWORKS 出品字体 Klee One 衍生。",
+    "summary_zh": "基于 Klee One 衍生的开源中文字体“霞鹜文楷”。可用于中文界面、排版和阅读场景。",
+    "source_url": "https://github.com/lxgw/LxgwWenKai",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "dsx-ai-factory/nvke": {
+    "source_desc": "NVIDIA Kubernetes Engine (NVKE). A management plane for GPU Kubernetes on bare metal.",
+    "summary_zh": "面向裸机 GPU 集群的 Kubernetes 管理平台。用于管理 GPU Kubernetes 基础设施。",
+    "source_url": "https://github.com/dsx-ai-factory/nvke",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "opensandbox-group/opensandbox": {
+    "source_desc": "Secure, Fast, and Extensible Sandbox runtime for AI agents.",
+    "summary_zh": "为 AI 助手提供隔离执行环境的沙箱运行时。强调安全、速度和可扩展性。",
+    "source_url": "https://github.com/opensandbox-group/OpenSandbox",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "runkids/skillshare": {
+    "source_desc": "📚 Sync skills, agents, MCP, plugins to all AI CLI tools with one command and simplify team sharing.",
+    "summary_zh": "在多种 AI 命令行工具之间同步技能和配置的工具。支持助手、MCP、插件等内容，也方便团队共享。",
+    "source_url": "https://github.com/runkids/skillshare",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "datatalksclub/data-engineering-zoomcamp": {
+    "source_desc": "Data Engineering Zoomcamp is a free 9-week course on building production-ready data pipelines. Join the course here 👇🏼",
+    "summary_zh": "免费的数据工程课程，围绕生产级数据管道展开。通过九周学习练习构建数据处理流程。",
+    "source_url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "microsoft/ai-for-beginners": {
+    "source_desc": "12 Weeks, 24 Lessons, AI for All!",
+    "summary_zh": "微软面向初学者的人工智能课程。以十二周、二十四节课组织基础学习内容。",
+    "source_url": "https://github.com/microsoft/AI-For-Beginners",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "langbot-app/langbot": {
+    "source_desc": "Production-grade platform for building agentic IM bots - 生产级多平台智能机器人开发平台/ Agent、知识库编排、插件系统 / Bots for Discord / Slack / LINE / Telegram / WeChat(企业微信, 企微智能机器人, 公众号) / 飞书 / 钉钉 / QQ / Matrix e.g. Integrated with ChatGPT(GPT), DeepSeek, Dify, n8n, Langflow, Coze, Claude, Gemini, GLM, Ollama, SiliconFlow, Kimi, openclaw / hermes agent, deerflow",
+    "summary_zh": "用于开发多平台聊天机器人的平台。支持助手、知识库编排和插件，并能连接飞书、微信、Discord 等通信工具。",
+    "source_url": "https://github.com/langbot-app/LangBot",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "hiroi-sora/umi-ocr": {
+    "source_desc": "OCR software, free and offline. 开源、免费的离线OCR软件。支持截屏/批量导入图片，PDF文档识别，排除水印/页眉页脚，扫描/生成二维码。内置多国语言库。",
+    "summary_zh": "免费、开源的离线文字识别软件。支持截图、批量图片、PDF 识别，以及二维码处理。",
+    "source_url": "https://github.com/hiroi-sora/Umi-OCR",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "kagent-dev/kagent": {
+    "source_desc": "Cloud Native Agentic AI | Discord: https://bit.ly/kagentdiscord",
+    "summary_zh": "面向云原生环境的 AI 助手项目。用于把 Agent 能力引入云原生系统。",
+    "source_url": "https://github.com/kagent-dev/kagent",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "zellij-org/zellij": {
+    "source_desc": "A terminal workspace with batteries included",
+    "summary_zh": "集成常用功能的终端工作空间。用于组织和管理终端中的工作。",
+    "source_url": "https://github.com/zellij-org/zellij",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "tokio-rs/topcoat": {
+    "source_desc": "A batteries-included framework for building web apps",
+    "summary_zh": "集成常用能力的 Web 应用开发框架。用于搭建网页应用。",
+    "source_url": "https://github.com/tokio-rs/topcoat",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "sundowndev/phoneinfoga": {
+    "source_desc": "Information gathering framework for phone numbers",
+    "summary_zh": "围绕电话号码收集相关信息的工具框架。用于检索和整理号码相关资料。",
+    "source_url": "https://github.com/sundowndev/phoneinfoga",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "throneproj/throne": {
+    "source_desc": "Cross-platform GUI proxy utility (Empowered by sing-box)",
+    "summary_zh": "基于 sing-box 的跨平台代理工具。通过图形界面配置和使用代理连接。",
+    "source_url": "https://github.com/throneproj/Throne",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "datawhalechina/happy-llm": {
+    "source_desc": "📚 从零开始构建大模型",
+    "summary_zh": "从零学习和构建大语言模型的中文教程。适合希望通过实践入门的学习者。",
+    "source_url": "https://github.com/datawhalechina/happy-llm",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "d2l-ai/d2l-zh": {
+    "source_desc": "《动手学深度学习》：面向中文读者、能运行、可讨论。中英文版被70多个国家的500多所大学用于教学。",
+    "summary_zh": "面向中文读者的深度学习教材。结合可运行代码与讨论，帮助理解模型和实践方法。",
+    "source_url": "https://github.com/d2l-ai/d2l-zh",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "idvel/rime-ice": {
+    "source_desc": "Rime 配置：雾凇拼音 | 长期维护的简体词库",
+    "summary_zh": "Rime 输入法的“雾凇拼音”配置方案。提供持续维护的简体中文词库。",
+    "source_url": "https://github.com/iDvel/rime-ice",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "alibaba/mnn": {
+    "source_desc": "MNN: A blazing-fast, lightweight inference engine battle-tested by Alibaba, powering high-performance on-device LLMs and Edge AI.",
+    "summary_zh": "阿里巴巴开源的轻量模型推理引擎。用于设备端大模型和边缘 AI 计算。",
+    "source_url": "https://github.com/alibaba/MNN",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "jeecgboot/jeecgboot": {
+    "source_desc": "一款免费开源的 AI 低代码平台，也是 AI 时代构建复杂业务系统的开源基座！权限、多租户、工作流、报表、大屏、AI 知识库等通用能力开箱即用，AI 只需生成业务差异部分。AI Skills 一句话生成完整系统——建表、前后端代码、菜单权限、BPM 流程、表单、报表、大屏全自动。内置 AI 应用平台（聊天、知识库、流程编排、MCP），兼容主流大模型",
+    "summary_zh": "面向业务系统开发的 AI 低代码平台。集成权限、多租户、工作流、报表和知识库等能力，减少重复开发。",
+    "source_url": "https://github.com/jeecgboot/JeecgBoot",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "opencv/opencv": {
+    "source_desc": "Open Source Computer Vision Library",
+    "summary_zh": "开源计算机视觉库。用于开发图像与视觉处理应用。",
+    "source_url": "https://github.com/opencv/opencv",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "anduin2017/howtocook": {
+    "source_desc": "Programmer's guide about how to cook at home.",
+    "summary_zh": "面向程序员整理的居家做饭指南。提供按步骤学习烹饪的资料。",
+    "source_url": "https://github.com/Anduin2017/HowToCook",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "atmosphere-nx/atmosphere": {
+    "source_desc": "Atmosphère is a work-in-progress customized firmware for the Nintendo Switch.",
+    "summary_zh": "面向 Nintendo Switch 的自定义固件项目。用于修改和扩展主机的软件运行环境。",
+    "source_url": "https://github.com/Atmosphere-NX/Atmosphere",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "johnshall/shadowrocket-adblock-rules-forever": {
+    "source_desc": "提供多款 Shadowrocket 规则，拥有强劲的广告过滤功能。每日 8 时重新构建规则。",
+    "summary_zh": "为 Shadowrocket 提供广告过滤规则的项目。持续维护多套规则并定时重新构建。",
+    "source_url": "https://github.com/Johnshall/Shadowrocket-ADBlock-Rules-Forever",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "azahar-emu/azahar": {
+    "source_desc": "An open-source 3DS emulator project based on Citra.",
+    "summary_zh": "基于 Citra 的开源任天堂 3DS 模拟器。用于模拟 3DS 游戏运行环境。",
+    "source_url": "https://github.com/azahar-emu/azahar",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "cli/cli": {
+    "source_desc": "GitHub’s official command line tool",
+    "summary_zh": "GitHub 官方命令行工具。用于从终端操作 GitHub。",
+    "source_url": "https://github.com/cli/cli",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "521xueweihan/github520": {
+    "source_desc": "😘 让你“爱”上 GitHub，解决访问时图裂、加载慢的问题。（无需安装）",
+    "summary_zh": "改善 GitHub 访问体验的辅助项目。针对图片加载失败、访问缓慢等问题提供方案。",
+    "source_url": "https://github.com/521xueweihan/GitHub520",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "evcc-io/evcc": {
+    "source_desc": "smart charging ☀️🚘",
+    "summary_zh": "智能充电项目。用于管理和优化充电过程。",
+    "source_url": "https://github.com/evcc-io/evcc",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "dariulone/cyberpunk-vr-port": {
+    "source_desc": "",
+    "summary_zh": "为《赛博朋克 2077》增加 VR 体验的社区模组。支持头部追踪、立体画面和手部动作控制，目前仍属实验项目。",
+    "source_url": "https://github.com/dariulone/cyberpunk-vr-port#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "lnkiai/m3e-canvas": {
+    "source_desc": "Sketch Material 3 Expressive screens in the browser and turn them into vibe-coding prompts.",
+    "summary_zh": "在浏览器中草绘 Material 3 Expressive 界面的工具。可把界面方案转换为 AI 编程提示词。",
+    "source_url": "https://github.com/lnkiai/m3e-canvas",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nirdiamant/genai_agents": {
+    "source_desc": "50+ tutorials and implementations for Generative AI Agent techniques, from basic conversational bots to complex multi-agent systems.",
+    "summary_zh": "生成式 AI 助手技术的教程与实现集合。内容从聊天机器人延伸到复杂的多助手系统。",
+    "source_url": "https://github.com/NirDiamant/GenAI_Agents",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "nlohmann/json": {
+    "source_desc": "JSON for Modern C++",
+    "summary_zh": "面向现代 C++ 的 JSON 库。用于读写和处理 JSON 数据。",
+    "source_url": "https://github.com/nlohmann/json",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "googlecloudplatform/generative-ai": {
+    "source_desc": "Sample code and notebooks for Generative AI on Google Cloud, with Gemini platform",
+    "summary_zh": "Google Cloud 上生成式 AI 的示例代码与笔记本。包含基于 Gemini 平台的应用案例。",
+    "source_url": "https://github.com/GoogleCloudPlatform/generative-ai",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "brucedevices/firmware": {
+    "source_desc": "Predatory ESP32 Firmware",
+    "summary_zh": "为 ESP32 设备提供便携安全测试工具的固件。支持多种开发板，面向红队评估和授权安全测试。",
+    "source_url": "https://github.com/BruceDevices/firmware#readme",
+    "source_kind": "readme",
+    "reviewed_at": "2026-11-16"
+  },
+  "zazencodes/zazencodes-season-3": {
+    "source_desc": "YouTube video source code for Season 3",
+    "summary_zh": "作者第三季 YouTube 视频的配套源码。适合跟随视频查看和运行示例。",
+    "source_url": "https://github.com/zazencodes/zazencodes-season-3",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "dataexpert-io/data-engineer-handbook": {
+    "source_desc": "This is a repo with links to everything you'd ever want to learn about data engineering",
+    "summary_zh": "数据工程学习资源索引。汇总相关教程、工具和资料链接。",
+    "source_url": "https://github.com/DataExpert-io/data-engineer-handbook",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "hillya51/lunatranslator": {
+    "source_desc": "视觉小说翻译器 / Visual Novel Translator",
+    "summary_zh": "面向视觉小说的翻译工具。用于辅助阅读其他语言的视觉小说。",
+    "source_url": "https://github.com/HIllya51/LunaTranslator",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "auto-novel/auto-novel": {
+    "source_desc": "轻小说机翻网站，支持网络小说/文库小说/本地小说",
+    "summary_zh": "用于轻小说机器翻译的网站项目。支持网络小说、文库小说和本地小说。",
+    "source_url": "https://github.com/auto-novel/auto-novel",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "modernrelay/omnigraph": {
+    "source_desc": "Object-storage native graph database with branching and typed ontology",
+    "summary_zh": "基于对象存储的图数据库。支持分支和带类型的本体结构，适合组织有明确关系的数据。",
+    "source_url": "https://github.com/ModernRelay/omnigraph",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ed-donner/llm_engineering": {
+    "source_desc": "Repo to accompany my mastering LLM engineering course",
+    "summary_zh": "大语言模型工程课程的配套代码仓库。用于跟随课程学习和实践。",
+    "source_url": "https://github.com/ed-donner/llm_engineering",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "yunaiv/ruoyi-vue-pro": {
+    "source_desc": "🔥 官方推荐 🔥 RuoYi-Vue 全新 Pro 版本，优化重构所有功能。基于 Spring Boot + MyBatis Plus + Vue & Element 实现的后台管理系统 + 微信小程序，支持 RBAC 动态权限、数据权限、SaaS 多租户、Flowable 工作流、三方登录、支付、短信、商城、CRM、ERP、MES、IM、AI 大模型、IoT 物联网等功能。你的 ⭐️ Star ⭐️，是作者生发的动力！",
+    "summary_zh": "基于 Spring Boot、Vue 等技术的后台管理系统。集成权限、多租户、工作流、商城和 CRM 等业务能力。",
+    "source_url": "https://github.com/YunaiV/ruoyi-vue-pro",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "halo-dev/halo": {
+    "source_desc": "Halo 是一款强大易用的开源建站工具，从个人博客、知识库，到企业官网、在线商城，Halo 都能助您轻松实现，一站式满足您的多样化建站需求。",
+    "summary_zh": "开源建站工具。可用于个人博客、知识库、企业官网和在线商城。",
+    "source_url": "https://github.com/halo-dev/halo",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "qwenlm/qwen3-vl": {
+    "source_desc": "Qwen3-VL is the multimodal large language model series developed by Qwen team, Alibaba Cloud.",
+    "summary_zh": "阿里云 Qwen 团队开发的多模态大语言模型系列。用于处理多种模态的信息。",
+    "source_url": "https://github.com/QwenLM/Qwen3-VL",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "gepa-ai/gepa": {
+    "source_desc": "Optimize prompts, code, and more with AI-powered Reflective Optimization",
+    "summary_zh": "通过 AI 反思与迭代来优化提示词、代码等内容的工具。用于自动探索更有效的实现方案。",
+    "source_url": "https://github.com/gepa-ai/gepa",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "ed-donner/agents": {
+    "source_desc": "Repo for the Complete Agentic AI Engineering Course",
+    "summary_zh": "Agentic AI 工程课程的配套仓库。用于跟随课程学习 AI 助手系统的构建方法。",
+    "source_url": "https://github.com/ed-donner/agents",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "google/googletest": {
+    "source_desc": "GoogleTest - Google Testing and Mocking Framework",
+    "summary_zh": "Google 提供的测试与模拟框架。用于编写自动化测试和替代测试中的依赖对象。",
+    "source_url": "https://github.com/google/googletest",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "higgsfield-ai/higgsfield": {
+    "source_desc": "Fault-tolerant, highly scalable GPU orchestration, and a machine learning framework designed for training models with billions to trillions of parameters",
+    "summary_zh": "面向大型模型训练的 GPU 编排与机器学习框架。强调容错能力和大规模计算扩展。",
+    "source_url": "https://github.com/higgsfield-ai/higgsfield",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "immersive-translate/immersive-translate": {
+    "source_desc": "沉浸式双语网页翻译扩展 , 支持输入框翻译， 鼠标悬停翻译， PDF, Epub, 字幕文件, TXT 文件翻译 - Immersive Dual Web Page Translation Extension",
+    "summary_zh": "双语网页翻译扩展。还支持输入框、悬停内容、PDF、电子书和字幕等内容的翻译。",
+    "source_url": "https://github.com/immersive-translate/immersive-translate",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "fanmingming/live": {
+    "source_desc": "✯ 可直连访问的电视/广播图标库与相关工具项目 ✯ 🔕 永久免费 直连访问 完整开源 不断完善的台标 支持IPv4/IPv6双栈访问 🔕",
+    "summary_zh": "可直接访问的电视、广播台标库及相关工具。持续维护图标资源，支持 IPv4、IPv6 访问。",
+    "source_url": "https://github.com/fanmingming/live",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "facebookresearch/dinov3": {
+    "source_desc": "Reference PyTorch implementation and models for DINOv3",
+    "summary_zh": "DINOv3 的 PyTorch 参考实现及模型。用于复现和使用该项目发布的模型。",
+    "source_url": "https://github.com/facebookresearch/dinov3",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "lionsoul2014/ip2region": {
+    "source_desc": "Ip2region is an offline IP-to-Region localization library and IP data management framework with both IPv4 and IPv6 supports, 10-microsecond level query efficiency, xdb search client for many programming languages",
+    "summary_zh": "离线 IP 归属地查询库与数据管理框架。支持 IPv4、IPv6，并提供多种编程语言的查询客户端。",
+    "source_url": "https://github.com/lionsoul2014/ip2region",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  },
+  "suno-ai/bark": {
+    "source_desc": "🔊 Text-Prompted Generative Audio Model",
+    "summary_zh": "根据文字提示生成音频的模型。用于从文本描述制作音频内容。",
+    "source_url": "https://github.com/suno-ai/bark",
+    "source_kind": "description",
+    "reviewed_at": "2026-11-16"
+  }
+}

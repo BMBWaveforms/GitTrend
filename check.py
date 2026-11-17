@@ -130,6 +130,57 @@ def check_history():
                 break
 
 
+def check_summaries():
+    catalog = load_json(DATA / "project_summaries_zh.json")
+    if not isinstance(catalog, dict):
+        fail("project_summaries_zh.json 必须是按仓库名索引的对象")
+        return
+    for repo, entry in catalog.items():
+        if not isinstance(entry, dict):
+            fail(f"中文说明[{repo}]: 条目必须是对象")
+            continue
+        if repo != repo.lower() or not re.fullmatch(r"[^/\s]+/[^/\s]+", repo):
+            fail(f"中文说明[{repo}]: 仓库键须为小写 owner/name")
+        summary = entry.get("summary_zh", "")
+        if not isinstance(summary, str) or not re.search(r"[\u3400-\u9fff]", summary):
+            fail(f"中文说明[{repo}]: 缺少中文用途说明")
+        if not isinstance(entry.get("source_desc"), str):
+            fail(f"中文说明[{repo}]: 缺少用于匹配的原始简介")
+        if entry.get("source_kind") not in ("description", "readme"):
+            fail(f"中文说明[{repo}]: 来源类型无效")
+        if not str(entry.get("source_url", "")).lower().startswith(f"https://github.com/{repo}"):
+            fail(f"中文说明[{repo}]: 缺少对应仓库的来源链接")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(entry.get("reviewed_at", ""))):
+            fail(f"中文说明[{repo}]: 缺少核对日期")
+    if (DATA / "latest.json").exists():
+        latest = load_json(DATA / "latest.json") or {}
+        missing = [r.get("repo", "") for r in latest.get("repos", [])
+                   if not isinstance(catalog.get(r.get("repo", "").lower()), dict)
+                   or catalog[r.get("repo", "").lower()].get("source_desc") != (r.get("desc") or "")]
+        if missing:
+            warn(f"{len(missing)} 个项目的中文说明待补充或原文已变更：" + "、".join(missing[:5]))
+
+
+def check_project_avatars():
+    catalog = load_json(ROOT / "assets" / "project-avatars.json")
+    if not isinstance(catalog, dict) or not catalog:
+        fail("项目头像目录为空或格式不正确")
+        return
+    for owner, entry in catalog.items():
+        if not isinstance(entry, dict):
+            fail(f"项目头像[{owner}]: 条目必须是对象")
+            continue
+        path = (ROOT / entry.get("src", "")).resolve()
+        if not path.is_relative_to((ROOT / "assets" / "project-avatars").resolve()) or not path.is_file():
+            fail(f"项目头像[{owner}]: 本地素材不存在或路径越界")
+            continue
+        signature = {"image/png": b"\x89PNG\r\n\x1a\n", "image/jpeg": b"\xff\xd8\xff"}.get(entry.get("mime"))
+        if not signature or not path.read_bytes().startswith(signature):
+            fail(f"项目头像[{owner}]: 图片类型与内容不匹配")
+        if entry.get("kind") != "owner-avatar" or not entry.get("source_url", "").startswith(f"https://github.com/{owner}.png?"):
+            fail(f"项目头像[{owner}]: 缺少维护者头像来源")
+
+
 def check_template():
     path = ROOT / "template.html"
     if not path.exists():
@@ -138,6 +189,8 @@ def check_template():
     text = path.read_text(encoding="utf-8")
     if "/*__DATA__*/{}" not in text:
         fail("template.html 里找不到数据占位符 /*__DATA__*/{}")
+    if "/*__SUMMARIES__*/{}" not in text:
+        fail("template.html 里找不到中文说明占位符")
     if "<script src=" in text:
         fail("template.html 引入了外部脚本，看板必须自包含")
     if re.search(r"@import\s+url", text) or re.search(r"url\(\s*['\"]?https?://", text):
@@ -153,12 +206,18 @@ def check_dashboard(expected_count):
 
     # 过期检测：模板或数据比产物新，说明改了东西没重新构建
     stamp = path.stat().st_mtime
-    newer = [p.name for p in (ROOT / "template.html", DATA / "latest.json")
+    newer = [p.name for p in (ROOT / "template.html", DATA / "latest.json", DATA / "project_summaries_zh.json", ROOT / "assets" / "star-3d.png", ROOT / "assets" / "project-avatars.json")
              if p.exists() and p.stat().st_mtime > stamp + 1]
     if newer:
         fail(f"dashboard.html 比 {', '.join(newer)} 旧，请重新构建"
              f"（python3 build_dashboard.py）")
 
+    if not re.search(r'class="stamp-star" src="data:image/png;base64,[A-Za-z0-9+/=]+"', html):
+        fail("dashboard.html 的 3D 星星未内联")
+    if "/*__AVATARS__*/{}" in html:
+        fail("dashboard.html 的项目头像未内联")
+    if "/*__SUMMARIES__*/{}" in html:
+        fail("dashboard.html 的中文说明未内联")
     if "/*__DATA__*/{}" in html:
         fail("dashboard.html 里数据占位符没被替换，构建失败")
     if not re.search(r"\b(?:const|let) DATA = \{", html):
@@ -168,8 +227,10 @@ def check_dashboard(expected_count):
     if "<script src=" in html:
         fail("dashboard.html 引入了外部脚本，违反自包含约束")
 
+    # Image bytes may coincidentally contain words such as NaN; inspect text only.
+    renderable_html = re.sub(r"data:image/(?:png|jpeg);base64,[A-Za-z0-9+/=]+", "", html)
     for bad in ("NaN", ">undefined<", "undefined%"):
-        if bad in html:
+        if bad in renderable_html:
             fail(f"dashboard.html 里出现 {bad!r}，渲染时有空值泄漏")
 
     m = re.search(r'"date":"(\d{4}-\d{2}-\d{2})"', html)
@@ -183,6 +244,8 @@ def check_dashboard(expected_count):
 def main():
     count = check_latest()
     check_history()
+    check_summaries()
+    check_project_avatars()
     check_template()
     check_dashboard(count)
 

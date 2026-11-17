@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """把采集结果内联进 template.html，产出自包含看板。"""
 
+import base64
 import json
 import sys
 from pathlib import Path
@@ -10,12 +11,36 @@ from pathlib import Path
 def build(payload, out_path):
     here = Path(__file__).resolve().parent
     tpl = (here / "template.html").read_text(encoding="utf-8")
+    summaries_path = here / "data" / "project_summaries_zh.json"
+    summaries = json.loads(summaries_path.read_text(encoding="utf-8")) if summaries_path.exists() else {}
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
     data = data.replace("</", "<\\/")
     stamp = "/*__DATA__*/{}"
     if stamp not in tpl:
         raise RuntimeError("template.html 里找不到数据占位符")
-    html = tpl.replace(stamp, data)
+    summaries_stamp = "/*__SUMMARIES__*/{}"
+    if summaries_stamp not in tpl:
+        raise RuntimeError("template.html 里找不到中文说明占位符")
+    summaries_json = json.dumps(summaries, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    html = tpl.replace(stamp, data).replace(summaries_stamp, summaries_json)
+    avatars_stamp = "/*__AVATARS__*/{}"
+    if avatars_stamp not in tpl:
+        raise RuntimeError("template.html 里找不到项目头像占位符")
+    avatars = json.loads((here / "assets" / "project-avatars.json").read_text(encoding="utf-8"))
+    for entry in avatars.values():
+        image_path = (here / entry["src"]).resolve()
+        if not image_path.is_relative_to((here / "assets" / "project-avatars").resolve()):
+            raise RuntimeError("项目头像路径超出素材目录")
+        encoded = base64.b64encode(image_path.read_bytes()).decode("ascii")
+        entry["src"] = f'data:{entry["mime"]};base64,{encoded}'
+    avatars_json = json.dumps(avatars, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    html = html.replace(avatars_stamp, avatars_json)
+    icon = here / "assets" / "star-3d.png"
+    icon_data = "data:image/png;base64," + base64.b64encode(icon.read_bytes()).decode("ascii")
+    icon_src = 'src="assets/star-3d.png"'
+    if icon_src not in html:
+        raise RuntimeError("template.html 里找不到星星素材引用")
+    html = html.replace(icon_src, f'src="{icon_data}"')
     out_path = Path(out_path)
     out_path.write_text(html, encoding="utf-8")
     return out_path
