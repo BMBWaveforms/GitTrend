@@ -52,7 +52,7 @@ select{width:100%;background:var(--panel);border:1px solid var(--rule);padding:9
 .rail footer{font-size:0.8125rem;color:var(--faint);line-height:1.9;border-top:1px solid var(--rule);padding:16px 10px 0}
 .rail footer b{color:var(--dim);font-weight:500}
 .source-dot{display:inline-block;width:5px;height:5px;background:var(--mint);border-radius:50%;margin-right:6px}
-main{min-width:0;padding:0 26px 48px;max-width:1680px;width:100%;margin:auto}
+main{min-width:0;padding:0 26px 48px;max-width:1680px;width:100%;margin:0 auto;align-self:start}
 .topbar{position:sticky;top:16px;z-index:30;background:rgba(252,252,252,.96);backdrop-filter:blur(14px);display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule);min-height:76px}
 .dateline{font-size:0.8125rem;color:var(--faint);display:flex;align-items:center;gap:12px;white-space:nowrap}
 .dateline b{font-weight:500;color:var(--dim)}
@@ -147,16 +147,16 @@ main{min-width:0;padding:0 26px 48px;max-width:1680px;width:100%;margin:auto}
 .dcard li{display:flex;justify-content:space-between;gap:10px;font-size:0.8125rem;cursor:pointer;padding:3px 0}
 .dcard li:hover span{color:var(--accent-text)}
 .dcard li span{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dcard li b{font:0.8125rem var(--mono);color:var(--faint);flex:none}
-.scrim{position:fixed;inset:0;background:#2021244d;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:60;backdrop-filter:blur(3px)}.scrim.on{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:var(--panel);border-left:1px solid var(--rule);transform:translateX(100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1);z-index:70;overflow-y:auto;padding:40px 32px 50px;box-shadow:-12px 0 60px #00000014}
-.drawer.on{transform:none;visibility:visible}
-body.drawer-open{overflow:hidden}
-.drawer .x{position:absolute;top:18px;right:18px;color:var(--dim);font-size:1.0625rem;width:32px;height:32px;border:1px solid var(--rule);border-radius:6px;line-height:1}
-.drawer .x:hover{color:var(--text);background:var(--panel2)}
-.drawer .tag{font-size:0.8125rem;color:var(--accent-text);padding-right:32px}
-.drawer h2{font-size:1.625rem;font-weight:550;margin:14px 0 6px;line-height:1.3;overflow-wrap:anywhere;letter-spacing:-.5px}
-.drawer .sub{font-size:0.8125rem;color:var(--faint)}
-.drawer .body{color:var(--dim);font-size:0.875rem;line-height:1.9;margin:20px 0 26px;overflow-wrap:anywhere}
+
+
+
+
+
+
+
+
+
+
 .dstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--ink);border:1px solid var(--rule);border-radius:8px;margin-bottom:28px;overflow:hidden}
 .dstat{padding:16px 12px;border-right:1px solid var(--rule)}.dstat:nth-child(3n){border-right:none}.dstat:nth-child(n+4){border-top:1px solid var(--rule)}
 .dstat .k{font-size:0.8125rem;color:var(--faint);display:block;margin-bottom:7px}.dstat .v{font-size:1.375rem;line-height:1;font-variant-numeric:tabular-nums}.dstat .v small{font-size:0.8125rem;color:var(--faint);margin-left:3px}.dstat .v small.na{font-size:0.8125rem;margin:0}
@@ -189,7 +189,7 @@ body.drawer-open{overflow:hidden}
   .cols:not(.cols-new)>*:nth-child(4),.cols:not(.cols-new)>*:nth-child(7),.cols:not(.cols-new)>*:nth-child(8),.row:not(.row-new)>*:nth-child(4),.row:not(.row-new)>*:nth-child(7),.row:not(.row-new)>*:nth-child(8){display:none}
   .cols.cols-new,.row.row-new{grid-template-columns:20px minmax(80px,1fr) 54px 57px 38px;gap:8px}.cols.cols-new>*:nth-child(3),.row.row-new>*:nth-child(3){display:none}
   .cols,.row{padding-right:5px}.row{padding-block:14px}.row .repo .own{display:none}.row .repo{font-size:0.8125rem}.row .desc{font-size:0.8125rem}.num{font-size:0.8125rem}.row .rk{font-size:0.8125rem}.mom-cell .track{display:none}.mom-cell .v{font-size:0.8125rem}
-  .drawer{padding:48px 20px 36px}.drawer h2{font-size:1.4375rem}.dstat{padding:14px 9px}.dstat .v{font-size:1.25rem}.dcard{padding:20px}
+  .dstat{padding:14px 9px}.dstat .v{font-size:1.25rem}.dcard{padding:20px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
@@ -221,7 +221,7 @@ body.drawer-open{overflow:hidden}
 .pane .domain-row .tr{background:#f4f4f5}.domain-row .tr i{opacity:.9}
 .cols{background:#f6f7f8}.mom-cell .track{background:#f4e5da}.mom-cell .track i{opacity:.9}
 .hero .stamp{font-size:0.8125rem}.hero .stamp b{font-size:1.5625rem}.stamp-label{font-size:0.8125rem}.hero .stamp b small{font-size:0.8125rem}
-.row:hover{background:#faf6f2}.mover:hover{background:#fff8f2}.drawer .tag{color:#b95310}
+.row:hover{background:#faf6f2}.mover:hover{background:#fff8f2}
 .tbl-head h2{font-size:1rem}.mover .mom{font-size:1.9375rem}.mover .mom i{font-size:0.8125rem}.mover .rk{margin-bottom:13px}
 .brand-mark{color:#ed7622}.brand b{font-size:1.3125rem}.brand small{font-size:0.8125rem}
 .live{background:#fff}.live i{background:var(--positive)}.live.off i{background:#a9acb0}
@@ -289,8 +289,7 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
 .num{font-size:.875rem;line-height:1.6;white-space:nowrap;overflow-wrap:normal}.num.warn{color:var(--accent-text)}.mom-cell .v{font-size:1rem;line-height:1.6;white-space:nowrap}
 .mom-cell .track{width:24px}.dcard h3{font-size:1rem;flex-wrap:wrap}.dcard h3 em{font-size:.8125rem}
 .dcard li{font-size:.9375rem;min-height:36px;align-items:baseline}.dcard li span{white-space:normal;overflow:visible;overflow-wrap:anywhere}.dcard li b{font-size:.875rem}
-.drawer{width:min(620px,96vw);padding-top:56px}.drawer .x{width:40px;height:40px}
-.drawer .tag,.drawer .sub{font-size:.875rem;line-height:1.6}.drawer .body{font-size:1rem;line-height:1.75}
+
 .dstat .k{font-size:.8125rem;line-height:1.6}.dstat .v{font-size:1.5rem;line-height:1.5;overflow-wrap:anywhere}.dstat .v small,.dstat .v small.na{font-size:.8125rem}
 .dsec h4{font-size:.9375rem}.tbl-mini{font-size:.875rem}.tbl-mini td{vertical-align:top;overflow-wrap:anywhere}
 .hncard{font-size:.9375rem}.hncard span{font-size:.8125rem}.links a{font-size:.9375rem;min-height:44px;display:flex;align-items:center}
@@ -331,7 +330,7 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
  .row .num,.row .mom-cell{font-size:.875rem;text-align:left;justify-content:flex-start;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
  .row [data-label]:before{content:attr(data-label);display:block;color:var(--faint);font-size:.8125rem;line-height:1.6;font-family:var(--sans);font-weight:400}
  .mom-cell .v{font-size:1rem}.mom-cell .track{display:none}.row-new>.num[data-label="出生"]{display:none}
- .dstat{padding:14px 10px}.dstat .v{font-size:1.375rem}.drawer h2{font-size:1.5rem}.drawer .body{font-size:1rem}
+ .dstat{padding:14px 10px}.dstat .v{font-size:1.375rem}
 }
 @media(max-width:360px){main{padding-inline:14px}.rail{padding-inline:14px}.pane,.summary-card{padding:18px}.domain-row{grid-template-columns:minmax(90px,1fr) minmax(36px,1fr) 3ch;gap:8px}.dstats{grid-template-columns:repeat(2,minmax(0,1fr))}.dstat:nth-child(3n){border-right:1px solid var(--rule)}.dstat:nth-child(2n){border-right:0}.dstat:nth-child(n+3){border-top:1px solid var(--rule)}}
 @media(max-height:700px) and (min-width:821px){.rail{position:static;height:auto}.rail .filters{overflow:visible}.topbar{position:static}}
@@ -369,10 +368,6 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
 .mover .dt{font-size:.8125rem;margin-top:0}
 .domain-project{display:flex;flex-direction:column;gap:6px;min-width:0}
 .dcard .domain-project small{font-size:.8125rem;font-weight:400;color:var(--faint);line-height:1.65}
-.original-description{margin:-8px 0 24px;color:var(--dim);font-size:.875rem}
-.original-description summary{cursor:pointer;min-height:32px;padding:4px 0}
-.original-description p{margin:12px 0;overflow-wrap:anywhere}
-.original-description a{display:inline-block;color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;padding-block:8px}
 @container content (max-width:52rem){
  .hero{grid-template-columns:minmax(0,1fr);gap:24px;padding:28px}
  .hero p{max-width:60ch;margin-top:8px}
@@ -434,6 +429,71 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
  .new-project-meta{margin-bottom:20px}.new-project-stats b{font-size:1.25rem}
 }
 @media(prefers-reduced-motion:reduce){.project-card{transition:none}}
+
+/* Project detail changes only the main content; shared navigation stays visible. */
+.project-back:hover{color:var(--accent-text)}
+.project-breadcrumb{display:block;margin:16px 0 14px;overflow:visible}
+.project-breadcrumb ol{display:flex;align-items:center;flex-wrap:wrap;gap:10px;list-style:none;color:var(--faint);font-size:.8125rem}
+.project-breadcrumb li{display:flex;align-items:center;gap:10px}
+.project-breadcrumb li+li::before{content:"/";color:#b3b5b8}
+.project-breadcrumb button{display:inline-flex;min-height:36px;padding:4px 0;font-size:.8125rem;color:var(--dim);border-radius:0;background:none;white-space:nowrap}
+.project-breadcrumb button:hover{color:var(--accent-text);background:none}.project-breadcrumb button::before{display:none}
+.project-breadcrumb [aria-current="page"]{color:var(--faint)}
+.project-page-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px}
+.project-heading{min-width:0}.project-heading h1{font-size:2rem;line-height:1.25;margin:0;letter-spacing:-.035em;overflow-wrap:anywhere}
+.project-actions{justify-content:flex-end;flex-wrap:nowrap;gap:8px}.project-actions a{white-space:nowrap;justify-content:center}
+.project-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px}
+.project-meta-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border:1px solid var(--rule);border-radius:5px;background:#f5f5f6;color:var(--dim);font-size:.8125rem;line-height:1.6;overflow-wrap:anywhere}
+.project-meta-chip>span{color:var(--faint)}.project-meta-chip.category{background:#fff2e8;border-color:#f4dfd0;color:var(--accent-text)}
+.project-homepage{font-size:.8125rem;color:var(--accent-text);padding:4px 0}
+#view-project>.body{font-size:1rem;color:var(--dim);line-height:1.8;margin:16px 0 24px;max-width:80ch;overflow-wrap:anywhere}
+.project-data{border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--panel);margin-bottom:28px}
+#view-project .dstats{grid-template-columns:repeat(6,minmax(0,1fr));margin:0;border:0;border-radius:0}
+#view-project .dstat{padding:20px 16px;border:0;border-right:1px solid var(--rule)}
+#view-project .dstat:last-child{border-right:0}#view-project .dstat .v{font-size:1.625rem}
+.project-data-meta{display:flex;flex-wrap:wrap;gap:8px 24px;padding:10px 16px;border-top:1px solid var(--rule);font-size:.8125rem;color:var(--faint);background:#f7f8f9}
+.project-data-meta time,.project-data-meta b{margin-left:6px;color:var(--dim);font-weight:400;font-variant-numeric:tabular-nums}
+#view-project .dsec h4{font-size:1rem;font-weight:600;color:var(--text)}
+@container content (max-width:60rem){
+ #view-project .dstats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #view-project .dstat:nth-child(3n){border-right:0}#view-project .dstat:nth-child(n+4){border-top:1px solid var(--rule)}
+}
+@container content (max-width:40rem){
+ .project-heading h1{font-size:1.625rem}
+ #view-project .dstats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #view-project .dstat{border-right:1px solid var(--rule)}#view-project .dstat:nth-child(3n){border-right:1px solid var(--rule)}
+ #view-project .dstat:nth-child(2n){border-right:0}#view-project .dstat:nth-child(n+3){border-top:1px solid var(--rule)}
+}
+@container content (max-width:32rem){
+ .project-page-head{gap:12px}.project-heading h1{font-size:1.5rem}
+ .project-actions{display:grid;grid-template-columns:1fr;gap:6px}.project-actions a{min-height:36px;padding:6px 10px;font-size:.8125rem}
+ .project-breadcrumb{margin:12px 0 10px}.project-meta{gap:6px;margin-top:10px}
+}
+
+#view-project .dsec{margin-bottom:32px}
+.detail-section-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin-bottom:14px}
+#view-project .detail-section-heading h4{margin:0}.detail-section-heading>span{font-size:.8125rem;color:var(--faint)}
+.project-reasons .tbl-mini td{padding:10px 0}.project-reasons .tbl-mini td:last-child{font-size:1rem;color:var(--text)}
+.history-chart-card{border:1px solid var(--rule);border-radius:10px;padding:18px 20px 14px;background:var(--panel)}
+.history-chart-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}
+.history-readout{display:flex;align-items:baseline;gap:10px 18px;flex-wrap:wrap;min-width:0}
+.history-readout time{font-size:.875rem;color:var(--dim);font-variant-numeric:tabular-nums}.history-readout strong{font-size:1.75rem;line-height:1.3;white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums}.history-readout small{font-size:.8125rem;color:var(--faint);font-weight:400}.history-readout>span{font-size:.8125rem;color:var(--dim)}
+.history-controls{display:flex;gap:6px;flex:none}.history-controls button{width:36px;height:36px;border:1px solid var(--rule);border-radius:6px}.history-controls button:disabled{opacity:.35;cursor:default}
+.history-plot{width:100%;min-width:0}.star-history-svg{display:block;width:100%;height:auto;overflow:visible}.star-history-svg text{fill:var(--faint);font-size:12px;font-family:var(--sans);font-variant-numeric:tabular-nums}
+.chart-grid{stroke:var(--rule);stroke-width:1}.chart-line{fill:none;stroke:var(--mint);stroke-width:2.5;stroke-linejoin:round}.chart-area{fill:#e66b1610}.chart-hit{fill:transparent}.chart-point{fill:#fff;stroke:var(--mint);stroke-width:2}.history-guide{stroke:#bc875f;stroke-dasharray:4 4;stroke-width:1}.selected .chart-point{fill:var(--mint);r:5px}.star-history-svg g{cursor:pointer}.star-history-svg g:focus{outline:none}.star-history-svg g:focus .chart-point{stroke:var(--text);stroke-width:3}
+.history-hint{font-size:.75rem;color:var(--faint);margin-top:4px}
+.history-table{width:100%;border-collapse:collapse;font-size:.875rem;font-variant-numeric:tabular-nums}.history-table th,.history-table td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}.history-table th{font-weight:500;color:var(--faint)}.history-table th:first-child,.history-table td:first-child{text-align:left;padding-left:0}
+.discussion-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.discussion-list .hncard{background:var(--panel);padding:18px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}.discussion-list .hncard b{font-weight:550;margin:0}.discussion-list .hncard b>span{display:inline;color:var(--faint)}.discussion-meta{display:flex!important;flex-wrap:wrap;gap:6px 16px;font-size:.8125rem!important;color:var(--faint)}.discussion-meta>span{display:inline}.section-empty{padding:20px 0;color:var(--faint);font-size:.875rem}
+@container content (max-width:40rem){.discussion-list{grid-template-columns:minmax(0,1fr)}.history-chart-card{padding:14px 10px 12px}.history-readout{gap:5px 12px}.history-readout strong{font-size:1.5rem}.history-readout>span{flex-basis:100%}.history-controls button{width:32px;height:36px}}
+
+.star-history .detail-section-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+.history-section-title>span{display:block;margin-top:4px;color:var(--faint);font-size:.8125rem}
+.history-view-switch{display:flex;gap:3px;padding:3px;border:1px solid var(--rule);border-radius:8px;background:var(--panel2);flex:none}
+.history-view-switch button{min-height:36px;min-width:56px;padding:5px 12px;border-radius:5px;font-size:.875rem;color:var(--dim)}
+.history-view-switch button[aria-selected="true"]{background:var(--panel);color:var(--accent-text);font-weight:550;box-shadow:0 1px 3px #00000010}
+.history-data-panel{overflow:auto;min-height:250px;scrollbar-width:thin}.history-data-panel[hidden],#history-chart-panel[hidden]{display:none}
+.history-data-panel .history-table thead{position:sticky;top:0;z-index:1;background:var(--panel)}
+.history-data-panel .history-table td{padding-block:12px}.history-data-panel .history-table tbody tr:hover{background:#fff8f2}
 </style>
 </head>
 <body>
@@ -484,11 +544,10 @@ select{font-size:.9375rem;min-height:44px;border-color:var(--control);background
     <section class="view" id="view-new"></section>
     <section class="view" id="view-domains"></section>
     <section class="view" id="view-all"></section>
+    <section class="view" id="view-project" aria-labelledby="projectTitle"></section>
   </main>
 </div>
 
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true" inert></aside>
 
 <script>
 let DATA = /*__DATA__*/{};
@@ -589,15 +648,16 @@ const NAV_ICONS = {
   all:'<path d="M8 5h11M8 11h11M8 17h11M3 5h.1M3 11h.1M3 17h.1"/>'
 };
 function renderNav(){
+  const activeView=state.view==="project"?(history.state?.originView||"all"):state.view;
   document.getElementById("nav").innerHTML = VIEWS.map(([k,label])=>{
     let n = REPOS.length;
     if(k==="new") n = REPOS.filter(r=>r.age_days!=null && r.age_days<=90).length;
-    return `<button data-v="${k}" class="${state.view===k?"on":""}" aria-current="${state.view===k?'page':'false'}">
+    return `<button data-v="${k}" class="${activeView===k?"on":""}" aria-current="${activeView===k?'page':'false'}">
       <svg class="nav-icon" viewBox="0 0 22 22" aria-hidden="true">${NAV_ICONS[k]}</svg>
       <span>${label}</span><span class="n">${n}</span></button>`;
   }).join("");
   document.querySelectorAll("#nav button").forEach(b=>{
-    b.onclick = ()=>{ state.view=b.dataset.v; render(); window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"}); };
+    b.onclick = ()=>navigateList(b.dataset.v);
   });
 }
 
@@ -610,7 +670,7 @@ function renderChips(){
     `<button class="chip ${state.domain===d?"on":""}" data-d="${esc(d)}" aria-pressed="${state.domain===d}"><span class="chip-label"><i class="chip-dot" style="background:${d==="全部"?'var(--mint)':dc(d)}" aria-hidden="true"></i>${esc(dl(d))}</span><span class="chip-count">${d==="全部"?REPOS.length:counts[d]}</span></button>`
   ).join("");
   document.querySelectorAll("#domainChips .chip").forEach(b=>{
-    b.onclick = ()=>{ state.domain=b.dataset.d; render(); };
+    b.onclick = ()=>{ state.domain=b.dataset.d; if(state.view==="project") navigateList("all"); else render(); };
   });
 
   const langs = {...{}};
@@ -676,7 +736,7 @@ function bindTable(root){
     };
   });
   root.querySelectorAll(".row").forEach(row=>{
-    const open = ()=>openDrawer(REPOS[+row.dataset.i]);
+    const open = ()=>openProject(REPOS[+row.dataset.i]);
     row.onclick = open;
     row.onkeydown = e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); open(); } };
   });
@@ -784,7 +844,7 @@ function renderOverview(){
     ${renderTable(rows.slice(0,15), {cols:COLS_ALL})}
   `;
   document.querySelectorAll("#view-overview .mover").forEach(el=>{
-    el.onclick = ()=>openDrawer(REPOS[+el.dataset.i]);
+    el.onclick = ()=>openProject(REPOS[+el.dataset.i]);
   });
   bindTable(document.getElementById("view-overview"));
 }
@@ -845,7 +905,7 @@ function projectIdentity(r){
 
 function bindProjectCards(root){
   root.querySelectorAll(".project-card").forEach(card=>{
-    const open=()=>openDrawer(REPOS[+card.dataset.i]);
+    const open=()=>openProject(REPOS[+card.dataset.i]);
     card.onclick=open;
     card.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};
   });
@@ -926,7 +986,7 @@ function renderDomains(){
       <p>看看今天的热点集中在哪些方向</p></div>
     ${cards?`<div class="dgrid">${cards}</div>`:'<div class="empty">暂无数据</div>'}`;
   document.querySelectorAll("#view-domains .dcard li").forEach(li=>{
-    li.onclick=()=>openDrawer(REPOS[+li.dataset.i]);
+    li.onclick=()=>openProject(REPOS[+li.dataset.i]);
     li.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();li.click();}};
   });
 }
@@ -940,51 +1000,188 @@ function renderAll(){
   bindTable(document.getElementById("view-all"));
 }
 
-/* ---------- drawer ---------- */
-let drawerTrigger = null;
-function openDrawer(r){
+/* ---------- detailed star history ---------- */
+let historyChartObserver=null;
+const exactNumber=n=>Number(n).toLocaleString("en-US");
+function historyPoints(r){
+  const unique=new Map();
+  for(const point of r.history||[]){
+    if(Array.isArray(point)&&/^\d{4}-\d{2}-\d{2}$/.test(point[0])&&Number.isFinite(Date.parse(point[0]+"T00:00:00Z"))&&Number.isFinite(point[1])&&point[1]>=0) unique.set(point[0],point[1]);
+  }
+  return [...unique].sort(([a],[b])=>a.localeCompare(b)).slice(-30);
+}
+function historySection(points){
+  if(!points.length) return '<section class="dsec star-history"><h4>Star 历史</h4><p class="section-empty">还没有历史记录，采集后会在这里显示日期、Star 数和趋势。</p></section>';
+  const rows=points.map(([date,value],i)=>{
+    const delta=i?value-points[i-1][1]:null;
+    return `<tr><td><time datetime="${esc(date)}">${esc(date)}</time></td><td>${exactNumber(value)}</td><td>${delta==null?'—':(delta>=0?'+':'')+exactNumber(delta)}</td></tr>`;
+  }).reverse().join('');
+  return `<section class="dsec star-history"><div class="detail-section-heading"><div class="history-section-title"><h4>Star 历史</h4><span>${esc(points[0][0])} 至 ${esc(points.at(-1)[0])} · ${points.length} 次记录</span></div><div class="history-view-switch" role="tablist" aria-label="历史展示方式"><button id="history-chart-tab" type="button" role="tab" aria-selected="true" aria-controls="history-chart-panel" data-history-view="chart">图表</button><button id="history-data-tab" type="button" role="tab" aria-selected="false" aria-controls="history-data-panel" tabindex="-1" data-history-view="data">数据</button></div></div>
+    <div class="history-chart-card"><div id="history-chart-panel" role="tabpanel" aria-labelledby="history-chart-tab"><div class="history-chart-top"><output class="history-readout" aria-live="polite"></output><div class="history-controls"><button type="button" data-history-step="-1" aria-label="上一条历史记录">←</button><button type="button" data-history-step="1" aria-label="下一条历史记录">→</button></div></div>
+      <div class="history-plot"></div><p class="history-hint">${points.length===1?'当前只有一次记录，后续采集后即可连成趋势线。':'悬停或点选节点查看精确数值，也可用左右方向键切换。'}</p>
+    </div><div id="history-data-panel" class="history-data-panel" role="tabpanel" aria-labelledby="history-data-tab" tabindex="0" hidden><table class="history-table"><thead><tr><th scope="col">日期</th><th scope="col">Star 总数</th><th scope="col">较上次记录</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+  </section>`;
+}
+function bindHistoryChart(root,points){
+  if(!points.length) return;
+  const plot=root.querySelector('.history-plot'),readout=root.querySelector('.history-readout');
+  let selected=points.length-1,positions=[];
+  const chartPanel=root.querySelector('#history-chart-panel'),dataPanel=root.querySelector('#history-data-panel');
+  const viewTabs=[...root.querySelectorAll('[data-history-view]')];
+  function changeView(mode){
+    if(mode==='data'&&!chartPanel.hidden) dataPanel.style.height=chartPanel.getBoundingClientRect().height+'px';
+    chartPanel.hidden=mode!=='chart';dataPanel.hidden=mode!=='data';
+    viewTabs.forEach(tab=>{const active=tab.dataset.historyView===mode;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
+    if(mode==='chart') draw();
+  }
+  viewTabs.forEach((tab,i)=>{
+    tab.onclick=()=>changeView(tab.dataset.historyView);
+    tab.onkeydown=event=>{
+      if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+        event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?1:1-i;
+        changeView(viewTabs[next].dataset.historyView);viewTabs[next].focus({preventScroll:true});
+      }
+    };
+  });
+  function select(index){
+    selected=Math.max(0,Math.min(points.length-1,index));
+    const [date,value]=points[selected],delta=selected?value-points[selected-1][1]:null;
+    readout.innerHTML=`<time datetime="${esc(date)}">${esc(date)}</time><strong>${exactNumber(value)} <small>stars</small></strong><span>${delta==null?'首次记录':`较上次 ${delta>=0?'+':''}${exactNumber(delta)}`}</span>`;
+    plot.querySelectorAll('[data-history-index]').forEach((el,i)=>{el.classList.toggle('selected',i===selected);el.setAttribute('tabindex',i===selected?'0':'-1');el.setAttribute('aria-pressed',i===selected?'true':'false');});
+    const guide=plot.querySelector('.history-guide');if(guide){guide.setAttribute('x1',positions[selected].x);guide.setAttribute('x2',positions[selected].x);}
+    root.querySelectorAll('[data-history-step]').forEach(button=>{button.disabled=+button.dataset.historyStep<0?selected===0:selected===points.length-1;});
+  }
+  function draw(){
+    if(chartPanel.hidden||!plot.clientWidth) return;
+    const width=Math.max(240,plot.clientWidth),height=250,right=22,top=20,bottom=38;
+    const values=points.map(p=>p[1]),min=Math.min(...values),max=Math.max(...values),pad=Math.max(1,(max-min)*.15,max===min?max*.01:0);
+    const low=Math.max(0,Math.floor(min-pad)),high=Math.ceil(max+pad),times=points.map(p=>Date.parse(p[0]+'T00:00:00Z'));
+    const left=Math.max(66,exactNumber(high).length*7+14);
+    positions=points.map(([date,value],i)=>({x:points.length===1?(left+width-right)/2:left+(times[i]-times[0])/Math.max(1,times.at(-1)-times[0])*(width-left-right),y:top+(high-value)/(high-low)*(height-top-bottom)}));
+    const ticks=[...new Set([low,Math.round((low+high)/2),high])];
+    const yAxis=ticks.map(value=>{const y=top+(high-value)/(high-low)*(height-top-bottom);return `<line x1="${left}" x2="${width-right}" y1="${y}" y2="${y}" class="chart-grid"/><text x="${left-10}" y="${y+4}" text-anchor="end">${exactNumber(value)}</text>`;}).join('');
+    const indices=[0];
+    for(let i=1;i<points.length-1;i++){
+      if(positions[i].x-positions[indices.at(-1)].x>=90 && positions.at(-1).x-positions[i].x>=75) indices.push(i);
+    }
+    if(points.length>1) indices.push(points.length-1);
+    const xAxis=indices.map(i=>`<text x="${positions[i].x}" y="${height-12}" text-anchor="middle">${esc(points[i][0].slice(5))}</text>`).join('');
+    const path=positions.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ');
+    plot.innerHTML=`<svg class="star-history-svg" viewBox="0 0 ${width} ${height}" role="group" aria-label="Star 总数随日期变化的趋势图">${yAxis}${xAxis}
+      ${points.length>1?`<path class="chart-area" d="${path} L${positions.at(-1).x} ${height-bottom} L${positions[0].x} ${height-bottom} Z"/><path class="chart-line" d="${path}"/>`:''}
+      <line class="history-guide" y1="${top}" y2="${height-bottom}"/>
+      ${points.map(([date,value],i)=>`<g role="button" data-history-index="${i}" aria-label="${esc(date)}，${exactNumber(value)} stars"><title>${esc(date)} · ${exactNumber(value)} stars</title><circle class="chart-hit" cx="${positions[i].x}" cy="${positions[i].y}" r="12"/><circle class="chart-point" cx="${positions[i].x}" cy="${positions[i].y}" r="3.5"/></g>`).join('')}
+    </svg>`;
+    select(selected);
+  }
+  function fromEvent(event){const target=event.target.closest('[data-history-index]');if(target) select(+target.dataset.historyIndex);}
+  plot.onpointerover=fromEvent;plot.onclick=fromEvent;plot.onfocusin=fromEvent;
+  plot.onkeydown=event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();select(selected+(event.key==='ArrowRight'?1:-1));plot.querySelector(`[data-history-index="${selected}"]`).focus();}};
+  root.querySelectorAll('[data-history-step]').forEach(button=>button.onclick=()=>select(selected+Number(button.dataset.historyStep)));
+  draw();historyChartObserver=new ResizeObserver(draw);historyChartObserver.observe(plot);
+}
+function discussionSection(hn){
+  const stories=(Array.isArray(hn.stories)?hn.stories:(hn.top?[hn.top]:[])).slice(0,6);
+  return `<section class="dsec project-discussions"><div class="detail-section-heading"><h4>国外社区讨论</h4><span>Hacker News${stories.length?' · '+stories.length+' 条收录 · 含历史讨论':''}</span></div>
+    ${stories.length?`<div class="discussion-list">${stories.map(story=>`<a class="hncard" href="${esc(safeUrl(story.url))}" target="_blank" rel="noopener"><b>${esc(story.title||'Hacker News 讨论')} <span aria-hidden="true">↗</span></b><span class="discussion-meta">${story.created_at?`<time datetime="${esc(story.created_at)}">${esc(story.created_at.slice(0,10))}</time>`:''}<span>${exactNumber(story.points||0)} 赞</span><span>${exactNumber(story.comments||0)} 条评论</span></span></a>`).join('')}</div>`:'<p class="section-empty">暂未收录与该项目直接相关的 Hacker News 讨论。</p>'}
+  </section>`;
+}
+
+/* ---------- project page and navigation ---------- */
+let selectedRepo=new URL(location.href).searchParams.get("repo");
+let projectTrigger=null;
+function routeUrl(repo){
+  const url=new URL(location.href);
+  if(repo) url.searchParams.set("repo",repo); else url.searchParams.delete("repo");
+  return url;
+}
+function navigateList(view){
+  const leavingProject=state.view==="project";
+  state.view=view;selectedRepo=null;
+  const entry={listState:{...state},listScroll:0};
+  if(leavingProject) history.pushState(entry,"",routeUrl(null));
+  else history.replaceState(entry,"",routeUrl(null));
+  render();window.scrollTo(0,0);
+}
+function openProject(r){
   if(!r) return;
-  drawerTrigger = document.activeElement;
+  projectTrigger=document.activeElement;
+  history.replaceState({...(history.state||{}),listState:{...state},listScroll:window.scrollY},"",location.href);
+  selectedRepo=r.repo;
+  history.pushState({project:true,hasList:true,originView:state.view},"",routeUrl(r.repo));
+  state.view="project";
+  render();window.scrollTo(0,0);
+  document.getElementById("projectTitle")?.focus({preventScroll:true});
+}
+function backToProjects(){
+  if(history.state?.hasList){history.back();return;}
+  selectedRepo=null;state.view="overview";
+  history.replaceState({listState:{...state},listScroll:0},"",routeUrl(null));
+  render();window.scrollTo(0,0);
+}
+window.addEventListener("popstate",event=>{
+  selectedRepo=new URL(location.href).searchParams.get("repo");
+  if(selectedRepo) state.view="project";
+  else Object.assign(state,event.state?.listState||{view:"overview"});
+  document.getElementById("q").value=state.q;
+  document.getElementById("momSel").value=state.minMom;
+  render();
+  requestAnimationFrame(()=>{
+    window.scrollTo(0,selectedRepo?0:event.state?.listScroll||0);
+    if(!selectedRepo && projectTrigger){
+      const target=projectTrigger.isConnected?projectTrigger:document.querySelector(`#view-${state.view} [data-i="${projectTrigger.dataset.i}"]`);
+      target?.focus({preventScroll:true});
+    }
+  });
+});
+function renderProject(){
+  historyChartObserver?.disconnect();historyChartObserver=null;
+  const root=document.getElementById("view-project");
+  const r=REPOS.find(item=>item.repo.toLowerCase()===(selectedRepo||"").toLowerCase());
+  if(!r){
+    root.innerHTML=`<button class="project-back" type="button">← 返回项目列表</button><h1 id="projectTitle">${REPOS.length?"当前数据中未找到此项目":"正在加载项目…"}</h1><p>可以返回列表搜索其他项目。</p>`;
+    root.querySelector(".project-back").onclick=backToProjects;
+    document.title="项目详情 · GitTrend";return;
+  }
   const m=r.metrics||{}, hn=r.hn||{};
   const [own,name]=(r.repo||"").split("/");
-  const hist = (r.history||[]).slice(-14);
-  const histRows = hist.map(([d,v],i)=>{
-    const prev = i>0?hist[i-1][1]:null;
-    const delta = prev!=null? v-prev : null;
-    return `<tr><td>${d}</td><td>${fmt(v)}${delta!=null?` <span style="color:${delta>=0?"var(--positive)":"#cc4f59"}">${delta>=0?"+":""}${delta}</span>`:""}</td></tr>`;
-  }).reverse().join("");
+  const hist=historyPoints(r);
 
-  document.getElementById("drawer").innerHTML = `
-    <button class="x" id="drawerX" aria-label="关闭">✕</button>
-    <div class="tag" style="border-left:3px solid ${dc(r.domain)};padding-left:10px;color:var(--dim)">${esc(dl(r.domain))}${r.language?" · "+esc(r.language):""}</div>
-    <h2 id="drawerTitle">${esc(r.repo)}</h2>
-    <div class="sub">${r.created_at?"创建于 "+r.created_at+"（"+ageText(r.age_days)+"）":"不知道什么时候创建的"}</div>
+  document.title=`${r.repo} · GitTrend`;
+  root.innerHTML = `
+    <nav class="project-breadcrumb" aria-label="面包屑导航"><ol>
+      <li><button class="project-home" type="button">GitTrend</button></li>
+      <li><button class="project-back" type="button" aria-label="返回项目列表">${esc(VIEWS.find(([key])=>key===history.state?.originView)?.[1]||"项目列表")}</button></li>
+      <li aria-current="page">项目详情</li>
+    </ol></nav>
+    <header class="project-page-head">
+      <div class="project-heading"><h1 id="projectTitle" tabindex="-1">${esc(name)}</h1></div>
+      <div class="links project-actions">
+        <a href="https://github.com/${esc(r.repo)}" target="_blank" rel="noopener">打开项目 ↗</a>
+        <a href="https://star-history.com/#${esc(r.repo)}&Date" target="_blank" rel="noopener">Star 增长曲线 ↗</a>
+      </div>
+    </header>
+    <div class="project-meta">
+      <span class="project-meta-chip"><span>维护者</span> ${esc(own)}</span>
+      <span class="project-meta-chip category">${esc(dl(r.domain))}</span>
+      ${r.language?`<span class="project-meta-chip">${esc(r.language)}</span>`:""}
+      ${r.homepage?`<a class="project-homepage" href="${esc(safeUrl(r.homepage))}" target="_blank" rel="noopener">项目官网 ↗</a>`:""}
+    </div>
     <div class="body">${esc(projectDescription(r))}</div>
-    <details class="original-description"><summary>查看原文与来源</summary>
-      ${r.desc?`<p>${esc(r.desc)}</p>`:""}
-      <a href="${esc(safeUrl(summaryEntry(r)?.source_url||'https://github.com/'+r.repo))}" target="_blank" rel="noopener">${summaryEntry(r)?.source_kind==='readme'?'查看项目 README':'查看仓库简介'} ↗</a>
-    </details>
 
-    <div class="dstats">
+    <div class="project-data"><div class="dstats">
       <div class="dstat"><span class="k">热度</span><span class="v">${(r.momentum||0).toFixed(0)}<small>/100</small></span></div>
       <div class="dstat"><span class="k">每天新增 star</span><span class="v">${m.estimated?"~":"+"}${fmt(Math.round(m.rate_day||0))}</span></div>
       <div class="dstat"><span class="k">加速</span><span class="v">${m.accel==null?'<small class="na">还没有数据</small>':m.accel.toFixed(1)+'<small>×</small>'}</span></div>
       <div class="dstat"><span class="k">总 star</span><span class="v">${fmt(r.stars)}</span></div>
       <div class="dstat"><span class="k">Fork</span><span class="v">${fmt(r.forks)}</span></div>
       <div class="dstat"><span class="k">近一周平均</span><span class="v">${m.rate_week==null?"—":"+"+fmt(Math.round(m.rate_week))}</span></div>
-    </div>
+    </div><div class="project-data-meta">
+      <span>创建时间 <time datetime="${esc((r.created_at||"").slice(0,10))}">${esc((r.created_at||"").slice(0,10)||"未知")}</time></span>
+      ${r.age_days!=null?`<span>项目年龄 <b>${ageText(r.age_days)}</b></span>`:""}
+    </div></div>
 
-    ${histRows?`<div class="dsec"><h4>star 历史</h4>
-      <table class="tbl-mini">${histRows}</table></div>`:
-      `<div class="dsec"><h4>star 历史</h4>
-       <div style="color:var(--faint);font-size:.875rem">刚开始记录，明天起这里会出现增长曲线。</div></div>`}
-
-    ${hn.points?`<div class="dsec"><h4>国外社区讨论（Hacker News）</h4>
-      <a class="hncard" href="${esc(safeUrl(hn.top&&hn.top.url))}" target="_blank" rel="noopener">
-        <b>${esc(hn.top?hn.top.title:"相关讨论")}</b>
-        <span>${hn.mentions} 条讨论 · ${hn.points} 个赞 · ${hn.comments} 条评论</span></a></div>`:""}
-
-    <div class="dsec"><h4>为什么上榜</h4>
+    <section class="dsec project-reasons"><h4>为什么上榜</h4>
       <table class="tbl-mini">
         ${r.gain&&r.gain.daily?`<tr><td>今天新增</td><td>+${fmt(r.gain.daily)}</td></tr>`:""}
         ${r.gain&&r.gain.weekly?`<tr><td>本周新增</td><td>+${fmt(r.gain.weekly)}</td></tr>`:""}
@@ -992,43 +1189,25 @@ function openDrawer(r){
         ${r.stars_per_day_life?`<tr><td>平均每天（从创建到现在）</td><td>+${fmt(Math.round(r.stars_per_day_life))}</td></tr>`:""}
         <tr><td>上了哪些榜</td><td>${(r.windows||[]).map(w=>({daily:"日榜",weekly:"周榜",monthly:"月榜"}[w]||w)).join(" / ")||"搜索发现"}</td></tr>
       </table>
-    </div>
-
-    <div class="links">
-      <a href="https://github.com/${esc(r.repo)}" target="_blank" rel="noopener">打开项目</a>
-      ${r.homepage?`<a href="${esc(safeUrl(r.homepage))}" target="_blank" rel="noopener">项目官网</a>`:""}
-      <a href="https://star-history.com/#${esc(r.repo)}&Date" target="_blank" rel="noopener">star 增长曲线</a>
-      <a href="https://github.com/search?q=${encodeURIComponent(r.repo)}&type=issues" target="_blank" rel="noopener">相关讨论</a>
-    </div>
+    </section>
+    ${historySection(hist)}
+    ${discussionSection(hn)}
   `;
-  document.getElementById("drawerX").onclick = closeDrawer;
-  document.getElementById("drawer").classList.add("on");
-  document.getElementById("drawer").setAttribute("aria-hidden","false");
-  document.getElementById("scrim").classList.add("on");
-  document.getElementById("drawer").inert = false;
-  document.querySelector(".app").inert = true;
-  document.body.classList.add("drawer-open");
-  document.getElementById("drawer").scrollTop = 0;
-  document.getElementById("drawerX").focus();
+  bindHistoryChart(root,hist);
+  root.querySelector(".project-back").onclick=backToProjects;
+  root.querySelector(".project-home").onclick=()=>navigateList("overview");
 }
-function closeDrawer(){
-  document.getElementById("drawer").classList.remove("on");
-  document.getElementById("drawer").setAttribute("aria-hidden","true");
-  document.getElementById("scrim").classList.remove("on");
-  document.getElementById("drawer").inert = true;
-  document.querySelector(".app").inert = false;
-  document.body.classList.remove("drawer-open");
-  if(drawerTrigger && drawerTrigger.isConnected) drawerTrigger.focus({preventScroll:true});
-}
-document.getElementById("scrim").onclick = closeDrawer;
 
 /* ---------- render ---------- */
 function render(){
+  if(state.view!=="project"){historyChartObserver?.disconnect();historyChartObserver=null;}
+  document.querySelector(".app").classList.toggle("project-open",state.view==="project");
+  if(state.view!=="project") document.title="GitTrend · 开源趋势观察台";
   renderNav(); renderChips();
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("on"));
   document.getElementById("view-"+state.view).classList.add("on");
   ({overview:renderOverview, velocity:renderVelocity, new:renderNew,
-    domains:renderDomains, all:renderAll})[state.view]();
+    domains:renderDomains, all:renderAll, project:renderProject})[state.view]();
 }
 
 /* ---------- live refresh ---------- */
@@ -1147,31 +1326,25 @@ function manualRefresh(){
 
   const q = document.getElementById("q");
   let t;
-  q.oninput = ()=>{ clearTimeout(t); t=setTimeout(()=>{ state.q=q.value.trim(); render(); },140); };
+  q.oninput = ()=>{ clearTimeout(t); t=setTimeout(()=>{ state.q=q.value.trim(); if(state.view==="project") navigateList("all"); else render(); },140); };
 
   document.getElementById("resetFilters").onclick = ()=>{
     state.domain="全部";state.lang="全部";state.minMom=0;state.q="";
-    q.value="";document.getElementById("momSel").value="0";render();
+    q.value="";document.getElementById("momSel").value="0";if(state.view==="project") navigateList("all"); else render();
   };
 
-  document.getElementById("langSel").onchange = e=>{ state.lang=e.target.value; render(); };
-  document.getElementById("momSel").onchange = e=>{ state.minMom=+e.target.value; render(); };
+  document.getElementById("langSel").onchange = e=>{ state.lang=e.target.value; if(state.view==="project") navigateList("all"); else render(); };
+  document.getElementById("momSel").onchange = e=>{ state.minMom=+e.target.value; if(state.view==="project") navigateList("all"); else render(); };
 
   document.addEventListener("keydown", e=>{
-    const drawer = document.getElementById("drawer");
-    if(drawer.classList.contains("on") && e.key==="Tab"){
-      const focusable = [...drawer.querySelectorAll('button,a[href],summary,[tabindex="0"]')];
-      const visible=focusable.filter(el=>{const closed=el.closest('details:not([open])');return !closed||el===closed.querySelector('summary');});
-      const first=visible[0],last=visible[visible.length-1];
-      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
-      else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
-    }
-    if(e.key==="/" && !drawer.classList.contains("on") && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){ e.preventDefault(); q.focus(); }
-    if(e.key==="Escape"){ if(document.getElementById("drawer").classList.contains("on")) closeDrawer();
-      else if(document.activeElement===q){ q.blur(); q.value=""; state.q=""; render(); } }
+    if(e.key==="/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();q.focus();}
+    if(e.key==="Escape" && document.activeElement===q){q.blur();q.value="";state.q="";render();}
   });
 
   document.getElementById("live").onclick = manualRefresh;
+  if(selectedRepo) state.view="project";
+  else if(history.state?.listState) Object.assign(state,history.state.listState);
+  q.value=state.q;document.getElementById("momSel").value=state.minMom;
   render();
   // 模板预览和生成看板都立即同步项目及中文说明，之后每分钟刷新。
   checkRefresh().then(r=>{

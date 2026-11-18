@@ -99,6 +99,31 @@ def check_latest():
         if accel is not None and (not isinstance(accel, (int, float)) or accel <= 0):
             fail(f"{name}: accel={accel!r} 非法（应为 None 或正数）")
 
+        hn = r.get("hn") or {}
+        if "stories" in hn:
+            stories = hn["stories"]
+            if not isinstance(stories, list) or len(stories) > 6:
+                fail(f"{name}: HN stories 必须是最多 6 条的数组")
+            else:
+                story_ids = set()
+                for story in stories:
+                    if not isinstance(story, dict):
+                        fail(f"{name}: HN 讨论条目无效")
+                        continue
+                    story_id = str(story.get("id", ""))
+                    if not story_id.isdigit() or story_id in story_ids:
+                        fail(f"{name}: HN 讨论 ID 无效或重复")
+                    story_ids.add(story_id)
+                    if story.get("url") != f"https://news.ycombinator.com/item?id={story_id}":
+                        fail(f"{name}: HN 讨论链接无效")
+                    if not story.get("title") or not re.match(r"\d{4}-\d{2}-\d{2}T", story.get("created_at", "")):
+                        fail(f"{name}: HN 讨论缺少标题或发布时间")
+                    for field in ("points", "comments"):
+                        if not isinstance(story.get(field), int) or story[field] < 0:
+                            fail(f"{name}: HN 讨论 {field} 无效")
+            if hn.get("score_window_days") != 60:
+                fail(f"{name}: HN 热度窗口须保持 60 天")
+
         hist = r.get("history")
         if hist is not None and not isinstance(hist, list):
             fail(f"{name}: history 不是数组")

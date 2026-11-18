@@ -27,6 +27,7 @@ import sys
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 import requests
 from bs4 import BeautifulSoup
@@ -304,53 +305,67 @@ def collect_new_repos(token=None):
 
 # ---------------------------------------------------------------- 3. Hacker News
 
-def hn_lookup(repo: str):
-    """返回该仓库在 HN 的讨论热度（近 60 天）。"""
-    if "/" in repo:
-        owner, name = repo.split("/", 1)
-    else:
-        owner, name = "", repo
-    full = f"{owner}/{name}".lower()
-    n = name.lower()
-    # 短名（<=4 字符）极易误中通用词（go / math / rust / rea ...），只认全名
-    strict = len(n) <= 4
-    url = "https://hn.algolia.com/api/v1/search"
-    params = {
-        "query": name,
-        "tags": "story",
-        "hitsPerPage": 20,
-        "numericFilters": f"created_at_i>{int(time.time()) - 60*86400}",
-    }
-    try:
-        r = requests.get(url, params=params, timeout=15,
-                         headers={"User-Agent": UA})
-        if r.status_code != 200:
-            return None
-        hits = r.json().get("hits", [])
-    except Exception:
-        return None
+def hn_hit_matches(repo, hit):
+    """Prefer exact repository references; never match univer to universal."""
+    owner, name = repo.lower().split("/", 1)
+    full = f"{owner}/{name}"
+    url = unquote(hit.get("url") or "").lower()
+    parsed = urlsplit(url)
+    path = parsed.path.strip("/")
+    if parsed.hostname in ("github.com", "www.github.com"):
+        return "/".join(path.split("/")[:2]).removesuffix(".git") == full
+    text = ((hit.get("title") or "") + " " + (hit.get("story_text") or "")).lower()
+    if re.search(r"(?<![a-z0-9_-])" + re.escape(full) + r"(?![a-z0-9_.-])", text + " " + url):
+        return True
+    # Generic and short names require a repository reference or owner context.
+    generic = {"skills", "agent", "agents", "math", "chat", "chat-demo", "firmware", "substrate"}
+    exact_name = r"(?<![a-z0-9])" + re.escape(name) + r"(?![a-z0-9])"
+    if len(name) <= 4 or name in generic:
+        return bool(re.search(exact_name, text) and re.search(r"\b" + re.escape(owner) + r"\b", text))
+    return bool(re.search(exact_name, text + " " + url))
 
-    rel = []
-    for h in hits:
-        t = (h.get("title") or "").lower()
-        u = (h.get("url") or "").lower()
-        if full in t or full in u:
-            rel.append(h)
-        elif not strict and (n in t or n in u):
-            rel.append(h)
-    if not rel:
-        return {"mentions": 0, "points": 0, "comments": 0, "top": None}
-    top = max(rel, key=lambda h: (h.get("points") or 0))
+
+def hn_lookup(repo: str):
+    """Recent 60-day scoring plus up to six real discussion links, including archives."""
+    name = repo.split("/", 1)[-1]
+    cutoff = int(time.time()) - 60 * 86400
+    queries = [
+        {"query": repo, "tags": "story", "hitsPerPage": 100},
+        {"query": name, "tags": "story", "hitsPerPage": 100,
+         "numericFilters": f"created_at_i>{cutoff}"},
+    ]
+    hits = {}
+    for params in queries:
+        try:
+            response = requests.get("https://hn.algolia.com/api/v1/search", params=params,
+                                    timeout=15, headers={"User-Agent": UA})
+            response.raise_for_status()
+            batch = response.json().get("hits", [])
+        except (requests.RequestException, ValueError):
+            return None
+        for hit in batch:
+            story_id = str(hit.get("objectID") or "")
+            if story_id.isdigit() and hit.get("title") and hn_hit_matches(repo, hit):
+                hits[story_id] = hit
+    ordered = sorted(hits.values(), key=lambda h: (h.get("created_at_i") or 0,
+                                                  h.get("points") or 0), reverse=True)
+    recent = [h for h in ordered if (h.get("created_at_i") or 0) > cutoff]
+
+    def story(hit):
+        return {
+            "id": str(hit["objectID"]), "title": hit["title"],
+            "points": hit.get("points") or 0, "comments": hit.get("num_comments") or 0,
+            "url": f"https://news.ycombinator.com/item?id={hit['objectID']}",
+            "source_url": hit.get("url") or "", "created_at": hit.get("created_at") or "",
+        }
+
+    top = max(recent, key=lambda h: h.get("points") or 0) if recent else None
     return {
-        "mentions": len(rel),
-        "points": sum(h.get("points") or 0 for h in rel),
-        "comments": sum(h.get("num_comments") or 0 for h in rel),
-        "top": {
-            "title": top.get("title"),
-            "points": top.get("points"),
-            "comments": top.get("num_comments"),
-            "url": top.get("url") or f"https://news.ycombinator.com/item?id={top.get('objectID')}",
-        },
+        "mentions": len(recent), "points": sum(h.get("points") or 0 for h in recent),
+        "comments": sum(h.get("num_comments") or 0 for h in recent),
+        "top": story(top) if top else None,
+        "stories": [story(h) for h in ordered[:6]],
+        "discussion_count": len(ordered), "score_window_days": 60,
     }
 
 
